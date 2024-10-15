@@ -99,9 +99,9 @@ if (isset($_POST['btnsave'])) {
                         </div>
                         <div class="col-md-4">
                             <div class="form-group" style="width: 300px;">
-                                <input type="text" name="namesearch" class="search form-control float-right"
-                                    placeholder="Search" style="font-family:Khmer OS Siemreap;">
-                            </div>
+                                  <input type="text" name="namesearch" class="search form-control float-right"
+                                      placeholder="Search" style="font-family:Khmer OS Siemreap;">
+                              </div>
                         </div>
                     </div>
             </div>
