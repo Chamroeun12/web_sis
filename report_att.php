@@ -6,40 +6,48 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx; // Xlsx for better compatibility
 
 include_once 'connection.php'; // Database connection
 
-
 // Function to fetch student data
 function fetchStudentData($conn) {
-    if(isset($_POST['classname'])){
-        $classname = $_POST['classname'];
-        // echo $classname;
-        }
-    $query = "SELECT
-        s.En_name AS Student_Name,
-        s.Gender,
-        s.DOB,
-        c.Class_name,
-        co.Course_name,
-        c.Shift,
-        t.En_name AS Teacher_Name,
-        s.Phone
-    FROM
-        tb_add_to_class ad
-    INNER JOIN
-        tb_class c ON ad.Class_id = c.ClassID
-    INNER JOIN
-        tb_course co ON c.course_id = co.id
-    INNER JOIN
-        tb_teacher t ON c.Teacher_id = t.id
-    INNER JOIN
-        tb_student s ON ad.Stu_id = s.ID WHERE  c.Class_name='$classname'";
+    if (isset($_POST['classname'])) {
+        // Sanitize input to prevent SQL injection
+        $classname = filter_input(INPUT_POST, 'classname', FILTER_SANITIZE_STRING);
 
-    $stmt = $conn->prepare($query);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $query = "SELECT
+            s.En_name AS Student_Name,
+            s.Gender,
+            s.DOB,
+            co.Course_name,
+            c.Class_name,
+            att.Date AS Attendance_Date,
+            att.Attendance
+        FROM
+            tb_attendance att
+        INNER JOIN
+            tb_class c ON att.Class_id = c.ClassID
+        INNER JOIN
+            tb_course co ON c.course_id = co.id
+        INNER JOIN
+            tb_teacher t ON c.Teacher_id = t.id
+        INNER JOIN
+            tb_student s ON att.Stu_id = s.ID
+        WHERE
+            c.Class_name = :classname;"; // Use a parameterized query
+
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(':classname', $classname, PDO::PARAM_STR); // Bind parameter
+        $stmt->execute();
+        return [$classname, $stmt->fetchAll(PDO::FETCH_ASSOC)]; // Return classname and data
+    }
+    return [null, []]; // Return null and empty array if classname is not set
 }
 
 // Fetch data from the database
-$data = fetchStudentData($conn);
+list($classname, $data) = fetchStudentData($conn);
+
+if (empty($data)) {
+    echo "No records found for the specified class.";
+    exit; // Exit if no data is available
+}
 
 if (isset($_POST['export_excel'])) {
     // Generate Excel using PhpSpreadsheet
@@ -47,7 +55,7 @@ if (isset($_POST['export_excel'])) {
     $sheet = $spreadsheet->getActiveSheet();
 
     // Set column headers
-    $headers = ['Student Name', 'Gender', 'DOB', 'Class Name', 'Course Name', 'Shift', 'Teacher Name', 'Phone'];
+    $headers = ['Student Name', 'Gender', 'DOB', 'Course Name', 'Class Name', 'Attendance Date', 'Attendance'];
     $column = 'A';
     foreach ($headers as $header) {
         $sheet->setCellValue($column . '1', $header);
@@ -60,18 +68,18 @@ if (isset($_POST['export_excel'])) {
         $sheet->setCellValue('A' . $rowCount, $row['Student_Name']);
         $sheet->setCellValue('B' . $rowCount, $row['Gender']);
         $sheet->setCellValue('C' . $rowCount, $row['DOB']);
-        $sheet->setCellValue('D' . $rowCount, $row['Class_name']);
-        $sheet->setCellValue('E' . $rowCount, $row['Course_name']);
-        $sheet->setCellValue('F' . $rowCount, $row['Shift']);
-        $sheet->setCellValue('G' . $rowCount, $row['Teacher_Name']);
-        $sheet->setCellValue('H' . $rowCount, $row['Phone']);
+        $sheet->setCellValue('D' . $rowCount, $row['Course_name']);
+        $sheet->setCellValue('E' . $rowCount, $row['Class_name']);
+        $sheet->setCellValue('F' . $rowCount, $row['Attendance_Date']);
+        $sheet->setCellValue('G' . $rowCount, $row['Attendance']);
         $rowCount++;
     }
 
-    // Save Excel file
+    // Save Excel file with dynamic filename
+    $filename = "attendance_report_{$classname}_" . date('Y-m-d') . ".xlsx";
     $writer = new Xlsx($spreadsheet); // Use Xlsx for better compatibility
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-    header('Content-Disposition: attachment;filename="report.xlsx"');
+    header("Content-Disposition: attachment;filename=\"$filename\"");
     header('Cache-Control: max-age=0');
     $writer->save('php://output');
     exit; // Exit after outputting the file
@@ -92,9 +100,8 @@ if (isset($_POST['export_excel'])) {
                   <th style="color: blue; text-align: center;">DOB</th>
                   <th style="color: blue; text-align: center;">Class Name</th>
                   <th style="color: blue; text-align: center;">Course Name</th>
-                  <th style="color: blue; text-align: center;">Shift</th>
-                  <th style="color: blue; text-align: center;">Teacher Name</th>
-                  <th style="color: blue; text-align: center;">Phone</th>
+                  <th style="color: blue; text-align: center;">Attendance Date</th>
+                  <th style="color: blue; text-align: center;">Attendance</th>
               </tr>';
 
     foreach ($data as $row) {
@@ -104,15 +111,17 @@ if (isset($_POST['export_excel'])) {
                   <td style="text-align: center;">' . htmlspecialchars($row['DOB']) . '</td>
                   <td style="text-align: center;">' . htmlspecialchars($row['Class_name']) . '</td>
                   <td style="text-align: center;">' . htmlspecialchars($row['Course_name']) . '</td>
-                  <td style="text-align: center;">' . htmlspecialchars($row['Shift']) . '</td>
-                  <td style="text-align: center;">' . htmlspecialchars($row['Teacher_Name']) . '</td>
-                  <td style="text-align: center;">' . htmlspecialchars($row['Phone']) . '</td>
+                  <td style="text-align: center;">' . htmlspecialchars($row['Attendance_Date']) . '</td>
+                  <td style="text-align: center;">' . htmlspecialchars($row['Attendance']) . '</td>
               </tr>';
     }
 
     $html .= '</table>';
     $pdf->writeHTML($html, true, false, true, false, '');
-    $pdf->Output('students_report.pdf', 'I'); // Output PDF inline
+
+    // Output PDF with dynamic filename
+    $pdfFilename = "students_report_attendance_{$classname}_" . date('Y-m-d') . ".pdf";
+    $pdf->Output($pdfFilename, 'I'); // Output PDF inline
     exit; // Exit after outputting the file
 }
 ?>

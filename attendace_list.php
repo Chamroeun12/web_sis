@@ -83,7 +83,7 @@ $attendance = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 ?>
                             </td>
                             <td>
-                              <form action="report_data.php" method="POST">
+                              <form action="report_att.php" method="POST">
                                         <button type="submit" name="export_pdf" title="PDF"
                                             style="border:none; background: transparent; padding:0px;"><i
                                                 class="fa fa-file-pdf text-danger ml-1" style=" font-size: 18px;"></i>
