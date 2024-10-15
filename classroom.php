@@ -100,7 +100,8 @@ include_once "header.php";
             </div>
             <div class="col-sm-6">
                 <h3 class="card-title float-sm-right">
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-lg">Create</button>
+                    <button type="button" class="btn btn-success" data-toggle="modal"
+                        data-target="#modal-lg">Create</button>
                 </h3>
             </div>
         </div>
@@ -128,7 +129,8 @@ include_once "header.php";
                                     <select name="teacher_name" class="form-control">
                                         <option selected disabled value="">Select Teacher</option>
                                         <?php foreach ($Teacher as $row) { ?>
-                                            <option value="<?php echo $row['id']; ?>"><?php echo $row['En_name']; ?></option>
+                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['En_name']; ?>
+                                        </option>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -137,7 +139,8 @@ include_once "header.php";
                                     <select name="co" class="form-control">
                                         <option selected disabled value="">Select Course</option>
                                         <?php foreach ($Course as $row) { ?>
-                                            <option value="<?php echo $row['id']; ?>"><?php echo $row['Course_name']; ?></option>
+                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['Course_name']; ?>
+                                        </option>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -188,15 +191,21 @@ include_once "header.php";
                 <div class="card-header">
                     <div class="card-tools">
                         <div class="form-group" style="width: 300px;">
-                            <input type="text" name="namesearch" class="search form-control float-right" placeholder="Search" style="font-family:Khmer OS Siemreap;">
+                            <input type="text" name="namesearch" class="search form-control float-right"
+                                placeholder="Search" style="font-family:Khmer OS Siemreap;">
                         </div>
                     </div>
-                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET" style="float: right; margin-right: 10px;">
-                        <input type="hidden" name="search" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
-                        <select name="status" onchange="this.form.submit()" class="form-select custom-select" style="width: 250px;">
+                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET"
+                        style="float: right; margin-right: 10px;">
+                        <input type="hidden" name="search"
+                            value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+                        <select name="status" onchange="this.form.submit()" class="form-select custom-select"
+                            style="width: 250px;">
                             <option value="" <?php echo ($status == '') ? 'selected' : ''; ?>>All</option>
-                            <option value="active" <?php echo ($status === 'active') ? 'selected' : ''; ?>>Active</option>
-                            <option value="disable" <?php echo ($status === 'disable') ? 'selected' : ''; ?>>Disable</option>
+                            <option value="active" <?php echo ($status === 'active') ? 'selected' : ''; ?>>Active
+                            </option>
+                            <option value="disable" <?php echo ($status === 'disable') ? 'selected' : ''; ?>>Disable
+                            </option>
                         </select>
                     </form>
                 </div>
@@ -220,34 +229,52 @@ include_once "header.php";
                         </thead>
                         <tbody>
                             <?php $i = 1; foreach ($Class as $row) { ?>
-                                <tr>
-                                    <td><?php echo $i++; ?></td>
-                                    <td><?php echo htmlspecialchars($row['Class_name']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['En_name']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['Course_name']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['Time_in']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['Time_out']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['Start_class']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['End_class']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['Shift']); ?></td>
-                                    <td>
-                                      <?php if ($row['status'] == 'active') { ?>
-                                          <span class="badge badge-success">Active</span>
-                                      <?php } else { ?>
-                                          <span class="badge badge-danger">Disabled</span>
-                                      <?php } ?>
-                                    </td>
-                                    <td>
-                                        <a href="classroom.php?delete_class_id=<?php echo $row['ClassID']; ?>"><i class="fa fa-print"></i></a>
-                                        <a href="classroom.php?delete_class_id=<?php echo $row['ClassID']; ?>"><i class="fa fa-file-pdf"></i></a>
-                                        <a href="classroom.php?delete_class_id=<?php echo $row['ClassID']; ?>"><i class="fa fa-file-excel"></i></a>
-                                        <a href="">
-                                            <i class="nav-icon fas fa-ellipsis-h"></i>
-                                            <a href="classroom.php?class_id=<?php echo $row['ClassID']; ?>"><i class="fa fa-edit"></i></a>
-                                            <a href="classroom.php?delete_class_id=<?php echo $row['ClassID']; ?>"><i class="fa fa-trash text-danger"></i></a>
-                                        </a>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td><?php echo $i++; ?></td>
+                                <td><?php echo htmlspecialchars($row['Class_name']); ?></td>
+                                <td><?php echo htmlspecialchars($row['En_name']); ?></td>
+                                <td><?php echo htmlspecialchars($row['Course_name']); ?></td>
+                                <td><?php echo htmlspecialchars($row['Time_in']); ?></td>
+                                <td><?php echo htmlspecialchars($row['Time_out']); ?></td>
+                                <td><?php echo htmlspecialchars($row['Start_class']); ?></td>
+                                <td><?php echo htmlspecialchars($row['End_class']); ?></td>
+                                <td><?php echo htmlspecialchars($row['Shift']); ?></td>
+                                <td>
+                                    <?php if ($row['status'] == 'active') { ?>
+                                    <span class="badge badge-success">Active</span>
+                                    <?php } else { ?>
+                                    <span class="badge badge-danger">Disabled</span>
+                                    <?php } ?>
+                                </td>
+                                <td>
+                                    <a href="classroom.php?delete_class_id=<?php echo $row['ClassID']; ?>"><i
+                                            class="fa fa-print text-dark" style=" font-size: 18px;"></i></a>
+                                    <a href="classroom.php?delete_class_id=<?php echo $row['ClassID']; ?>"><i
+                                            class="fa fa-file-pdf text-danger ml-2" style=" font-size: 18px;"></i></a>
+                                    <a href="classroom.php?delete_class_id=<?php echo $row['ClassID']; ?>"><i
+                                            class="fa fa-file-excel text-success ml-2"
+                                            style=" font-size: 18px;"></i></a>
+
+
+                                    <i class="nav-icon fas fa-ellipsis-v text-info ml-2 dropup" style=" font-size:
+                                        18px; cursor:pointer;" data-toggle="dropdown"></i>
+                                    <div class="dropdown-menu">
+                                        <a href="" class="dropdown-item"><i class="fa fa-edit text-success"></i>
+                                            Edit</a>
+                                        <a href="" onclick="return confirm('Do you want to delete this record?')"
+                                            class="dropdown-item"><i class="fa fa-trash text-danger"></i> Delete</a>
+
+                                    </div>
+
+                                    <!-- <a href="">
+                                        <i class="nav-icon fas fa-ellipsis-v ml-2"></i>
+                                        <a href="classroom.php?class_id=<?php echo $row['ClassID']; ?>"><i
+                                                class="fa fa-edit"></i></a>
+                                        <a href="classroom.php?delete_class_id=<?php echo $row['ClassID']; ?>"><i
+                                                class="fa fa-trash text-danger"></i></a>
+                                    </a> -->
+                                </td>
+                            </tr>
                             <?php } ?>
                         </tbody>
                     </table>
