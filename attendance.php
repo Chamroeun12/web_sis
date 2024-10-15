@@ -153,45 +153,14 @@ $class = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="card-footer">
-                                <div class="card-tools">
-                                    <ul class="pagination pagination-sm float-right">
-                                        <li class="page-item"><a class="page-link" href="student_list.php?page=
-                     <?php
-                        if (isset($_GET['page']) && $_GET['page'] > 1)
-
-                            echo $_GET['page'] - 1;
-                        else
-                            echo 1;
-                        ?>
-                    ">&laquo;</a></li>
-                                        <?php for ($i = 1; $i <= $maxpage; $i++) { ?>
-                                        <li class="page-item
-                      <?php
-                                            if (isset($_GET['page'])) {
-                                                if ($i == $_GET['page'])
-                                                    echo ' active ';
-                                            } else {
-                                                if ($i == 1)
-                                                    echo ' active ';
-                                            }
-                        ?>"><a class="page-link" href="student_list.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                                        </li>
-                                        <?php } ?>
-                                        <li class="page-item"><a class="page-link" href="student_list.php?page=
-                     <?php
-                        if (isset($_GET['page'])) {
-                            if ($_GET['page'] == $maxpage) {
-                                echo $maxpage;
-                            } else {
-                                echo $maxpage + 1;
-                            }
-                        } else {
-                            echo 2;
-                        }
-                        ?>">&raquo;</a></li>
-                                    </ul>
-                                </div>
+                            <div class="card-tools">
+                                <ul class="pagination pagination-sm float-right">
+                                    <li class="page-item"><a class="page-link" href="#">«</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">»</a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
