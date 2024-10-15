@@ -197,27 +197,28 @@ include 'connection.php';
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview ml-4"
+                            <ul class="nav nav-treeview "
                                 style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
                                     <a href="classroom.php" class="nav-link">
-                                        <p class="stu-list text-white ml-2">All Classrooms</p>
+                                        <p class="stu-list text-white pl-2">
+                                            All Classrooms</p>
                                     </a>
                                 </li>
                             </ul>
-                            <ul class="nav nav-treeview ml-4"
+                            <ul class="nav nav-treeview "
                                 style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
                                     <a href="Student_in_class.php" class="nav-link">
-                                        <p class="stu-list text-white ml-2">Student in Class</p>
+                                        <p class="stu-list text-white pl-2">Student in Class</p>
                                     </a>
                                 </li>
                             </ul>
-                            <ul class="nav nav-treeview ml-4"
+                            <ul class="nav nav-treeview"
                                 style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
                                     <a href="class.php" class="nav-link ">
-                                        <p class="stu-list text-white ml-2">Add Student to Class</p>
+                                        <p class="stu-list text-white pl-2">Add Student to Class</p>
                                     </a>
                                 </li>
                             </ul>
@@ -254,21 +255,21 @@ include 'connection.php';
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview ml-4"
+                            <ul class="nav nav-treeview "
                                 style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
                                     <a href="" class="nav-link ">
 
-                                        <p class="stu-list text-white ml-2">Teacher Schedule</p>
+                                        <p class="stu-list text-white pl-2">Teacher Schedule</p>
                                     </a>
                                 </li>
                             </ul>
-                            <ul class="nav nav-treeview ml-4"
+                            <ul class="nav nav-treeview"
                                 style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
                                     <a href="class_for_sch.php" class="nav-link ">
 
-                                        <p class="stu-list text-white ml-2">Student Schedule</p>
+                                        <p class="stu-list text-white pl-2">Student Schedule</p>
                                     </a>
                                 </li>
                             </ul>
@@ -290,27 +291,27 @@ include 'connection.php';
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview ml-4"
+                            <ul class="nav nav-treeview"
                                 style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
                                     <a href="user_info.php" class="nav-link">
-                                        <p class="stu-list text-white ml-2">User Info</p>
+                                        <p class="stu-list text-white pl-2">User Info</p>
                                     </a>
                                 </li>
                             </ul>
-                            <ul class="nav nav-treeview ml-4"
+                            <ul class="nav nav-treeview"
                                 style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
                                     <a href="backup.php" class="nav-link ">
-                                        <p class="stu-list text-white ml-2">Backup</p>
+                                        <p class="stu-list text-white pl-2">Backup</p>
                                     </a>
                                 </li>
                             </ul>
-                            <ul class="nav nav-treeview ml-4 mb-5"
+                            <ul class="nav nav-treeview mb-5"
                                 style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
                                     <a href="logout.php" class="nav-link ">
-                                        <p class="stu-list text-white ml-2">Logout</p>
+                                        <p class="stu-list text-white pl-2">Logout</p>
                                     </a>
                                 </li>
                             </ul>

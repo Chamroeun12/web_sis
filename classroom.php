@@ -262,8 +262,9 @@ include_once "header.php";
                                                 style=" font-size: 18px;"></i></button>
                                         <button type="submit" name="export_pdf" title="PDF"
                                             style="border:none; background: transparent; padding:0px;"><i
-                                                class="fa fa-file-pdf text-danger ml-1"
-                                                style=" font-size: 18px;"></i></button>
+                                                class="fa fa-file-pdf text-danger ml-1" style=" font-size: 18px;"></i>
+                                            <input type="hidden" name="classname" value="<?=$row['Class_name']; ?>">
+                                        </button>
                                         <button type="submit" name="export_excel" title="Excel"
                                             style="border:none; background: transparent; padding:0px;"><i
                                                 class="fa fa-file-excel text-success ml-1"
@@ -282,15 +283,6 @@ include_once "header.php";
                                             </div>
                                         </span>
                                     </form>
-
-
-                                    <!-- <a href="">
-                                        <i class="nav-icon fas fa-ellipsis-v ml-2"></i>
-                                        <a href="classroom.php?class_id=<?php echo $row['ClassID']; ?>"><i
-                                                class="fa fa-edit"></i></a>
-                                        <a href="classroom.php?delete_class_id=<?php echo $row['ClassID']; ?>"><i
-                                                class="fa fa-trash text-danger"></i></a>
-                                    </a> -->
                                 </td>
                             </tr>
                             <?php } ?>

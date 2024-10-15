@@ -1,36 +1,45 @@
 <?php
 require('fpdf/fpdf.php');  // For PDF generation
-require 'vendors/autoload.php'; // Make sure the autoloader for PhpSpreadsheet is correctly set up
+require 'vendors/autoload.php'; // Autoloader for PhpSpreadsheet
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx; // Change to Xlsx for better compatibility
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx; // Xlsx for better compatibility
 
-include_once 'connection.php'; // For database connection
+include_once 'connection.php'; // Database connection
+
+
+// Function to fetch student data
+function fetchStudentData($conn) {
+    if(isset($_POST['classname'])){
+        $classname = $_POST['classname'];
+        // echo $classname;
+        }
+    $query = "SELECT
+        s.En_name AS Student_Name,
+        s.Gender,
+        s.DOB,
+        c.Class_name,
+        co.Course_name,
+        c.Shift,
+        t.En_name AS Teacher_Name,
+        s.Phone
+    FROM
+        tb_add_to_class ad
+    INNER JOIN
+        tb_class c ON ad.Class_id = c.ClassID
+    INNER JOIN
+        tb_course co ON c.course_id = co.id
+    INNER JOIN
+        tb_teacher t ON c.Teacher_id = t.id
+    INNER JOIN
+        tb_student s ON ad.Stu_id = s.ID WHERE  c.Class_name='$classname'";
+
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
 // Fetch data from the database
-$data = [];
-$query = "SELECT
-    s.En_name AS Student_Name,
-    s.Gender,
-    s.DOB,
-    c.Class_name,
-    co.Course_name,
-    c.Shift,
-    t.En_name AS Teacher_Name,
-    s.Phone
-FROM
-    tb_add_to_class ad
-INNER JOIN
-    tb_class c ON ad.Class_id = c.ClassID
-INNER JOIN
-    tb_course co ON c.course_id = co.id
-INNER JOIN
-    tb_teacher t ON c.Teacher_id = t.id
-INNER JOIN
-    tb_student s ON ad.Stu_id = s.ID;";
-
-$stmt = $conn->prepare($query);
-$stmt->execute();
-$data = $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch the data
+$data = fetchStudentData($conn);
 
 if (isset($_POST['export_excel'])) {
     // Generate Excel using PhpSpreadsheet
@@ -67,7 +76,7 @@ if (isset($_POST['export_excel'])) {
     $writer->save('php://output');
     exit; // Exit after outputting the file
 } elseif (isset($_POST['export_pdf'])) {
-    // Create a new PDF document
+    // Create a new PDF document using TCPDF
     $pdf = new TCPDF();
     $pdf->SetCreator(PDF_CREATOR);
     $pdf->SetTitle('Students In Class');
@@ -103,7 +112,7 @@ if (isset($_POST['export_excel'])) {
 
     $html .= '</table>';
     $pdf->writeHTML($html, true, false, true, false, '');
-    $pdf->Output('users_report.pdf', 'I'); // Output PDF
+    $pdf->Output('students_report.pdf', 'I'); // Output PDF inline
     exit; // Exit after outputting the file
 }
 ?>
