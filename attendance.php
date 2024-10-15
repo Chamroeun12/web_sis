@@ -60,6 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $msg = "<div class='alert alert-success'>Attendance saved successfully.</div>";
         // Re-fetch students info to display the attendance status
         $students_info = fetchAttendance($selected_class, $class_date, $conn);
+        header('Location: attendace_list.php');
+        exit;
     }
 }
 

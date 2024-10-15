@@ -165,13 +165,30 @@ include 'connection.php';
                         </li>
                         </li>
                         <li class="nav-item">
-                            <a href="attendance.php" class="nav-link btnhover1">
+                            <a href="#" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-tasks"></i>
                                 <p>
-                                    Attendace
+                                Attendace
+                                    <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
-                        </li>
+                            <ul class="nav nav-treeview "
+                                style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
+                                <li class="nav-item">
+                                    <a href="attendance.php" class="nav-link">
+                                        <p class="stu-list text-white pl-2">
+                                            Add Attendace</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview "
+                                style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
+                                <li class="nav-item">
+                                    <a href="attendace_list.php" class="nav-link">
+                                        <p class="stu-list text-white pl-2">Attendace List</p>
+                                    </a>
+                                </li>
+                            </ul>
                         <li class="nav-item">
                             <a href="subject.php" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-graduation-cap"></i>
