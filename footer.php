@@ -40,6 +40,8 @@ $.widget.bridge('uibutton', $.ui.button)
 <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <!-- Summernote -->
 <script src="plugins/summernote/summernote-bs4.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
@@ -210,6 +212,19 @@ function preview(evt) {
 }
 </script>
 <!-- active -->
+
+<!-- Check box backup -->
+<script>
+function toggleCheckboxes(source) {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][name="tables[]"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = source.checked;
+    });
+}
+</script>
+
+<!-- Bootstrap JS for better styling (optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- live search -->
 <!-- <script>
