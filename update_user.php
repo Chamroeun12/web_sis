@@ -78,9 +78,7 @@ if (isset($_GET['user_id'])) {
                                     </div>
                                 </div>
                                 <select name="role" id="role" class="form-control">
-                                    <option value="super_admin"
-                                        <?php echo !isset($data) ? '' : ($data['Role'] == 'super_admin' ? 'selected' : ''); ?>>
-                                        Super Admin</option>
+                                    <option selected disabled>--select role--</option>
                                     <option value="admin"
                                         <?php echo !isset($data) ? '' : ($data['Role'] == 'admin' ? 'selected' : ''); ?>>
                                         Admin</option>
