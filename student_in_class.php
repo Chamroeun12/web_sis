@@ -33,7 +33,7 @@ if (isset($_POST['addclass'])) {
 }
 
 // Fetch all classes for the dropdown
-$sql = "SELECT * FROM tb_class";
+$sql = "SELECT * FROM tb_class where Status = 'Active'";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $classes = $stmt->fetchAll(PDO::FETCH_ASSOC);

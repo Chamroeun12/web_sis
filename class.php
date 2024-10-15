@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // Fetch Classes
-$sql = "SELECT * FROM tb_class";
+$sql = "SELECT * FROM tb_class where Status = 'Active'";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $class = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -74,7 +74,7 @@ $maxpage = ceil($temp['CountRecords'] / 10);
                                     <select name="addclass" class="form-control">
                                         <option value="">--Select Class--</option>
                                         <?php foreach ($class as $row) : ?>
-                                        <option value="<?= $row['ClassID']; ?>"><?= $row['Class_name']; ?></option>
+                                        <option value="<?= $row['ClassID']; ?>"><?= $row['Class_name']; ?> <span> coure name</span> <span> Teacher name</span></option>
                                         <?php endforeach; ?>
                                     </select>
                                     <div class="ml-3">
