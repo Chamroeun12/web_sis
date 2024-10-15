@@ -87,7 +87,7 @@ if (isset($_POST['export_excel'])) {
     // Create a new PDF document using TCPDF
     $pdf = new TCPDF();
     $pdf->SetCreator(PDF_CREATOR);
-    $pdf->SetTitle('Students In Class');
+    $pdf->SetTitle('Students Report Attendance');
     $pdf->AddPage();
     $pdf->SetFont('helvetica', '', 12);
 
