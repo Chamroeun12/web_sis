@@ -20,7 +20,7 @@ if (isset($_GET['remove_id']) && isset($_GET['class_id'])) {
 if (isset($_POST['addclass'])) {
     $class_id = $_POST['addclass'];
 
-    $sql = "SELECT stu.ID, stu.En_name, c.Class_name
+    $sql = "SELECT stu.ID, stu.En_name, stu.Kh_name, stu.Stu_code, stu.Gender, stu.DOB, c.Class_name
             FROM tb_student stu
             JOIN tb_add_to_class atc ON stu.ID = atc.Stu_id
             JOIN tb_class c ON c.ClassID = atc.Class_id
@@ -81,10 +81,10 @@ if ($temp) {
                                         <select name="addclass" id="" class="form-control">
                                             <option value="">--Select Class--</option>
                                             <?php foreach ($classes as $row) : ?>
-                                            <option value="<?= $row['ClassID']; ?>"
-                                                <?= isset($_POST['addclass']) && $_POST['addclass'] == $row['ClassID'] ? 'selected' : '' ?>>
-                                                <?= $row['Class_name']; ?>
-                                            </option>
+                                                <option value="<?= $row['ClassID']; ?>"
+                                                    <?= isset($_POST['addclass']) && $_POST['addclass'] == $row['ClassID'] ? 'selected' : '' ?>>
+                                                    <?= $row['Class_name']; ?>
+                                                </option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
@@ -109,42 +109,59 @@ if ($temp) {
                 </div>
             </div>
 
-            <div class="card-body table-responsive p-0 text-sm">
-                <table class="table table-hover text-nowrap" style="font-family:Khmer OS Siemreap;" id="userTbl">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Class Name</th>
-                            <th>English Name</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="showdata">
-                        <!-- Show students already in the class -->
-                        <?php if (isset($students_in_class) && !empty($students_in_class)) { ?>
-                        <?php foreach ($students_in_class as $key => $student) { ?>
-                        <tr>
-                            <td><?= $key + 1; ?></td>
-                            <td><?= $student['Class_name']; ?></td>
-                            <td><?= $student['En_name']; ?></td>
-                            <td>
-                                <!-- Remove button to delete the student from the class -->
-                                <a href="?remove_id=<?= $student['ID']; ?>&class_id=<?= $class_id; ?>"
-                                    class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Are you sure you want to remove this student?');">
-                                    Remove
-                                </a>
-                            </td>
-                        </tr>
-                        <?php } ?>
-                        <?php } else { ?>
-                        <tr>
-                            <td colspan="4">No students found for the selected class.</td>
-                        </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
+
+            <div class="row">
+                <div class="card col-md-12">
+                    <div class="card-body">
+                        <div class="table-responsive p-0 text-sm">
+                            <table class="table table-hover text-nowrap" style="font-family:Khmer OS Siemreap;"
+                                id="userTbl">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Class Name</th>
+                                        <th>Student Code</th>
+                                        <th>English Name</th>
+                                        <th>Khmer Name</th>
+                                        <th>Gender</th>
+                                        <th>Date of Birth</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="showdata">
+                                    <!-- Show students already in the class -->
+                                    <?php if (isset($students_in_class) && !empty($students_in_class)) { ?>
+                                        <?php foreach ($students_in_class as $key => $student) { ?>
+                                            <tr>
+                                                <td><?= $key + 1; ?></td>
+                                                <td><?= $student['Class_name']; ?></td>
+                                                <td><?= $student['Stu_code']; ?></td>
+                                                <td><?= $student['En_name']; ?></td>
+                                                <td><?= $student['Kh_name']; ?></td>
+                                                <td><?= $student['Gender']; ?></td>
+                                                <td><?= $student['DOB']; ?></td>
+                                                <td>
+                                                    <!-- Remove button to delete the student from the class -->
+                                                    <a href="?remove_id=<?= $student['ID']; ?>&class_id=<?= $class_id; ?>"
+                                                        class="btn btn-danger btn-sm"
+                                                        onclick="return confirm('Are you sure you want to remove this student?');">
+                                                        Remove
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
+                                    <?php } else { ?>
+                                        <tr>
+                                            <td colspan="4">No students found for the selected class.</td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
+
             <!-- Page -->
             <div class="card-footer">
                 <div class="card-tools">
@@ -159,7 +176,7 @@ if ($temp) {
                         ?>
                     ">&laquo;</a></li>
                         <?php for ($i = 1; $i <= $maxpage; $i++) { ?>
-                        <li class="page-item
+                            <li class="page-item
                       <?php
                             if (isset($_GET['page'])) {
                                 if ($i == $_GET['page'])
@@ -169,8 +186,8 @@ if ($temp) {
                                     echo ' active ';
                             }
                         ?>"><a class="page-link"
-                                href="student_in_class.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                        </li>
+                                    href="student_in_class.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                            </li>
                         <?php } ?>
                         <li class="page-item"><a class="page-link" href="student_in_class.php?page=
                      <?php
