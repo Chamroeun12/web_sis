@@ -6,15 +6,33 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Fetch Classes
 $sql = "SELECT * FROM tb_class where Status = 'Active'";
+$sql = "SELECT * FROM tb_class";
+
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $class = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Fetch Students
-$sql = "SELECT * FROM tb_student";
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$student = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Number of records per page
+$records_per_page = 5;
+
+
+$sql = "SELECT * FROM tb_student LIMIT $records_per_page";
+$student = $conn->prepare($sql);
+$student->execute();
+$student = $student->fetchAll(PDO::FETCH_ASSOC);
+// Get the current page number from the query string; default to 1 if not set
+$page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+// Calculate the starting limit for the SQL query
+$start_from = ($page - 1) * $records_per_page;
+
+// Query to get the total number of records
+$total_records = $conn->query("SELECT COUNT(*) FROM tb_student")->fetchColumn();
+
+// Calculate the total number of pages
+$total_pages = ceil($total_records / $records_per_page);
+
+
+
 
 // Fetch joined records
 $sql = "SELECT * FROM tb_add_to_class atc
@@ -43,12 +61,7 @@ if (isset($_POST['btnsave'])) {
     }
 }
 
-// Pagination logic
-$sql  = "SELECT COUNT(*) AS CountRecords FROM tb_add_to_class";
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$temp = $stmt->fetch(PDO::FETCH_ASSOC);
-$maxpage = ceil($temp['CountRecords'] / 10);
+
 ?>
 
 <?php include_once 'header.php'; ?>
@@ -131,12 +144,29 @@ $maxpage = ceil($temp['CountRecords'] / 10);
                                 </tbody>
                             </table>
                         </div>
+                        <!-- Page -->
+                        <!-- xkjfjxfjhk -->
+                        <div>
+                            <?php if ($page > 1): ?>
+                            <a href="class.php?page=<?php echo $page - 1; ?>">Previous</a>
+                            <?php endif; ?>
+
+                            <?php if ($page < $total_pages): ?>
+                            <a href="class.php?page=<?php echo $page + 1; ?>">Next</a>
+                            <?php endif; ?>
+                        </div>
+
+
+
+
+
                     </div>
                 </div>
             </div>
             </form>
             <!-- this form table -->
         </div>
+
     </div>
 </section>
 <?php include_once 'footer.php'; ?>
