@@ -60,6 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $msg = "<div class='alert alert-success'>Attendance saved successfully.</div>";
         // Re-fetch students info to display the attendance status
         $students_info = fetchAttendance($selected_class, $class_date, $conn);
+        header('Location: attendace_list.php');
+        exit;
     }
 }
 
@@ -95,13 +97,16 @@ function fetchAttendance($class_id, $class_date, $conn) {
                                     <select name="Class_id" id="Class_id" class="form-control" required>
                                         <option value="">--Select Class--</option>
                                         <?php foreach ($classes as $row) : ?>
-                                            <option value="<?= htmlspecialchars($row['ClassID'], ENT_QUOTES, 'UTF-8'); ?>" <?= ($row['ClassID'] == $selected_class) ? 'selected' : ''; ?>><?= htmlspecialchars($row['Class_name'], ENT_QUOTES, 'UTF-8'); ?></option>
+                                        <option value="<?= htmlspecialchars($row['ClassID'], ENT_QUOTES, 'UTF-8'); ?>"
+                                            <?= ($row['ClassID'] == $selected_class) ? 'selected' : ''; ?>>
+                                            <?= htmlspecialchars($row['Class_name'], ENT_QUOTES, 'UTF-8'); ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                                     <label for="class_date" class="form-label">Date</label>
-                                    <input type="date" name="class_date" id="class_date" class="form-control" required value="<?= htmlspecialchars($class_date, ENT_QUOTES, 'UTF-8'); ?>">
+                                    <input type="date" name="class_date" id="class_date" class="form-control" required
+                                        value="<?= htmlspecialchars($class_date, ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                                 <div class="col-ms-2">
                                     <label for="">&nbsp;</label>
@@ -119,7 +124,7 @@ function fetchAttendance($class_id, $class_date, $conn) {
                     <div class="card-header rounded-0">
                         <div class="card-title">Attendance Sheet</div>
                         <div class="d-flex justify-content-end">
-                            <button class="btn btn-success rounded-pill mr-2" type="submit">Submit</button>
+                            <button class="btn btn-success mr-2" type="submit">Submit</button>
                         </div>
                     </div>
 
@@ -139,39 +144,46 @@ function fetchAttendance($class_id, $class_date, $conn) {
                                     </thead>
                                     <tbody>
                                         <?php if (!empty($students_info)): ?>
-                                            <?php foreach ($students_info as $index => $student): ?>
-                                                <tr class="student-row">
-                                                    <td class="px-2 py-1 text-dark-emphasis fw-bold">
-                                                        <input type="hidden" name="student_id[]" value="<?= htmlspecialchars($student['ID'], ENT_QUOTES, 'UTF-8'); ?>">
-                                                        <?= $index + 1; ?>
-                                                    </td>
-                                                    <td class="text-center px-2 py-1 text-dark-emphasis fw-bold">
-                                                        <?= htmlspecialchars($student['En_name'], ENT_QUOTES, 'UTF-8'); ?>
-                                                    </td>
-                                                    <td class="text-center px-2 py-1 text-dark-emphasis">
-                                                        <?= htmlspecialchars($student['Stu_code'], ENT_QUOTES, 'UTF-8'); ?>
-                                                    </td>
-                                                    <td class="text-center px-2 py-1 text-dark-emphasis">
-                                                        <div class="form-check d-flex w-100 justify-content-center">
-                                                            <input class="form-check-input status_check" type="radio" name="status[<?= $index; ?>]" value="1" <?= (isset($student['Attendance']) && $student['Attendance'] == 1) ? 'checked' : ''; ?>>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center px-2 py-1 text-dark-emphasis">
-                                                        <div class="form-check d-flex w-100 justify-content-center">
-                                                            <input class="form-check-input status_check" type="radio" name="status[<?= $index; ?>]" value="2" <?= (isset($student['Attendance']) && $student['Attendance'] == 2) ? 'checked' : ''; ?>>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center px-2 py-1 text-dark-emphasis">
-                                                        <div class="form-check d-flex w-100 justify-content-center">
-                                                            <input class="form-check-input status_check" type="radio" name="status[<?= $index; ?>]" value="3" <?= (isset($student['Attendance']) && $student['Attendance'] == 3) ? 'checked' : ''; ?>>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            <?php endforeach; ?>
+                                        <?php foreach ($students_info as $index => $student): ?>
+                                        <tr class="student-row">
+                                            <td class="px-2 py-1 text-dark-emphasis fw-bold">
+                                                <input type="hidden" name="student_id[]"
+                                                    value="<?= htmlspecialchars($student['ID'], ENT_QUOTES, 'UTF-8'); ?>">
+                                                <?= $index + 1; ?>
+                                            </td>
+                                            <td class="text-center px-2 py-1 text-dark-emphasis fw-bold">
+                                                <?= htmlspecialchars($student['En_name'], ENT_QUOTES, 'UTF-8'); ?>
+                                            </td>
+                                            <td class="text-center px-2 py-1 text-dark-emphasis">
+                                                <?= htmlspecialchars($student['Stu_code'], ENT_QUOTES, 'UTF-8'); ?>
+                                            </td>
+                                            <td class="text-center px-2 py-1 text-dark-emphasis">
+                                                <div class="form-check d-flex w-100 justify-content-center">
+                                                    <input class="form-check-input status_check" type="radio"
+                                                        name="status[<?= $index; ?>]" value="1"
+                                                        <?= (isset($student['Attendance']) && $student['Attendance'] == 1) ? 'checked' : ''; ?>>
+                                                </div>
+                                            </td>
+                                            <td class="text-center px-2 py-1 text-dark-emphasis">
+                                                <div class="form-check d-flex w-100 justify-content-center">
+                                                    <input class="form-check-input status_check" type="radio"
+                                                        name="status[<?= $index; ?>]" value="2"
+                                                        <?= (isset($student['Attendance']) && $student['Attendance'] == 2) ? 'checked' : ''; ?>>
+                                                </div>
+                                            </td>
+                                            <td class="text-center px-2 py-1 text-dark-emphasis">
+                                                <div class="form-check d-flex w-100 justify-content-center">
+                                                    <input class="form-check-input status_check" type="radio"
+                                                        name="status[<?= $index; ?>]" value="3"
+                                                        <?= (isset($student['Attendance']) && $student['Attendance'] == 3) ? 'checked' : ''; ?>>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <?php endforeach; ?>
                                         <?php else: ?>
-                                            <tr>
-                                                <td colspan="6" class="text-center">No students found in this class.</td>
-                                            </tr>
+                                        <tr>
+                                            <td colspan="6" class="text-center">No students found in this class.</td>
+                                        </tr>
                                         <?php endif; ?>
                                     </tbody>
                                 </table>
