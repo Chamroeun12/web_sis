@@ -247,17 +247,13 @@ include_once "header.php";
                                     <?php } ?>
                                 </td>
                                 <td>
-                                    <a href="classroom.php?delete_class_id=<?php echo $row['ClassID']; ?>"><i
-                                            class="fa fa-print text-dark" style=" font-size: 18px;"></i></a>
-                                    <a href="classroom.php?delete_class_id=<?php echo $row['ClassID']; ?>"><i
-                                            class="fa fa-file-pdf text-danger ml-2" style=" font-size: 18px;"></i></a>
-                                    <a href="classroom.php?delete_class_id=<?php echo $row['ClassID']; ?>"><i
-                                            class="fa fa-file-excel text-success ml-2"
-                                            style=" font-size: 18px;"></i></a>
-
-
+                                  <form action="report_data.php" method="POST">
+                                      <button type="submit" name="print" title="Print"><i class="fa fa-print text-dark" style=" font-size: 18px;"></i></button>
+                                      <button type="submit" name="export_pdf" title="PDF" ><i class="fa fa-file-pdf text-danger ml-2" style=" font-size: 18px;"></i></button>
+                                      <button type="submit" name="export_excel" title="Excel"><i class="fa fa-file-excel text-success ml-2" style=" font-size: 18px;"></i></button>
+                                  </form>
                                     <i class="nav-icon fas fa-ellipsis-v text-info ml-2 dropup" style=" font-size:
-                                        18px; cursor:pointer;" data-toggle="dropdown"></i>
+                                        18px; cursor:pointer;" data-toggle="dropdown" ></i>
                                     <div class="dropdown-menu">
                                         <a href="" class="dropdown-item"><i class="fa fa-edit text-success"></i>
                                             Edit</a>
