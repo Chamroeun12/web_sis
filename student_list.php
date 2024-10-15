@@ -280,12 +280,12 @@ if ($temp) {
                                 <td><?php echo $value['Address']; ?></td>
                                 <td><?php echo $value['Phone']; ?></td>
                                 <td>
-                                      <?php if ($value['Status'] == 'Active') { ?>
-                                          <span class="badge badge-success">Active</span>
-                                      <?php } else { ?>
-                                          <span class="badge badge-danger">Disabled</span>
-                                      <?php } ?>
-                                    </td>
+                                    <?php if ($value['Status'] == 'Active') { ?>
+                                    <span class="badge badge-success">Active</span>
+                                    <?php } else { ?>
+                                    <span class="badge badge-danger">Disabled</span>
+                                    <?php } ?>
+                                </td>
                                 <td>
                                     <a href="update_student.php?stu_id=<?php echo $value['ID'] ?>">
                                         <i class="fa fa-edit text-success"></i>
@@ -293,9 +293,6 @@ if ($temp) {
                                     <a class="m-2" href="all_condition.php?stu_id=<?php echo $value['ID'] ?>"
                                         onclick="return confirm('Do you want to delete this record?')">
                                         <i class="fa fa-trash text-danger"></i>
-                                    </a>
-                                    <a href="#">
-                                        <i class="nav-icon fas fa-ellipsis-h"></i>
                                     </a>
                                 </td>
                             </tr>

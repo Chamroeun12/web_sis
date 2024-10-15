@@ -72,7 +72,7 @@ CREATE TABLE `tb_subject` (
   `Create_at` timestamp(5) NULL DEFAULT NULL,
   `Update_at` datetime(5) DEFAULT NULL,
   PRIMARY KEY (`SubID`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO `tb_subject` (`SubID`, `Subject_name`, `Color`, `Create_at`, `Update_at`) VALUES ('1', 'Khmer', 'bg-danger', '2024-09-04 18:44:06.00000', '2024-09-04 18:44:09.00000');
 INSERT INTO `tb_subject` (`SubID`, `Subject_name`, `Color`, `Create_at`, `Update_at`) VALUES ('2', 'English', 'bg-warning', '2024-09-03 18:45:10.00000', '2024-09-04 18:45:15.00000');
@@ -92,10 +92,21 @@ CREATE TABLE `tb_add_to_class` (
   KEY `Class_id` (`Class_id`),
   CONSTRAINT `tb_add_to_class_ibfk_1` FOREIGN KEY (`Stu_id`) REFERENCES `tb_student` (`ID`),
   CONSTRAINT `tb_add_to_class_ibfk_2` FOREIGN KEY (`Class_id`) REFERENCES `tb_class` (`ClassID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO `tb_add_to_class` (`id`, `Stu_id`, `Class_id`, `Create_at`, `Update_at`) VALUES ('4', '89', '16', '', '');
 INSERT INTO `tb_add_to_class` (`id`, `Stu_id`, `Class_id`, `Create_at`, `Update_at`) VALUES ('5', '89', '16', '', '');
+INSERT INTO `tb_add_to_class` (`id`, `Stu_id`, `Class_id`, `Create_at`, `Update_at`) VALUES ('6', '91', '18', '', '');
+INSERT INTO `tb_add_to_class` (`id`, `Stu_id`, `Class_id`, `Create_at`, `Update_at`) VALUES ('7', '92', '18', '', '');
+INSERT INTO `tb_add_to_class` (`id`, `Stu_id`, `Class_id`, `Create_at`, `Update_at`) VALUES ('8', '93', '18', '', '');
+INSERT INTO `tb_add_to_class` (`id`, `Stu_id`, `Class_id`, `Create_at`, `Update_at`) VALUES ('9', '95', '18', '', '');
+INSERT INTO `tb_add_to_class` (`id`, `Stu_id`, `Class_id`, `Create_at`, `Update_at`) VALUES ('10', '97', '18', '', '');
+INSERT INTO `tb_add_to_class` (`id`, `Stu_id`, `Class_id`, `Create_at`, `Update_at`) VALUES ('11', '98', '18', '', '');
+INSERT INTO `tb_add_to_class` (`id`, `Stu_id`, `Class_id`, `Create_at`, `Update_at`) VALUES ('12', '99', '18', '', '');
+INSERT INTO `tb_add_to_class` (`id`, `Stu_id`, `Class_id`, `Create_at`, `Update_at`) VALUES ('13', '100', '18', '', '');
+INSERT INTO `tb_add_to_class` (`id`, `Stu_id`, `Class_id`, `Create_at`, `Update_at`) VALUES ('14', '101', '18', '', '');
+INSERT INTO `tb_add_to_class` (`id`, `Stu_id`, `Class_id`, `Create_at`, `Update_at`) VALUES ('15', '102', '18', '', '');
+INSERT INTO `tb_add_to_class` (`id`, `Stu_id`, `Class_id`, `Create_at`, `Update_at`) VALUES ('16', '103', '18', '', '');
 
 
 
@@ -131,18 +142,17 @@ CREATE TABLE `tb_class` (
   `End_class` date DEFAULT NULL,
   `Create_at` timestamp(5) NULL DEFAULT NULL,
   `Update_at` datetime DEFAULT NULL,
-  `status` varchar(50) DEFAULT NULL,
+  `status` int(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`ClassID`) USING BTREE,
   KEY `Teacher_id` (`Teacher_id`),
   KEY `course_id` (`course_id`),
   CONSTRAINT `tb_class_ibfk_1` FOREIGN KEY (`Teacher_id`) REFERENCES `tb_teacher` (`id`),
   CONSTRAINT `tb_class_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `tb_course` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-INSERT INTO `tb_class` (`ClassID`, `Class_name`, `Class_Type`, `Teacher_id`, `course_id`, `Time_in`, `Time_out`, `Shift`, `Start_class`, `End_class`, `Create_at`, `Update_at`, `status`) VALUES ('16', 'A001', '', '12', '164', '7', '9', 'PM', '', '2024-10-14', '', '', 'active');
-INSERT INTO `tb_class` (`ClassID`, `Class_name`, `Class_Type`, `Teacher_id`, `course_id`, `Time_in`, `Time_out`, `Shift`, `Start_class`, `End_class`, `Create_at`, `Update_at`, `status`) VALUES ('17', 'A002', '', '13', '165', '9', '11', 'AM', '', '0000-00-00', '', '', 'active');
-INSERT INTO `tb_class` (`ClassID`, `Class_name`, `Class_Type`, `Teacher_id`, `course_id`, `Time_in`, `Time_out`, `Shift`, `Start_class`, `End_class`, `Create_at`, `Update_at`, `status`) VALUES ('18', 'A003', '', '12', '164', '7', '9', 'PM', '', '2024-10-14', '', '', 'disable');
-INSERT INTO `tb_class` (`ClassID`, `Class_name`, `Class_Type`, `Teacher_id`, `course_id`, `Time_in`, `Time_out`, `Shift`, `Start_class`, `End_class`, `Create_at`, `Update_at`, `status`) VALUES ('19', 'A008', '', '13', '172', '7', '9', 'AM', '2024-10-15', '2024-10-15', '', '', 'active');
+INSERT INTO `tb_class` (`ClassID`, `Class_name`, `Class_Type`, `Teacher_id`, `course_id`, `Time_in`, `Time_out`, `Shift`, `Start_class`, `End_class`, `Create_at`, `Update_at`, `status`) VALUES ('16', 'A001', '', '12', '164', '7', '9', 'PM', '', '2024-10-14', '', '', '1');
+INSERT INTO `tb_class` (`ClassID`, `Class_name`, `Class_Type`, `Teacher_id`, `course_id`, `Time_in`, `Time_out`, `Shift`, `Start_class`, `End_class`, `Create_at`, `Update_at`, `status`) VALUES ('17', 'A002', '', '13', '165', '9', '11', 'AM', '', '0000-00-00', '', '', '1');
+INSERT INTO `tb_class` (`ClassID`, `Class_name`, `Class_Type`, `Teacher_id`, `course_id`, `Time_in`, `Time_out`, `Shift`, `Start_class`, `End_class`, `Create_at`, `Update_at`, `status`) VALUES ('18', 'A003', '', '12', '164', '7', '9', 'PM', '', '2024-10-14', '', '', '1');
 
 
 
@@ -185,7 +195,7 @@ CREATE TABLE `tb_login` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-INSERT INTO `tb_login` (`id`, `Teacher_id`, `Username`, `Password`, `Role`, `date`) VALUES ('1', '', 'Chamroeun', '1111', '', '2024-09-04');
+INSERT INTO `tb_login` (`id`, `Teacher_id`, `Username`, `Password`, `Role`, `date`) VALUES ('1', '', 'Chamroeun', '1111', 'admin', '2024-09-04');
 INSERT INTO `tb_login` (`id`, `Teacher_id`, `Username`, `Password`, `Role`, `date`) VALUES ('2', '', 'Tii', '2222', 'admin', '');
 INSERT INTO `tb_login` (`id`, `Teacher_id`, `Username`, `Password`, `Role`, `date`) VALUES ('4', '', 'Chet', '3333', 'user', '');
 INSERT INTO `tb_login` (`id`, `Teacher_id`, `Username`, `Password`, `Role`, `date`) VALUES ('5', '', 'admin', 'admin', 'admin', '');
@@ -239,22 +249,20 @@ CREATE TABLE `tb_month_score` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `Class_id` int(10) DEFAULT NULL,
   `Homework` double DEFAULT NULL,
-  `Participation` double DEFAULT NULL,
+  `Paticipation` double DEFAULT NULL,
   `Attendance` double DEFAULT NULL,
   `Monthly` double DEFAULT NULL,
   `Average` double DEFAULT NULL,
   `Status` varchar(50) DEFAULT NULL,
-  `for_month` varchar(50) DEFAULT NULL,
   `Date` date DEFAULT NULL,
   `Stu_id` int(10) DEFAULT NULL,
   `Course_id` int(10) DEFAULT NULL,
   `Create_at` timestamp(5) NULL DEFAULT NULL,
   `Update_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-INSERT INTO `tb_month_score` (`id`, `Class_id`, `Homework`, `Participation`, `Attendance`, `Monthly`, `Average`, `Status`, `for_month`, `Date`, `Stu_id`, `Course_id`, `Create_at`, `Update_at`) VALUES ('1', '', '60', '70', '50', '60', '68', 'New', '', '2024-08-29', '', '', '2024-09-03 18:48:27.00000', '2024-09-01 18:48:32');
-INSERT INTO `tb_month_score` (`id`, `Class_id`, `Homework`, `Participation`, `Attendance`, `Monthly`, `Average`, `Status`, `for_month`, `Date`, `Stu_id`, `Course_id`, `Create_at`, `Update_at`) VALUES ('2', '0', '87', '98', '97', '56', '84.5', '', '', '', '89', '', '', '');
+INSERT INTO `tb_month_score` (`id`, `Class_id`, `Homework`, `Paticipation`, `Attendance`, `Monthly`, `Average`, `Status`, `Date`, `Stu_id`, `Course_id`, `Create_at`, `Update_at`) VALUES ('1', '', '60', '70', '50', '60', '68', 'New', '2024-08-29', '', '', '2024-09-03 18:48:27.00000', '2024-09-01 18:48:32');
 
 
 
