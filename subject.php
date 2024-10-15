@@ -114,6 +114,7 @@ if (isset($_POST['btnsave'])) {
                     </div>
                     <!-- /.modal-dialog -->
                 </div>
+<<<<<<< HEAD
                 <!-- /.row -->
                 <!-- Foreach Loop -->
                 <div class="row mt-5">
@@ -132,6 +133,27 @@ if (isset($_POST['btnsave'])) {
                                 <div class="d-flex justify-content-between small-box-footer">
                                     <div>
                                         <!-- <a href="" class="text-white ml-3">
+=======
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.row -->
+            <!-- Foreach Loop -->
+            <!-- jduhfgukdsuhgh, -->
+            <div class="row mt-5">
+                <?php foreach ($data as $row) { ?>
+                <div class="col-lg-3 col-3">
+                    <div class="small-box <?php echo $row['Color']; ?>">
+                        <div class="inner">
+                            <h3 class="text-white"><?php echo $row['Subject_name']; ?></h3>
+                            <p class="text-white">&nbsp;</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="d-flex justify-content-between small-box-footer">
+                            <div>
+                                <!-- <a href="" class="text-white ml-3">
+>>>>>>> 23c9860af5d9fe9e512bfb415b802a4a99427e8d
                                     View &nbsp;
                                     <i class="fas fa-arrow-right fa-xs"></i>
                                 </a> -->
