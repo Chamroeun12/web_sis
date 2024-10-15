@@ -115,11 +115,11 @@ if (isset($_POST['btnsave'])) {
             </div>
             <!-- /.row -->
             <!-- Foreach Loop -->
+            <!-- jduhfgukdsuhgh, -->
             <div class="row mt-5">
                 <?php foreach ($data as $row) { ?>
                 <div class="col-lg-3 col-3">
                     <div class="small-box <?php echo $row['Color']; ?>">
-
                         <div class="inner">
                             <h3 class="text-white"><?php echo $row['Subject_name']; ?></h3>
                             <p class="text-white">&nbsp;</p>

@@ -24,7 +24,12 @@ if (isset($_POST['addclass'])) {
             FROM tb_student stu
             JOIN tb_add_to_class atc ON stu.ID = atc.Stu_id
             JOIN tb_class c ON c.ClassID = atc.Class_id
-            WHERE atc.Class_id = :class_id";
+            WHERE atc.Class_id = :class_id LIMIT 10";
+    if (isset($_GET['page'])) {
+        if ($_GET['page'] > 1) {
+            $sql .= " OFFSET " . ($_GET['page'] - 1) * 10;
+        }
+    }
 
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':class_id', $class_id, PDO::PARAM_INT);
@@ -38,6 +43,16 @@ $stmt = $conn->prepare($sql);
 $stmt->execute();
 $classes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+//pages
+$sql  = "SELECT COUNT(*) AS CountRecords FROM tb_add_to_class";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$temp = $stmt->fetch(PDO::FETCH_ASSOC);
+
+$maxpage = 1;
+if ($temp) {
+    $maxpage = ceil($temp['CountRecords'] / 10);
+}
 ?>
 <!-- this onclude hthggjjsdjjjjjjjjjjjjjjjjjjjj -->
 <?php include_once 'header.php'; ?>
@@ -114,7 +129,9 @@ $classes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <td><?= $student['En_name']; ?></td>
                             <td>
                                 <!-- Remove button to delete the student from the class -->
-                                <a href="?remove_id=<?= $student['ID']; ?>&class_id=<?= $class_id; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to remove this student?');">
+                                <a href="?remove_id=<?= $student['ID']; ?>&class_id=<?= $class_id; ?>"
+                                    class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Are you sure you want to remove this student?');">
                                     Remove
                                 </a>
                             </td>
@@ -128,7 +145,48 @@ $classes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </tbody>
                 </table>
             </div>
+            <!-- Page -->
+            <div class="card-footer">
+                <div class="card-tools">
+                    <ul class="pagination pagination-sm float-right">
+                        <li class="page-item"><a class="page-link" href="student_in_class.php?page=
+                     <?php
+                        if (isset($_GET['page']) && $_GET['page'] > 1)
 
+                            echo $_GET['page'] - 1;
+                        else
+                            echo 1;
+                        ?>
+                    ">&laquo;</a></li>
+                        <?php for ($i = 1; $i <= $maxpage; $i++) { ?>
+                        <li class="page-item
+                      <?php
+                            if (isset($_GET['page'])) {
+                                if ($i == $_GET['page'])
+                                    echo ' active ';
+                            } else {
+                                if ($i == 1)
+                                    echo ' active ';
+                            }
+                        ?>"><a class="page-link"
+                                href="student_in_class.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                        </li>
+                        <?php } ?>
+                        <li class="page-item"><a class="page-link" href="student_in_class.php?page=
+                     <?php
+                        if (isset($_GET['page'])) {
+                            if ($_GET['page'] == $maxpage) {
+                                echo $maxpage;
+                            } else {
+                                echo $maxpage + 1;
+                            }
+                        } else {
+                            echo 2;
+                        }
+                        ?>">&raquo;</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
     <!-- /.row -->
