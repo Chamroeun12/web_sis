@@ -248,11 +248,10 @@ include_once "header.php";
                                 </td>
                                 <td>
                                   <form action="report_data.php" method="POST">
-                                      <button type="submit" name="print" title="Print"><i class="fa fa-print text-dark" style=" font-size: 18px;"></i></button>
-                                      <button type="submit" name="export_pdf" title="PDF" ><i class="fa fa-file-pdf text-danger ml-2" style=" font-size: 18px;"></i></button>
-                                      <button type="submit" name="export_excel" title="Excel"><i class="fa fa-file-excel text-success ml-2" style=" font-size: 18px;"></i></button>
-                                  </form>
-                                    <i class="nav-icon fas fa-ellipsis-v text-info ml-2 dropup" style=" font-size:
+                                      <button type="submit" name="print" title="Print" style="border:none; background: transparent; pading:0px;"><i class="fa fa-print text-dark" style=" font-size: 18px;"></i></button>
+                                      <button type="submit" name="export_pdf" title="PDF" style="border:none; background: transparent; pading:0px;"><i class="fa fa-file-pdf text-danger" style=" font-size: 18px;"></i></button>
+                                      <button type="submit" name="export_excel" title="Excel" style="border:none; background: transparent; pading:0px;"><i class="fa fa-file-excel text-success" style=" font-size: 18px;"></i></button>
+                                      <i class="nav-icon fas fa-ellipsis-v text-info dropup ml-1" style=" font-size:
                                         18px; cursor:pointer;" data-toggle="dropdown" ></i>
                                     <div class="dropdown-menu">
                                         <a href="" class="dropdown-item"><i class="fa fa-edit text-success"></i>
@@ -261,6 +260,8 @@ include_once "header.php";
                                             class="dropdown-item"><i class="fa fa-trash text-danger"></i> Delete</a>
 
                                     </div>
+                                  </form>
+
 
                                     <!-- <a href="">
                                         <i class="nav-icon fas fa-ellipsis-v ml-2"></i>
