@@ -238,10 +238,14 @@ include_once "header.php";
                                       <?php } ?>
                                     </td>
                                     <td>
-                                        <a href="classroom.php?class_id=<?php echo $row['ClassID']; ?>"><i class="fa fa-edit"></i></a>
-                                        <a href="classroom.php?delete_class_id=<?php echo $row['ClassID']; ?>"><i class="fa fa-trash text-danger"></i></a>
                                         <a href="classroom.php?delete_class_id=<?php echo $row['ClassID']; ?>"><i class="fa fa-print"></i></a>
-                                        <a href="classroom.php?delete_class_id=<?php echo $row['ClassID']; ?>"><i class="fa fa-pdf"></i></a>
+                                        <a href="classroom.php?delete_class_id=<?php echo $row['ClassID']; ?>"><i class="fa fa-file-pdf"></i></a>
+                                        <a href="classroom.php?delete_class_id=<?php echo $row['ClassID']; ?>"><i class="fa fa-file-excel"></i></a>
+                                        <a href="">
+                                            <i class="nav-icon fas fa-ellipsis-h"></i>
+                                            <a href="classroom.php?class_id=<?php echo $row['ClassID']; ?>"><i class="fa fa-edit"></i></a>
+                                            <a href="classroom.php?delete_class_id=<?php echo $row['ClassID']; ?>"><i class="fa fa-trash text-danger"></i></a>
+                                        </a>
                                     </td>
                                 </tr>
                             <?php } ?>
