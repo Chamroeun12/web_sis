@@ -77,3 +77,13 @@ if (isset($_GET['co_id'])) {
         header('Location: tbl_course.php');
     }
 }
+//Delete Class
+if (isset($_GET['delete_class_id'])) {
+    $sql = "DELETE FROM tb_class WHERE ClassID=:id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(":id", $_GET['delete_class_id'], PDO::PARAM_INT);
+    $stmt->execute();
+    if ($stmt->rowCount()) {
+        header('Location: class.php');
+    }
+}

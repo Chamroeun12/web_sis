@@ -49,8 +49,8 @@ $Class = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Insert Class
 if (isset($_POST['btnsave'])) {
-    $sql = "INSERT INTO tb_class(Class_name, Teacher_id, Course_id, Time_in, Time_out, Shift, Start_class, End_class)
-            VALUES(:Class_name, :Teacher_id, :co, :Time_in, :Time_out, :Shift, :Start_class, :End_class)";
+    $sql = "INSERT INTO tb_class(Class_name, Teacher_id, Course_id, Time_in, Time_out, Shift, Start_class, End_class, status)
+            VALUES(:Class_name, :Teacher_id, :co, :Time_in, :Time_out, :Shift, :Start_class, :End_class, :status)";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(":Class_name", $_POST['class_name'], PDO::PARAM_STR);
     $stmt->bindParam(":Teacher_id", $_POST['teacher_name'], PDO::PARAM_INT);
@@ -60,6 +60,7 @@ if (isset($_POST['btnsave'])) {
     $stmt->bindParam(":Shift", $_POST['shift'], PDO::PARAM_STR);
     $stmt->bindParam(":Start_class", $_POST['start_class'], PDO::PARAM_STR);
     $stmt->bindParam(":End_class", $_POST['end_class'], PDO::PARAM_STR);
+    $stmt->bindParam(":status", $_POST['status'], PDO::PARAM_STR);
     $stmt->execute();
 
     if ($stmt->rowCount()) {
@@ -144,6 +145,13 @@ include_once "header.php";
                                         <?php } ?>
                                     </select>
                                 </div>
+                                <div class="col-sm-3">
+                                    <label for="">Shift</label>
+                                    <select name="shift" class="form-control">
+                                        <option value="AM">AM</option>
+                                        <option value="PM">PM</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3">
@@ -167,10 +175,10 @@ include_once "header.php";
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <label for="">Shift</label>
-                                    <select name="shift" class="form-control">
-                                        <option value="AM">AM</option>
-                                        <option value="PM">PM</option>
+                                    <label for="">Status</label>
+                                    <select name="status" class="form-control">
+                                        <option value="active">Active</option>
+                                        <option value="disable">Disable</option>
                                     </select>
                                 </div>
                             </div>
@@ -247,20 +255,33 @@ include_once "header.php";
                                     <?php } ?>
                                 </td>
                                 <td>
-                                  <form action="report_data.php" method="POST">
-                                      <button type="submit" name="print" title="Print" style="border:none; background: transparent; pading:0px;"><i class="fa fa-print text-dark" style=" font-size: 18px;"></i></button>
-                                      <button type="submit" name="export_pdf" title="PDF" style="border:none; background: transparent; pading:0px;"><i class="fa fa-file-pdf text-danger" style=" font-size: 18px;"></i></button>
-                                      <button type="submit" name="export_excel" title="Excel" style="border:none; background: transparent; pading:0px;"><i class="fa fa-file-excel text-success" style=" font-size: 18px;"></i></button>
-                                      <i class="nav-icon fas fa-ellipsis-v text-info dropup ml-1" style=" font-size:
-                                        18px; cursor:pointer;" data-toggle="dropdown" ></i>
-                                    <div class="dropdown-menu">
-                                        <a href="" class="dropdown-item"><i class="fa fa-edit text-success"></i>
-                                            Edit</a>
-                                        <a href="" onclick="return confirm('Do you want to delete this record?')"
-                                            class="dropdown-item"><i class="fa fa-trash text-danger"></i> Delete</a>
+                                    <form action="report_data.php" method="POST">
+                                        <button type="submit" name="print" title="Print"
+                                            style="border:none; background: transparent; padding:0px;"><i
+                                                class="fa fa-print text-dark ml-1"
+                                                style=" font-size: 18px;"></i></button>
+                                        <button type="submit" name="export_pdf" title="PDF"
+                                            style="border:none; background: transparent; padding:0px;"><i
+                                                class="fa fa-file-pdf text-danger ml-1"
+                                                style=" font-size: 18px;"></i></button>
+                                        <button type="submit" name="export_excel" title="Excel"
+                                            style="border:none; background: transparent; padding:0px;"><i
+                                                class="fa fa-file-excel text-success ml-1"
+                                                style=" font-size: 18px;"></i></button>
 
-                                    </div>
-                                  </form>
+                                        <span class="dropstart">
+                                            <i class="nav-icon fas fa-ellipsis-v text-info ml-2" style=" font-size:
+                                        18px; cursor:pointer;" data-toggle="dropdown"></i>
+                                            <div class="dropdown-menu">
+                                                <a href="classroom.php?class_id=<?php echo $row['ClassID']; ?>"
+                                                    class="dropdown-item"><i class="fas fa-edit text-success mr-2"
+                                                        style=" font-size: 18px;"></i>Edit</a>
+                                                <a href="all_condition.php?delete_class_id=<?php echo $row['ClassID']; ?>"
+                                                    class="dropdown-item"><i class="fas fa-trash text-danger mr-2"
+                                                        style=" font-size: 18px;"></i>Delete</a>
+                                            </div>
+                                        </span>
+                                    </form>
 
 
                                     <!-- <a href="">
