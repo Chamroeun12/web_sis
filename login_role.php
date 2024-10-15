@@ -40,19 +40,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->fetch();
 
         if ($stmt) {
-            // Set session variables
+                   // Set session variables
             $_SESSION['loggedin'] = true;
             $_SESSION['id'] = $id;
             $_SESSION['user'] = $user;
             $_SESSION['role'] = $role;
             header("Location: index.php");
+            
+         
             // Redirect based on role
             // if ($role == 'admin') {
             //     header("Location: admin_dashboard.php");
             // } else {
             //     header("Location: user_dashboard.php");
             // }
+            
             exit();
+            
         } else {
             echo "Invalid password.";
         }
