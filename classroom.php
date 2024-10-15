@@ -283,6 +283,13 @@ include_once "header.php";
                                             </div>
                                         </span>
                                     </form>
+                                    <!-- <a href="">
+                                        <i class="nav-icon fas fa-ellipsis-v ml-2"></i>
+                                        <a href="classroom.php?class_id=<?php echo $row['ClassID']; ?>"><i
+                                                class="fa fa-edit"></i></a>
+                                        <a href="classroom.php?delete_class_id=<?php echo $row['ClassID']; ?>"><i
+                                                class="fa fa-trash text-danger"></i></a>
+                                    </a> -->
                                 </td>
                             </tr>
                             <?php } ?>

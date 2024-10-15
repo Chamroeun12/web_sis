@@ -165,7 +165,7 @@ include 'connection.php';
                         </li>
                         </li>
                         <li class="nav-item">
-                            <a href="score.php" class="nav-link btnhover1">
+                            <a href="attendance.php" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-tasks"></i>
                                 <p>
                                     Attendace
