@@ -238,8 +238,10 @@ include_once "header.php";
                                       <?php } ?>
                                     </td>
                                     <td>
-                                        <a href="classroom.php?class_id=<?php echo $row['ClassID']; ?>" class="btn btn-info btn-sm">View</a>
-                                        <a href="classroom.php?delete_class_id=<?php echo $row['ClassID']; ?>" class="btn btn-danger btn-sm">Delete</a>
+                                        <a href="classroom.php?class_id=<?php echo $row['ClassID']; ?>"><i class="fa fa-edit"></i></a>
+                                        <a href="classroom.php?delete_class_id=<?php echo $row['ClassID']; ?>"><i class="fa fa-trash text-danger"></i></a>
+                                        <a href="classroom.php?delete_class_id=<?php echo $row['ClassID']; ?>"><i class="fa fa-print"></i></a>
+                                        <a href="classroom.php?delete_class_id=<?php echo $row['ClassID']; ?>"><i class="fa fa-pdf"></i></a>
                                     </td>
                                 </tr>
                             <?php } ?>
