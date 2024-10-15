@@ -62,6 +62,8 @@ include 'connection.php';
         border-bottom: 1px solid #5b6684;
     }
     </style>
+
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -220,7 +222,7 @@ include 'connection.php';
                                 </li>
                             </ul>
 
-                        <!-- <li class="nav-item">
+                            <!-- <li class="nav-item">
                             <a href="classroom.php" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-light fa-warehouse"></i>
                                 <p>
@@ -228,7 +230,7 @@ include 'connection.php';
                                 </p>
                             </a>
                         </li> -->
-                        <!-- <li class="nav-item">
+                            <!-- <li class="nav-item">
                             <a href="class.php" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-light fa-users-cog"></i>
                                 <p>
@@ -299,7 +301,7 @@ include 'connection.php';
                             <ul class="nav nav-treeview ml-4"
                                 style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
-                                    <a href="backup_database.php" class="nav-link ">
+                                    <a href="backup.php" class="nav-link ">
                                         <p class="stu-list text-white ml-2">Backup</p>
                                     </a>
                                 </li>
