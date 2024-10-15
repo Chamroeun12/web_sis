@@ -73,7 +73,7 @@ $temp = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $maxpage = 1;
 if ($temp) {
-    $maxpage = ceil($temp['CountRecords'] / 5);
+    $maxpage = ceil($temp['CountRecords'] / 10);
 }
 
 ?>
