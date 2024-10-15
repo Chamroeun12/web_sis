@@ -84,6 +84,6 @@ if (isset($_GET['delete_class_id'])) {
     $stmt->bindParam(":id", $_GET['delete_class_id'], PDO::PARAM_INT);
     $stmt->execute();
     if ($stmt->rowCount()) {
-        header('Location: class.php');
+        header('Location: classroom.php');
     }
 }
