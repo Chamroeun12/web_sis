@@ -30,15 +30,8 @@ if (session_status() === PHP_SESSION_NONE) {
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">|Dashboard</h1>
-                </div><!-- /.col -->
-                <!-- <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard v2</li>
-                    </ol>
-                </div> -->
-                <!-- /.col -->
+                    <h1 class="m-0">|ទំព័រដើម</h1>
+                </div>
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
@@ -54,7 +47,7 @@ if (session_status() === PHP_SESSION_NONE) {
                         <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Total Students</span>
+                            <span class="info-box-text">ចំនួនសិស្សសរុប</span>
                             <span class="info-box-number">
                                 <?php
                                 $sql  = "SELECT ID FROM tb_student";
@@ -75,7 +68,7 @@ if (session_status() === PHP_SESSION_NONE) {
                         <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-user-tie"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Total Teachers</span>
+                            <span class="info-box-text">ចំនួនគ្រូបង្រៀនសរុប</span>
                             <span class="info-box-number">
                                 <?php
                                 $sql  = "SELECT id FROM tb_teacher";
@@ -100,7 +93,7 @@ if (session_status() === PHP_SESSION_NONE) {
                         <span class="info-box-icon bg-success elevation-1"><i class="fas fa-warehouse"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Total Class</span>
+                            <span class="info-box-text">ចំនួនថ្នាក់រៀនសរុប</span>
                             <span class="info-box-number">
                                 <?php
                                 $sql  = "SELECT ClassID FROM tb_class";
@@ -121,7 +114,7 @@ if (session_status() === PHP_SESSION_NONE) {
                         <span class="info-box-icon bg-purple elevation-1 "><i class="fas fa-book"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Total Courses</span>
+                            <span class="info-box-text">ចំនួនវគ្គសិក្សាសរុប</span>
                             <span class="info-box-number">
                                 <?php
                                 $sql  = "SELECT id FROM tb_course";

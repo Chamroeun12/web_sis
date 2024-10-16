@@ -23,6 +23,7 @@ include 'connection.php';
     <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- JQVMap -->
     <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+    <link rel="stylesheet" href="fonts.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="dist/css/activemenu.css">
@@ -61,6 +62,10 @@ include 'connection.php';
         border-top: 1px solid #5b6684;
         border-bottom: 1px solid #5b6684;
     }
+
+    .bg-sis {
+        background-color: #152550;
+    }
     </style>
 
 
@@ -69,8 +74,7 @@ include 'connection.php';
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center"
-            style="font-family:Khmer OS Siemreap">
+        <div class="preloader flex-column justify-content-center align-items-center" style="">
             <img class="animation__shake" src="images/SiSlogo.png" height="100">
             <div class="font-weight-light">ស្មាតប្រាយ អ៊ិនធើណាសិនណលស្គូល</div>
             <div class="font-weight-light">SmartBright International School</div>
@@ -111,7 +115,7 @@ include 'connection.php';
             <a href="index.php" class="brand-link">
                 <img src="images/SiSlogo.png" class="brand-image" width="">
                 <!-- <span class="brand-text font-weight-light">Management System</span> -->
-                <span class="brand-text text-white" style="font-family:Khmer OS Siemreap; font-size:13px;">
+                <span class="brand-text text-white" style=" font-size:13px;">
                     ស្មាតប្រាយ អ៊ិនធើណាសិនណលស្គូល
                 </span>
             </a>
@@ -143,7 +147,7 @@ include 'connection.php';
                             <a href="index.php" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Dashboard
+                                    ទំព័រដើម
                                 </p>
                             </a>
                         </li>
@@ -151,7 +155,7 @@ include 'connection.php';
                             <a href="student_list.php" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
-                                    Students information
+                                    ព័ត៌មានផ្ទាល់ខ្លួនសិស្ស
                                 </p>
                             </a>
                         </li>
@@ -159,7 +163,7 @@ include 'connection.php';
                             <a href="score.php" class="nav-link btnhover1">
                                 <i class="nav-icon far fa-chart-bar"></i>
                                 <p>
-                                    Scores
+                                    ពិន្ទុ
                                 </p>
                             </a>
                         </li>
@@ -168,7 +172,7 @@ include 'connection.php';
                             <a href="#" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-tasks"></i>
                                 <p>
-                                Attendace
+                                    វត្តមាន
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -177,7 +181,7 @@ include 'connection.php';
                                 <li class="nav-item">
                                     <a href="attendance.php" class="nav-link">
                                         <p class="stu-list text-white pl-2">
-                                            Add Attendace</p>
+                                            បញ្ចូលវត្តមាន</p>
                                     </a>
                                 </li>
                             </ul>
@@ -185,7 +189,7 @@ include 'connection.php';
                                 style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
                                     <a href="attendace_list.php" class="nav-link">
-                                        <p class="stu-list text-white pl-2">Attendace List</p>
+                                        <p class="stu-list text-white pl-2">បញ្ចីវត្តមាន</p>
                                     </a>
                                 </li>
                             </ul>
@@ -193,7 +197,7 @@ include 'connection.php';
                             <a href="subject.php" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-graduation-cap"></i>
                                 <p>
-                                    Subjects
+                                    មុខវិជ្ចាសិក្សា
                                 </p>
                             </a>
                         </li>
@@ -201,7 +205,7 @@ include 'connection.php';
                             <a href="tbl_course.php" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-book"></i>
                                 <p>
-                                    Course
+                                    វគ្គសិក្សា
                                 </p>
                             </a>
                         </li>
@@ -210,7 +214,7 @@ include 'connection.php';
                             <a href="#" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-warehouse"></i>
                                 <p>
-                                    Classrooms
+                                    ថ្នាក់រៀន
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -219,7 +223,7 @@ include 'connection.php';
                                 <li class="nav-item">
                                     <a href="classroom.php" class="nav-link">
                                         <p class="stu-list text-white pl-2">
-                                            All Classrooms</p>
+                                            បញ្ចីថ្នាក់</p>
                                     </a>
                                 </li>
                             </ul>
@@ -227,7 +231,7 @@ include 'connection.php';
                                 style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
                                     <a href="Student_in_class.php" class="nav-link">
-                                        <p class="stu-list text-white pl-2">Student in Class</p>
+                                        <p class="stu-list text-white pl-2">សិស្សក្នុងថ្នាក់រៀន</p>
                                     </a>
                                 </li>
                             </ul>
@@ -235,32 +239,15 @@ include 'connection.php';
                                 style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
                                     <a href="class.php" class="nav-link ">
-                                        <p class="stu-list text-white pl-2">Add Student to Class</p>
+                                        <p class="stu-list text-white pl-2">បញ្ចូលសិស្សទៅក្នុងថ្នាក់</p>
                                     </a>
                                 </li>
                             </ul>
-
-                            <!-- <li class="nav-item">
-                            <a href="classroom.php" class="nav-link btnhover1">
-                                <i class="nav-icon fas fa-light fa-warehouse"></i>
-                                <p>
-                                    Classrooms
-                                </p>
-                            </a>
-                        </li> -->
-                            <!-- <li class="nav-item">
-                            <a href="class.php" class="nav-link btnhover1">
-                                <i class="nav-icon fas fa-light fa-users-cog"></i>
-                                <p>
-                                    Add Student to Class
-                                </p>
-                            </a>
-                        </li> -->
                         <li class="nav-item">
                             <a href="teacher_list.php" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-user-tie"></i>
                                 <p>
-                                    Teachers
+                                    ព័ត៌មានគ្រូបង្រៀន
                                 </p>
                             </a>
                         </li>
@@ -268,7 +255,7 @@ include 'connection.php';
                             <a href="#" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-calendar"></i>
                                 <p>
-                                    Schedules
+                                    កាលវិភាគសិក្សា
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -277,7 +264,7 @@ include 'connection.php';
                                 <li class="nav-item">
                                     <a href="" class="nav-link ">
 
-                                        <p class="stu-list text-white pl-2">Teacher Schedule</p>
+                                        <p class="stu-list text-white pl-2">កាលវិភាគគ្រូបង្រៀន</p>
                                     </a>
                                 </li>
                             </ul>
@@ -286,7 +273,7 @@ include 'connection.php';
                                 <li class="nav-item">
                                     <a href="class_for_sch.php" class="nav-link ">
 
-                                        <p class="stu-list text-white pl-2">Student Schedule</p>
+                                        <p class="stu-list text-white pl-2">កាលវិភាគសិស្ស</p>
                                     </a>
                                 </li>
                             </ul>
@@ -296,7 +283,7 @@ include 'connection.php';
                             <a href="report.php" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-file"></i>
                                 <p>
-                                    Reports
+                                    របាយការណ៍
                                 </p>
                             </a>
                         </li>
@@ -304,7 +291,7 @@ include 'connection.php';
                             <a href="#" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-cogs"></i>
                                 <p>
-                                    Setting
+                                    ផ្សេងៗ
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -312,7 +299,7 @@ include 'connection.php';
                                 style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
                                     <a href="user_info.php" class="nav-link">
-                                        <p class="stu-list text-white pl-2">User Info</p>
+                                        <p class="stu-list text-white pl-2">ព័ត៌មានអ្នកប្រើប្រាស់</p>
                                     </a>
                                 </li>
                             </ul>
@@ -328,7 +315,7 @@ include 'connection.php';
                                 style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
                                     <a href="logout.php" class="nav-link ">
-                                        <p class="stu-list text-white pl-2">Logout</p>
+                                        <p class="stu-list text-white pl-2">ចាកចេញ</p>
                                     </a>
                                 </li>
                             </ul>

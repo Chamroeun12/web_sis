@@ -84,14 +84,14 @@ if ($temp) {
     <div class="container-fluid">
         <div class="row mb-2 card-header">
             <div class="col-sm-6">
-                <h3 class="m-0" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
-                    |Student Lists</h3>
+                <h3 class="m-0">
+                    |បញ្ចីព័ត៌មានសិស្ស</h3>
             </div>
             <!-- /.col -->
             <div class="col-sm-6">
                 <h3 class="card-title float-sm-right">
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-lg">
-                        Add Student
+                    <button type="button" class="btn bg-sis text-white" data-toggle="modal" data-target="#modal-lg">
+                        បញ្ចូលសិស្សថ្មី
                     </button>
                 </h3>
             </div>
@@ -109,8 +109,7 @@ if ($temp) {
                 <!-- Condition to Add or Edit student -->
 
                 <!-- form add and edit student -->
-                <form name="studentform" method="post" action="" enctype="multipart/form-data"
-                    style="font-family: Khmer OS Siemreap;">
+                <form name="studentform" method="post" action="" enctype="multipart/form-data">
                     <div class="card-body">
                         <div class="form-group">
                             <div class="row">

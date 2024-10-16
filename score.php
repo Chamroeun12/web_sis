@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>List Students</h1>
+                    <h1>|តារាងបញ្ចូលពិន្ទុ</h1>
                 </div>
             </div>
         </div>
@@ -94,85 +94,109 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                          <form action="" method="POST">
-                              <div class="row mb-2">
-                                  <div class="col-sm-5">
-                                      <label for="month">For Month</label>
-                                      <select name="month" id="month" class="form-control">
-                                          <option value="">--Select Month--</option>
-                                          <option value="First Month" <?php echo ($selected_month == 'First Month') ? 'selected' : ''; ?>>First Month</option>
-                                          <option value="Second Month" <?php echo ($selected_month == 'Second Month') ? 'selected' : ''; ?>>Second Month</option>
-                                          <option value="Third Month" <?php echo ($selected_month == 'Third Month') ? 'selected' : ''; ?>>Third Month</option>
-                                          <option value="Fourth Month" <?php echo ($selected_month == 'Fourth Month') ? 'selected' : ''; ?>>Fourth Month</option>
-                                          <option value="Fifth Month" <?php echo ($selected_month == 'Fifth Month') ? 'selected' : ''; ?>>Fifth Month</option>
-                                          <option value="Sixth Month" <?php echo ($selected_month == 'Sixth Month') ? 'selected' : ''; ?>>Sixth Month</option>
-                                          <option value="Seventh Month" <?php echo ($selected_month == 'Seventh Month') ? 'selected' : ''; ?>>Seventh Month</option>
-                                          <option value="Eighth Month" <?php echo ($selected_month == 'Eighth Month') ? 'selected' : ''; ?>>Eighth Month</option>
-                                          <option value="Ninth Month" <?php echo ($selected_month == 'Ninth Month') ? 'selected' : ''; ?>>Ninth Month</option>
-                                          <option value="Tenth Month" <?php echo ($selected_month == 'Tenth Month') ? 'selected' : ''; ?>>Tenth Month</option>
-                                      </select>
-                                  </div>
-                                  <div class="col-sm-5">
-                                      <label for="class">For Class</label>
-                                      <select name="Class_id" id="Class_id" class="form-control">
-                                          <option value="">--Select Class--</option>
-                                          <?php foreach ($classes as $row) : ?>
-                                              <option value="<?= $row['ClassID']; ?>" <?= ($row['ClassID'] == $selected_class) ? 'selected' : ''; ?>><?= $row['Class_name']; ?></option>
-                                          <?php endforeach; ?>
-                                      </select>
-                                  </div>
-                                  <div class="col-ms-2">
-                                      <label for="">&nbsp;</label>
-                                      <div class="ml-3">
-                                          <input type="submit" value="Show" name="btnsave" class="btn btn-success">
-                                      </div>
-                                  </div>
-                              </div>
-                          </form>
+                            <form action="" method="POST">
+                                <div class="row mb-2">
+                                    <div class="col-sm-5">
+                                        <label for="month">បញ្ចូលសម្រាប់ខែ</label>
+                                        <select name="month" id="month" class="form-control" style="font-size:14px;">
+                                            <option value="">--ជ្រើសរើសខែ--</option>
+                                            <option value="First Month"
+                                                <?php echo ($selected_month == 'First Month') ? 'selected' : ''; ?>>
+                                                ប្រចាំខែទី១</option>
+                                            <option value="Second Month"
+                                                <?php echo ($selected_month == 'Second Month') ? 'selected' : ''; ?>>
+                                                ប្រចាំខែទី២</option>
+                                            <option value="Third Month"
+                                                <?php echo ($selected_month == 'Third Month') ? 'selected' : ''; ?>>
+                                                ប្រចាំខែទី៣</option>
+                                            <option value="Fourth Month"
+                                                <?php echo ($selected_month == 'Fourth Month') ? 'selected' : ''; ?>>
+                                                ប្រចាំខែទី៤</option>
+                                            <option value="Fifth Month"
+                                                <?php echo ($selected_month == 'Fifth Month') ? 'selected' : ''; ?>>
+                                                ប្រចាំខែទី៥</option>
+                                            <option value="Sixth Month"
+                                                <?php echo ($selected_month == 'Sixth Month') ? 'selected' : ''; ?>>
+                                                ប្រចាំខែទី៦</option>
+                                            <option value="Seventh Month"
+                                                <?php echo ($selected_month == 'Seventh Month') ? 'selected' : ''; ?>>
+                                                ប្រចាំខែទី៧</option>
+                                            <option value="Eighth Month"
+                                                <?php echo ($selected_month == 'Eighth Month') ? 'selected' : ''; ?>>
+                                                ប្រចាំខែទី៨</option>
+                                            <option value="Ninth Month"
+                                                <?php echo ($selected_month == 'Ninth Month') ? 'selected' : ''; ?>>
+                                                ប្រចាំខែទី៩</option>
+                                            <option value="Tenth Month"
+                                                <?php echo ($selected_month == 'Tenth Month') ? 'selected' : ''; ?>>
+                                                ប្រចាំខែទី១០</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <label for="class">បញ្ចូលសម្រាប់ថ្នាក់</label>
+                                        <select name="Class_id" id="Class_id" class="form-control"
+                                            style="font-size:14px;">
+                                            <option value="">--ជ្រើសរើសថ្នាក់--</option>
+                                            <?php foreach ($classes as $row) : ?>
+                                            <option value="<?= $row['ClassID']; ?>"
+                                                <?= ($row['ClassID'] == $selected_class) ? 'selected' : ''; ?>>
+                                                <?= $row['Class_name']; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-ms-2">
+                                        <label for="">&nbsp;</label>
+                                        <div class="ml-3">
+                                            <input type="submit" value="បង្ហាញ" name="btnsave"
+                                                class="btn bg-sis text-white">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
 
                         <!-- Show the table only if a class is selected -->
                         <?php if (!empty($students_info)) : ?>
-                            <form action="" method="POST" name="formscore">
-                                <div class="card-body p-0">
-                                    <table class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Student Name</th>
-                                                <th>Gender</th>
-                                                <?php foreach ($subjects as $subject): ?>
-                                                    <th class="text-center"><?php echo $subject['name']; ?></th>
-                                                <?php endforeach; ?>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php foreach ($students_info as $key => $student): ?>
-                                                <tr>
-                                                    <td><?php echo $key + 1; ?></td>
-                                                    <td><?php echo $student['En_name']; ?></td>
-                                                    <td><?php echo $student['Gender']; ?></td>
-
-                                                    <?php foreach ($subjects as $subject): ?>
-                                                        <td style="padding:0px">
-                                                            <input type="number" class="form-control text-center"
-                                                                   name="scorebox[<?php echo $student['ID']; ?>][<?php echo $subject['name']; ?>]"
-                                                                   placeholder="0-100" min="0" max="100">
-                                                        </td>
-                                                    <?php endforeach; ?>
-                                                </tr>
+                        <form action="" method="POST" name="formscore">
+                            <div class="card-body p-0">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>ល.រ</th>
+                                            <th>ឈ្មោះសិស្ស</th>
+                                            <th>ភេទ</th>
+                                            <?php foreach ($subjects as $subject): ?>
+                                            <th class="text-center"><?php echo $subject['name']; ?></th>
                                             <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="card-footer">
-                                    <button class="btn btn-primary" type="submit" name="btnsubmit">Save Scores</button>
-                                </div>
-                            </form>
-                        <?php else: ?>
-                            <div class="card-body">
-                                <p class="text-center">No students found for the selected class and month.</p>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($students_info as $key => $student): ?>
+                                        <tr>
+                                            <td><?php echo $key + 1; ?></td>
+                                            <td><?php echo $student['En_name']; ?></td>
+                                            <td><?php echo $student['Gender']; ?></td>
+
+                                            <?php foreach ($subjects as $subject): ?>
+                                            <td style="padding:0px">
+                                                <input type="number" class="form-control text-center"
+                                                    name="scorebox[<?php echo $student['ID']; ?>][<?php echo $subject['name']; ?>]"
+                                                    placeholder="0-100" min="0" max="100">
+                                            </td>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
                             </div>
+                            <div class="card-footer">
+                                <button class="btn bg-sis text-white" type="submit" name="btnsubmit">រក្សាទុក</button>
+                            </div>
+                        </form>
+                        <?php else: ?>
+                        <div class="card-body">
+                            <p class="text-center">គ្មានទិន្នន័យ</p>
+                        </div>
                         <?php endif; ?>
                         <!-- no students found for the selected -->
                     </div>
