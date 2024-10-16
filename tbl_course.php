@@ -20,14 +20,14 @@ if (isset($_POST['btnsave'])) {
 }
 
 //pages
-$sql  = "SELECT COUNT(*) AS CountRecords FROM tb_course";
+$sql  = "SELECT COUNT(*) AS CountRecords FROM tb_course LIMIT 8";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $temp = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $maxpage = 1;
 if ($temp) {
-    $maxpage = ceil($temp['CountRecords'] / 10);
+    $maxpage = ceil($temp['CountRecords'] / 8);
 }
 
 
@@ -185,9 +185,6 @@ $Subject = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                                 <a class="m-2" href="all_condition.php?co_id=<?php echo $value['id'] ?>"
                                                     onclick="return confirm('Do you want to delete this record?')">
                                                     <i class="fa fa-trash text-danger"></i>
-                                                </a>
-                                                <a href="">
-                                                    <i class="nav-icon fas fa-ellipsis-h"></i>
                                                 </a>
                                             </td>
                                         </tr>
