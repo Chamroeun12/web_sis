@@ -2,7 +2,7 @@
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
-    if (!isset($_SESSION['user']) == ['admin']) {
+    if (!isset($_SESSION['role']) == 'user') {
         // Redirect to login page or display an error message
         header('Location: login_role.php');
         exit;

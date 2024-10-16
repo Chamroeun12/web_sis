@@ -36,7 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Password is correct, start session
             $_SESSION['login'] = "Login successful!";
         }
-
         // $_SESSION["user"] = $data["Username"];
         // $_SESSION["id"] = $data["id"];
         // $_SESSION["role"] = $data["Role"];
