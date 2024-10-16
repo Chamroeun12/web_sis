@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Only run the query if a class is selected
     if ($selected_class) {
         // Fetch students based on selected class
-        $sql = "SELECT tb_student.ID, tb_student.En_name, tb_student.Gender
+        $sql = "SELECT tb_student.ID, tb_student.Kh_name, tb_student.Gender
                 FROM tb_add_to_class
                 INNER JOIN tb_student ON tb_add_to_class.Stu_id = tb_student.ID
                 INNER JOIN tb_class ON tb_add_to_class.Class_id = tb_class.ClassID
@@ -153,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <label for="">&nbsp;</label>
                                         <div class="ml-3">
                                             <input type="submit" value="បង្ហាញ" name="btnsave"
-                                                class="btn bg-sis text-white">
+                                                class="btn1 bg-sis text-white">
                                         </div>
                                     </div>
                                 </div>
@@ -162,6 +162,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                         <!-- Show the table only if a class is selected -->
                         <?php if (!empty($students_info)) : ?>
+                        <form action="" method="POST" name="formscore">
+                            <div class="card-body p-0">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>ល.រ</th>
+                                            <th>ឈ្មោះសិស្ស</th>
+                                            <th>ភេទ</th>
+                                            <?php foreach ($subjects as $subject): ?>
+                                            <th class="text-center"><?php echo $subject['name']; ?></th>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($students_info as $key => $student): ?>
+                                        <tr>
+                                            <td><?php echo $key + 1; ?></td>
+                                            <td><?php echo $student['Kh_name']; ?></td>
+                                            <td><?php echo $student['Gender']; ?></td>
                             <form action="" method="POST" name="formscore">
                                 <div class="card-body p-0">
                                     <table class="table table-bordered table-striped">

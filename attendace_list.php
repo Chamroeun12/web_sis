@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 $sql = "SELECT
     c.Class_name,
     co.Course_name,
-    t.En_name,
+    t.Kh_name,
     att.Date
 FROM
     tb_attendance att
@@ -34,7 +34,7 @@ $attendance = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="container-fluid">
         <div class="row mb-2 card-header">
             <div class="col-sm-6">
-                <h3 class="m-0">|Attendace Lists</h3>
+                <h3 class="m-0">|តារាងវត្តមានប្រចាំថ្ងៃ</h3>
             </div>
             <!-- /.col -->
             <div class="col-sm-6"> </div>
@@ -48,7 +48,7 @@ $attendance = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <div class="card-tools">
                         <div class="form-group" style="width: 300px;">
                             <input type="text" id="" name="namesearch" class="search form-control float-right"
-                                placeholder="Search" style="font-family:Khmer OS Siemreap;">
+                                placeholder="ស្វែងរក" style="font-family:Khmer OS Siemreap;">
                             <div class="input-group-append">
                             </div>
                         </div>
@@ -59,31 +59,31 @@ $attendance = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <table class="table table-hover text-nowrap" style="font-family:Khmer OS Siemreap;" id="userTbl">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Class Name</th>
-                                <th>Couser Name</th>
-                                <th>by Teather</th>
-                                <th>Date</th>
-                                <th>ACTION</th>
+                                <th>ល.រ</th>
+                                <th>ថ្នាក់</th>
+                                <th>វគ្គសិក្សា</th>
+                                <th>គ្រូបង្រៀន</th>
+                                <th>កាលបរិច្ឆេទ</th>
+                                <th>ទាញយក</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <?php $i = 1; foreach ($attendance as $row): ?>
-                          <tr>
-                            <td><?php echo $i++ ?></td>
-                            <td><?php echo $row['Class_name'];?></td>
-                            <td><?php echo $row['Course_name'];?></td>
-                            <td><?php echo $row['En_name'];?></td>
-                            <td>
-                            <?php
+                            <?php $i = 1; foreach ($attendance as $row): ?>
+                            <tr>
+                                <td><?php echo $i++ ?></td>
+                                <td><?php echo $row['Class_name'];?></td>
+                                <td><?php echo $row['Course_name'];?></td>
+                                <td><?php echo $row['Kh_name'];?></td>
+                                <td>
+                                    <?php
                                 // Create a DateTime object from the string
                                 $date = new DateTime($row['Date']);
                                 // Format the date to "15-Sep-2024 at 10 am"
                                 echo $date->format('d-M-Y');
                                 ?>
-                            </td>
-                            <td>
-                              <form action="report_att.php" method="POST">
+                                </td>
+                                <td>
+                                    <form action="report_att.php" method="POST">
                                         <button type="submit" name="export_pdf" title="PDF"
                                             style="border:none; background: transparent; padding:0px;"><i
                                                 class="fa fa-file-pdf text-danger ml-1" style=" font-size: 18px;"></i>
@@ -91,25 +91,14 @@ $attendance = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         </button>
                                         <button type="submit" name="export_excel" title="Excel"
                                             style="border:none; background: transparent; padding:0px;"><i
-                                                class="fa fa-file-excel text-success ml-1"
+                                                class="fa fa-file-excel text-success ml-2"
                                                 style=" font-size: 18px;"></i></button>
 
-                                        <span class="dropstart">
-                                            <i class="nav-icon fas fa-ellipsis-v text-info ml-2" style=" font-size:
-                                        18px; cursor:pointer;" data-toggle="dropdown"></i>
-                                            <div class="dropdown-menu">
-                                                <a href="classroom.php?class_id=<?php echo $row['ClassID']; ?>"
-                                                    class="dropdown-item"><i class="fas fa-edit text-success mr-2"
-                                                        style=" font-size: 18px;"></i>Edit</a>
-                                                <a href="all_condition.php?delete_class_id=<?php echo $row['ClassID']; ?>"
-                                                    class="dropdown-item"><i class="fas fa-trash text-danger mr-2"
-                                                        style=" font-size: 18px;"></i>Delete</a>
-                                            </div>
-                                        </span>
-                              </form>
-                            </td>
-                          </tr>
-                          <?php endforeach;?>
+
+                                    </form>
+                                </td>
+                            </tr>
+                            <?php endforeach;?>
                         </tbody>
                     </table>
                 </div>

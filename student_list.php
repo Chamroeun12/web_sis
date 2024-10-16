@@ -86,8 +86,8 @@ if ($temp) {
             <!-- /.col -->
             <div class="col-sm-6">
                 <h3 class="card-title float-sm-right">
-                    <button type="button" class="btn bg-sis text-white" data-toggle="modal" data-target="#modal-lg">
-                        បញ្ចូលសិស្សថ្មី
+                    <button type="button" class="btn1 bg-sis text-white" data-toggle="modal" data-target="#modal-lg">
+                        <i class="fas fa-user-plus"></i> បញ្ចូលសិស្សថ្មី
                     </button>
                 </h3>
             </div>
@@ -137,7 +137,7 @@ if ($temp) {
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="inputDateOfBirth">ថ្ងៃ​ ខែ ឆ្នាំកំណើត</label>
+                                        <label for="inputDateOfBirth">ថ្ងៃ​ខែឆ្នាំកំណើត</label>
                                         <input type="date" id="inputDateOfBirth" name="dob" class="form-control"
                                             value="">
                                     </div>
@@ -145,10 +145,10 @@ if ($temp) {
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="status">Status</label>
+                                        <label for="status">ស្ថានភាព</label>
                                         <select name="status" id="status" class="form-control">
                                             <option value="Active">Active</option>
-                                            <option value="Deactive">Deactive</option>
+                                            <option value="Deactive">Deactivate</option>
                                         </select>
                                     </div>
                                 </div>
@@ -157,37 +157,37 @@ if ($temp) {
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <label for="">Dad Name</label>
+                                    <label for="">ឈ្មោះឪពុក</label>
                                     <input type="text" name="dad_name" id="" class="form-control">
                                 </div>
                                 <div class="col-sm-3">
-                                    <label for="">Dad Job</label>
+                                    <label for="">មុខរបរឪពុក</label>
                                     <input type="text" name="dad_job" id="" class="form-control">
                                 </div>
                                 <div class="col-sm-3">
-                                    <label for="">Mom Name</label>
+                                    <label for="">ឈ្មោះម្ដាយ</label>
                                     <input type="text" name="mom_name" id="" class="form-control">
                                 </div>
                                 <div class="col-sm-3">
-                                    <label for="">Mom Job</label>
+                                    <label for="">មុខរបរម្ដាយ</label>
                                     <input type="text" name="mom_job" id="" class="form-control">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputDescription">Address</label>
+                            <label for="inputDescription">អាស័យដ្ឋាន</label>
                             <textarea id="inputDescription" name="address" class="form-control" rows="2"></textarea>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="inputPhone">Phone</label>
+                                    <label for="inputPhone">លេខទូរស័ព្ទ</label>
                                     <input type="text" id="inputPhone" name="phone" class="form-control" value="">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="inputEmail">Igmage</label>
+                                    <label for="inputEmail">រូបភាពសិស្ស</label>
                                     <input type="file" name="image" class="form-control">
                                 </div>
                             </div>
@@ -202,8 +202,8 @@ if ($temp) {
                         <?php } ?> -->
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <input type="submit" value="Save" name="btnsave" class="btn btn-success">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">បោះបង់</button>
+                        <input type="submit" value="រក្សាទុក" name="btnsave" class="btn1 bg-sis text-white">
                         <!-- <button type="button" class="btn btn-primary">Save</button> -->
                     </div>
                 </form>
@@ -225,7 +225,7 @@ if ($temp) {
                     <div class="card-tools">
                         <div class="form-group" style="width: 300px;">
                             <input type="text" id="" name="namesearch" class="search form-control float-right"
-                                placeholder="Search" style="font-family:Khmer OS Siemreap;">
+                                placeholder="ស្វែងរក">
                             <div class="input-group-append">
                             </div>
                         </div>
@@ -233,20 +233,21 @@ if ($temp) {
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body table-responsive p-0 text-sm">
-                    <table class="table table-hover text-nowrap" style="font-family:Khmer OS Siemreap;" id="userTbl">
+                    <table class="table table-hover text-nowrap" id="userTbl">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Student Image</th>
-                                <th>Student Code</th>
-                                <th>English Name</th>
-                                <th>Khmer Name</th>
-                                <th>Gender</th>
-                                <th>Date of Birth</th>
-                                <th>Address</th>
-                                <th>Phone</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>ល.រ</th>
+                                <th>រូបភាព</th>
+                                <th>អត្តលេខ</th>
+                                <th>ឈ្មោះភាសាអង់គ្លេស</th>
+                                <th>ឈ្មោះភាសាខ្មែរ</th>
+                                <th>ភេទ</th>
+                                <th>ថ្ងៃខែ​ឆ្នាំកំណើត</th>
+                                <th>អាស័យដ្ឋាន</th>
+                                <th>លេខទូរស័ព្ទ</th>
+                                <th>ស្ថានភាព</th>
+                                <th>សកម្មភាព</th>
+
                             </tr>
                         </thead>
                         <tbody id="showdata">
@@ -266,6 +267,32 @@ if ($temp) {
                                                     style="width: 35px; height: 35px;" />
                                             </div>
                                         </div>
+                                    </div>
+                                </td>
+                                <td><?php echo $value['Stu_code']; ?></td>
+                                <td><?php echo $value['En_name']; ?></td>
+                                <td><?php echo $value['Kh_name']; ?></td>
+                                <td><?php echo $value['Gender']; ?></td>
+                                <td><?php echo date('d-M-Y', strtotime($value['DOB'])); ?></td>
+                                <td><?php echo $value['Address']; ?></td>
+                                <td><?php echo $value['Phone']; ?></td>
+                                <td>
+                                    <?php if ($value['Status'] == 'Active') { ?>
+                                    <span class="badge badge-success">Active</span>
+                                    <?php } else { ?>
+                                    <span class="badge badge-danger">Deactive</span>
+                                    <?php } ?>
+                                </td>
+                                <td>
+                                    <a href="update_student.php?stu_id=<?php echo $value['ID'] ?>">
+                                        <i class="fa fa-edit text-success"></i>
+                                    </a>
+                                    <a class="m-2" href="all_condition.php?stu_id=<?php echo $value['ID'] ?>"
+                                        onclick="return confirm('Do you want to delete this record?')">
+                                        <i class="fa fa-trash text-danger"></i>
+                                    </a>
+                                </td>
+                            </tr>
                                     </td>
                                     <td><?php echo $value['Stu_code']; ?></td>
                                     <td><?php echo $value['En_name']; ?></td>

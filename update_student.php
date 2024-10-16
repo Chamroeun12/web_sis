@@ -94,84 +94,101 @@ if (isset($_GET['stu_id'])) {
     <div class="container-fluid">
         <div class="row mb-2 card-header">
             <div class="col-sm-6">
-                <h3 class="m-0">| Edit Student</h3>
+                <h3 class="m-0">|កែប្រែព័ត៌មានសិស្ស</h3>
             </div>
         </div>
     </div>
     <div class="m-4 card">
-        <form name="studentform" method="post" action="" enctype="multipart/form-data" style="font-family:Khmer OS Siemreap;">
+        <form name="studentform" method="post" action="" enctype="multipart/form-data"
+            style="font-family:Khmer OS Siemreap;">
             <div class="card-body">
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-4">
-                            <label for="code">Student Code</label>
-                            <input type="text" class="form-control" id="code" name="code" value="<?= htmlspecialchars($data['Stu_code']); ?>">
+                            <label for="code">អត្តលេខ</label>
+                            <input type="text" class="form-control" id="code" name="code"
+                                value="<?= htmlspecialchars($data['Stu_code']); ?>">
                         </div>
                         <div class="col-md-4">
-                            <label for="enName">English Name</label>
-                            <input type="text" id="enName" name="en_name" class="form-control" value="<?= htmlspecialchars($data['En_name']); ?>">
+                            <label for="enName">ឈ្មោះភាសាអង់គ្លេស</label>
+                            <input type="text" id="enName" name="en_name" class="form-control"
+                                value="<?= htmlspecialchars($data['En_name']); ?>">
                         </div>
                         <div class="col-md-4">
-                            <label for="khName">Khmer Name</label>
-                            <input type="text" id="khName" name="kh_name" class="form-control" value="<?= htmlspecialchars($data['Kh_name']); ?>">
+                            <label for="khName">ឈ្មោះភាសាខ្មែរ</label>
+                            <input type="text" id="khName" name="kh_name" class="form-control"
+                                value="<?= htmlspecialchars($data['Kh_name']); ?>">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">
-                            <label for="inputStatus">Gender</label>
+                        <div class="col-md-3 mt-3">
+                            <label for="inputStatus">ភេទ</label>
                             <select id="inputStatus" name="gender" class="form-control custom-select">
                                 <option selected disabled>Select one</option>
-                                <option value="Male" <?= ($data['Gender'] == 'Male') ? 'selected' : ''; ?>>Male</option>
-                                <option value="Female" <?= ($data['Gender'] == 'Female') ? 'selected' : ''; ?>>Female</option>
+                                <option value="Male" <?= ($data['Gender'] == 'Male') ? 'selected' : ''; ?>>ប្រុស
+                                </option>
+                                <option value="Female" <?= ($data['Gender'] == 'Female') ? 'selected' : ''; ?>>ស្រី
+                                </option>
                             </select>
                         </div>
-                        <div class="col-md-3">
-                            <label for="inputDateOfBirth">Date Of Birth</label>
-                            <input type="date" id="inputDateOfBirth" name="dob" class="form-control" value="<?= htmlspecialchars($data['DOB']); ?>">
+                        <div class="col-md-3 mt-3">
+                            <label for="inputDateOfBirth">ថ្ងៃខែ​ឆ្នាំកំណើត</label>
+                            <input type="date" id="inputDateOfBirth" name="dob" class="form-control"
+                                value="<?= htmlspecialchars($data['DOB']); ?>">
                         </div>
-                        <div class="col-md-3">
-                            <label for="inputPhone">Phone</label>
-                            <input type="text" id="inputPhone" name="phone" class="form-control" value="<?= htmlspecialchars($data['Phone']); ?>">
+                        <div class="col-md-3 mt-3">
+                            <label for="inputPhone">លេទទូរស័ព្ទ</label>
+                            <input type="text" id="inputPhone" name="phone" class="form-control"
+                                value="<?= htmlspecialchars($data['Phone']); ?>">
                         </div>
-                        <div class="col-md-3">
-                            <label for="inputStatus">Status</label>
+                        <div class="col-md-3 mt-3">
+                            <label for="inputStatus">ស្ថានភាព</label>
                             <select id="inputStatus" name="status" class="form-control custom-select">
                                 <option selected disabled>Select one</option>
-                                <option value="Active" <?= ($data['Status'] == 'Active') ? 'selected' : ''; ?>>Active</option>
-                                <option value="Deactive" <?= ($data['Status'] == 'Deactive') ? 'selected' : ''; ?>>Deactive</option>
+                                <option value="Active" <?= ($data['Status'] == 'Active') ? 'selected' : ''; ?>>
+                                    Active
+                                </option>
+                                <option value="Deactive" <?= ($data['Status'] == 'Deactive') ? 'selected' : ''; ?>>
+                                    Deactive</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-sm-3">
-                                <label for="dad_name">Dad Name</label>
-                                <input type="text" name="dad_name" class="form-control" value="<?= htmlspecialchars($data['Dad_name']); ?>">
+                            <div class="col-sm-3 mt-3">
+                                <label for="dad_name">ឈ្មោះឪពុក</label>
+                                <input type="text" name="dad_name" class="form-control"
+                                    value="<?= htmlspecialchars($data['Dad_name']); ?>">
                             </div>
-                            <div class="col-sm-3">
-                                <label for="dad_job">Dad Job</label>
-                                <input type="text" name="dad_job" class="form-control" value="<?= htmlspecialchars($data['Dad_job']); ?>">
+                            <div class="col-sm-3 mt-3">
+                                <label for="dad_job">មុខរបរឪពុក</label>
+                                <input type="text" name="dad_job" class="form-control"
+                                    value="<?= htmlspecialchars($data['Dad_job']); ?>">
                             </div>
-                            <div class="col-sm-3">
-                                <label for="mom_name">Mom Name</label>
-                                <input type="text" name="mom_name" class="form-control" value="<?= htmlspecialchars($data['Mom_name']); ?>">
+                            <div class="col-sm-3 mt-3">
+                                <label for="mom_name">ឈ្មោះម្ដាយ</label>
+                                <input type="text" name="mom_name" class="form-control"
+                                    value="<?= htmlspecialchars($data['Mom_name']); ?>">
                             </div>
-                            <div class="col-sm-3">
-                                <label for="mom_job">Mom Job</label>
-                                <input type="text" name="mom_job" class="form-control" value="<?= htmlspecialchars($data['Mom_job']); ?>">
+                            <div class="col-sm-3 mt-3">
+                                <label for="mom_job">មុខរបរម្ដាយ</label>
+                                <input type="text" name="mom_job" class="form-control"
+                                    value="<?= htmlspecialchars($data['Mom_job']); ?>">
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputDescription">Address</label>
-                        <textarea id="inputDescription" name="address" class="form-control" rows="2"><?= htmlspecialchars($data['Address']); ?></textarea>
+                        <label for="inputDescription">អាស័យដ្ឋាន</label>
+                        <textarea id="inputDescription" name="address" class="form-control"
+                            rows="2"><?= htmlspecialchars($data['Address']); ?></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputEmail">Image</label>
+                        <label for="inputEmail">រូបភាព</label>
                         <input type="file" name="image" class="form-control" accept="image/*" onchange="preview(event)">
                         <div style="margin-top: 9px">
-                            <img src="images/<?= htmlspecialchars($data['Profile_img']); ?>" alt="" id="img" width="100">
+                            <img src="images/<?= htmlspecialchars($data['Profile_img']); ?>" alt="" id="img"
+                                width="100">
                         </div>
                     </div>
                 </div>
@@ -179,9 +196,9 @@ if (isset($_GET['stu_id'])) {
 
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn bg-danger">
-                    <a href="student_list.php">Close</a>
+                    <a href="student_list.php">បោះបង់</a>
                 </button>
-                <input type="submit" value="Save" name="btnsave" class="btn btn-success">
+                <input type="submit" value="រក្សាទុក" name="btnsave" class="btn1 bg-sis text-white">
             </div>
         </form>
     </div>

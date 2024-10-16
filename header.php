@@ -70,6 +70,15 @@ include 'connection.php';
     .bg-sis {
         background-color: #152550;
     }
+
+    .btn1 {
+        padding: 6px 10px;
+        border-radius: 5px;
+    }
+
+    .bg-sis {
+        background-color: #152550;
+    }
     </style>
 
 
