@@ -46,6 +46,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
     <!-- Main content -->
     <section class="content">
+        <?php print_r($_SESSION['role']) ?>
         <div class="container-fluid">
             <!-- Info boxes -->
             <div class="row">

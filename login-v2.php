@@ -1,68 +1,85 @@
 <?php
-//User Login
+// User Login
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
 // Establish database connection with PDO
 include 'connection.php';
-// Pre-fill username and password if cookies are set
+
+// Pre-fill username if cookies are set (passwords should not be stored in cookies for security reasons)
 $username_value = isset($_COOKIE['username']) ? htmlspecialchars($_COOKIE['username']) : '';
-$password_value = isset($_COOKIE['password']) ? htmlspecialchars($_COOKIE['password']) : '';
 
+// Check if the form is submitted
 if (isset($_POST['username']) && isset($_POST['password'])) {
-    // function test_input($data)
-    // {
-    //     $data = trim($data);
-    //     $data = stripslashes($data);
-    //     $data = htmlspecialchars($data);
-    //     return $data;
-    // }
-
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $username = htmlspecialchars(trim($_POST['username']));
+    $password = htmlspecialchars(trim($_POST['password']));
     $remember = isset($_POST['remember']);
 
     if ($remember) {
-        // setcookie('username', $username, time() + (86400 * 30), "/"); // 30 days
-        // setcookie('password', $password, time() + (86400 * 30), "/"); // 30 days
-        if (!isset($_COOKIE[$username])) {
-            setcookie($username, $password, time() + (86400 * 30), "/");
-        }
+        // Store only the username in the cookie, not the password
+        setcookie($username, $password, time() + (86400 * 30), "/"); // 30 days
     }
 
+    // Input validation
     if (empty($username)) {
-        header("Location: login-v2.php?error=User Name is Required");
-    } else if (empty($password)) {
+        header("Location: login-v2.php?error=Username is Required");
+        exit();
+    } elseif (empty($password)) {
         header("Location: login-v2.php?error=Password is Required");
+        exit();
     } else {
-        // WHERE Username=:uname AND Password=:pwd 
-        // Hashing the password
-        // $password = md5($password);
-        $sql = $conn->prepare("SELECT * FROM tb_login");
-        // $sql->bindParam(":uname", $_POST['username'], PDO::PARAM_STR);
-        // $sql->bindParam(":pwd", $_POST['password'], PDO::PARAM_STR);
+        // Prepare SQL statement
+        $sql = $conn->prepare("SELECT * FROM tb_login WHERE Username=:uname LIMIT 1");
+        $sql->bindParam(":uname", $username, PDO::PARAM_STR);
         $sql->execute();
         $data = $sql->fetchAll(PDO::FETCH_ASSOC);
-        // var_dump($data);
-        // session_start();
-        if ($data) {
-            if ($data['Username'] && $data['Password'] && $data['Role']) {
-                $_SESSION['login'] = "Login Succesfully!";
-                $_SESSION["user"] = $data["Username"];
-                $_SESSION["id"] = $data["id"];
-                $_SESSION["role"] = $data["Role"];
-            }
+
+        $enteredPassword = $_POST['password']; // The password entered by the user during login
+
+        // Assuming you retrieved the hashed password from the database
+        $storedHashedPassword = $data['Password'];
+
+        if (password_verify($enteredPassword, $storedHashedPassword)) {
+            // Start session and store user information
+            $_SESSION['login'] = "Login Successfully!";
+            $_SESSION["user"] = $data["Username"];
+            $_SESSION["id"] = $data["id"];
+            $_SESSION["role"] = $data["Role"];
+
             echo '
               <script>
                 setTimeout(function() {
                   window.location.href = "index.php";
                 }, 200);
               </script>';
-            //sesion success
+        } else {
+            // Incorrect username or password
+            header("Location: login-v2.php?error=Incorrect Username or Password");
+            exit();
         }
+
+        // Check if user exists and verify password
+        // if ($data && password_verify($password, $data['Password'])) {
+        // Start session and store user information
+        //     $_SESSION['login'] = "Login Successfully!";
+        //     $_SESSION["user"] = $data["Username"];
+        //     $_SESSION["id"] = $data["id"];
+        //     $_SESSION["role"] = $data["Role"];
+
+        //     echo '
+        //       <script>
+        //         setTimeout(function() {
+        //           window.location.href = "index.php";
+        //         }, 200);
+        //       </script>';
+        // } else {
+        // Incorrect username or password
+        //     header("Location: login-v2.php?error=Incorrect Username or Password");
+        //     exit();
+        // }
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -128,8 +145,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
                 <img src="images/SiSlogo.png" alt="" class="profile-user-img">
             </div>
             <div class="card-body">
-                <form action="" method="post">
-                    <input type="hidden" name="role" value="">
+                <form action="login.php" method="post">
                     <?php if (isset($_GET['error'])) { ?>
                         <div class="alert alert-danger" role="alert">
                             <?= $_GET['error'] ?>
@@ -154,8 +170,8 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" id="password" name="password" class="form-control"
-                            placeholder="Password">
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+                            Required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
