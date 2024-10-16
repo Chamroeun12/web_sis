@@ -43,20 +43,15 @@ if (isset($_POST['delete'])) {
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">|Subject/Course</h1>
+                    <h1 class="m-0">|វគ្គសិក្សា</h1>
                 </div>
-                <!-- /.col -->
-                <!-- <div class="col-sm-6">
-                    <a href="add_subject.php" class="btn btn-success float-sm-right" data-toggle="modal"
-                        data-target="#modal-lg">Create</a>
-                </div> -->
             </div>
             <!-- Alert popup-->
             <div class="modal fade" id="modal-lg">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4>|Create Subject</h4>
+                            <h4>|បញ្ចូលវគ្គសិក្សាថ្មី</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -119,25 +114,25 @@ if (isset($_POST['delete'])) {
                 </div>
 
                 <?php if (isset($data)) { ?>
-                    <?php foreach ($data as $row) { ?>
-                        <div class="col-lg-3 col-3">
-                            <div class="small-box <?php echo $row['Color'] ?>">
-                                <div class="inner">
-                                    <h3 class="text-white"><?php echo $row['Course_name'] ?></h3>
-                                    <p class="text-white"><?php echo $row['Date'] ?></p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-graduation-cap"></i>
-                                </div>
-                                <div class="d-flex justify-content-between small-box-footer">
-                                    <div>
-                                        <a href="class_from_course.php?course_id=<?php echo $row['id'] ?>"
-                                            class="text-white ml-3">
-                                            View &nbsp;
-                                            <i class="fas fa-arrow-right fa-xs"></i>
-                                        </a>
-                                    </div>
-                                    <!-- <div class="mr-3 dropup">
+                <?php foreach ($data as $row) { ?>
+                <div class="col-lg-3 col-3">
+                    <div class="small-box <?php echo $row['Color'] ?>">
+                        <div class="inner">
+                            <h3 class="text-white"><?php echo $row['Course_name'] ?></h3>
+                            <p class="text-white"><?php echo $row['Date'] ?></p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="d-flex justify-content-between small-box-footer">
+                            <div>
+                                <a href="class_from_course.php?course_id=<?php echo $row['id'] ?>"
+                                    class="text-white ml-3">
+                                    View &nbsp;
+                                    <i class="fas fa-arrow-right fa-xs"></i>
+                                </a>
+                            </div>
+                            <!-- <div class="mr-3 dropup">
                                 <i class="nav-icon fas fa-ellipsis-h text-white" data-toggle="dropdown"></i>
                                 <div class="dropdown-menu">
                                     <a href="" class="dropdown-item"><i class="fa fa-edit text-success"></i>
@@ -147,17 +142,17 @@ if (isset($_POST['delete'])) {
                                         class="dropdown-item"><i class="fa fa-trash text-danger"></i> Delete</a>
                                 </div>
                             </div> -->
-                                </div>
+                        </div>
 
 
-                                <!-- <a href="class_from_course.php?course_id=<?php echo $row['id']; ?>" class="small-box-footer">
+                        <!-- <a href="class_from_course.php?course_id=<?php echo $row['id']; ?>" class="small-box-footer">
                             view &nbsp;
                             <i class="fas fa-arrow-circle-right"></i>
                         </a> -->
-                            </div>
+                    </div>
 
-                        </div>
-                    <?php } ?>
+                </div>
+                <?php } ?>
                 <?php } ?>
             </div>
         </div>

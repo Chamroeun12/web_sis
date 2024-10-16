@@ -252,81 +252,55 @@ if ($temp) {
                         </thead>
                         <tbody id="showdata">
                             <?php foreach ($data as $key => $value) { ?>
-                                <tr>
-                                    <td><?php
+                            <tr>
+                                <td><?php
                                         if (isset($_GET['page']) && $_GET['page'] > 1)
                                             echo ($_GET['page'] - 1) * 10 + ($key + 1);
                                         else
                                             echo ($key + 1);
                                         ?></td>
-                                    <td>
-                                        <div class="user-panel p-0">
-                                            <div class="image p-0">
-                                                <img onerror="this.style.display = 'none'" class="img-circle p-0"
-                                                    src="images/<?= $value['Profile_img']; ?>"
-                                                    style="width: 35px; height: 35px;" />
-                                            </div>
+                                <td>
+                                    <div class="user-panel p-0">
+                                        <div class="image p-0">
+                                            <img onerror="this.style.display = 'none'" class="img-circle p-0"
+                                                src="images/<?= $value['Profile_img']; ?>"
+                                                style="width: 35px; height: 35px;" />
                                         </div>
                                     </div>
-                                </td>
-                                <td><?php echo $value['Stu_code']; ?></td>
-                                <td><?php echo $value['En_name']; ?></td>
-                                <td><?php echo $value['Kh_name']; ?></td>
-                                <td><?php echo $value['Gender']; ?></td>
-                                <td><?php echo date('d-M-Y', strtotime($value['DOB'])); ?></td>
-                                <td><?php echo $value['Address']; ?></td>
-                                <td><?php echo $value['Phone']; ?></td>
-                                <td>
-                                    <?php if ($value['Status'] == 'Active') { ?>
-                                    <span class="badge badge-success">Active</span>
-                                    <?php } else { ?>
-                                    <span class="badge badge-danger">Deactive</span>
-                                    <?php } ?>
-                                </td>
-                                <td>
-                                    <a href="update_student.php?stu_id=<?php echo $value['ID'] ?>">
-                                        <i class="fa fa-edit text-success"></i>
-                                    </a>
-                                    <a class="m-2" href="all_condition.php?stu_id=<?php echo $value['ID'] ?>"
-                                        onclick="return confirm('Do you want to delete this record?')">
-                                        <i class="fa fa-trash text-danger"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                                    </td>
-                                    <td><?php echo $value['Stu_code']; ?></td>
-                                    <td><?php echo $value['En_name']; ?></td>
-                                    <td><?php echo $value['Kh_name']; ?></td>
-                                    <td><?php echo $value['Gender']; ?></td>
-                                    <td><?php echo date('d-M-Y', strtotime($value['DOB'])); ?></td>
-                                    <td><?php echo $value['Address']; ?></td>
-                                    <td><?php echo $value['Phone']; ?></td>
-                                    <td>
-                                        <?php if ($value['Status'] == 'Active') { ?>
-                                            <span class="badge badge-success">Active</span>
-                                        <?php } else { ?>
-                                            <span class="badge badge-danger">Disabled</span>
-                                        <?php } ?>
-                                    </td>
-                                    <td>
-                                        <a href="update_student.php?stu_id=<?php echo $value['ID'] ?>">
-                                            <i class="fa fa-edit text-success"></i>
-                                        </a>
-                                        <a class="m-2" href="all_condition.php?stu_id=<?php echo $value['ID'] ?>"
-                                            onclick="return confirm('Do you want to delete this record?')">
-                                            <i class="fa fa-trash text-danger"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
                 </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                    <div class="card-tools">
-                        <ul class="pagination pagination-sm float-right">
-                            <li class="page-item"><a class="page-link" href="student_list.php?page=
+                </td>
+                <td><?php echo $value['Stu_code']; ?></td>
+                <td><?php echo $value['En_name']; ?></td>
+                <td><?php echo $value['Kh_name']; ?></td>
+                <td><?php echo $value['Gender']; ?></td>
+                <td><?php echo date('d-M-Y', strtotime($value['DOB'])); ?></td>
+                <td><?php echo $value['Address']; ?></td>
+                <td><?php echo $value['Phone']; ?></td>
+                <td>
+                    <?php if ($value['Status'] == 'Active') { ?>
+                    <span class="badge badge-success">Active</span>
+                    <?php } else { ?>
+                    <span class="badge badge-danger">Deactive</span>
+                    <?php } ?>
+                </td>
+                <td>
+                    <a href="update_student.php?stu_id=<?php echo $value['ID'] ?>">
+                        <i class="fa fa-edit text-success"></i>
+                    </a>
+                    <a class="m-2" href="all_condition.php?stu_id=<?php echo $value['ID'] ?>"
+                        onclick="return confirm('Do you want to delete this record?')">
+                        <i class="fa fa-trash text-danger"></i>
+                    </a>
+                </td>
+                <?php } ?>
+                </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <div class="card-tools">
+                    <ul class="pagination pagination-sm float-right">
+                        <li class="page-item"><a class="page-link" href="student_list.php?page=
                      <?php
                         if (isset($_GET['page']) && $_GET['page'] > 1)
 
@@ -335,8 +309,8 @@ if ($temp) {
                             echo 1;
                         ?>
                     ">&laquo;</a></li>
-                            <?php for ($i = 1; $i <= $maxpage; $i++) { ?>
-                                <li class="page-item
+                        <?php for ($i = 1; $i <= $maxpage; $i++) { ?>
+                        <li class="page-item
                       <?php
                                 if (isset($_GET['page'])) {
                                     if ($i == $_GET['page'])
@@ -346,9 +320,9 @@ if ($temp) {
                                         echo ' active ';
                                 }
                         ?>"><a class="page-link" href="student_list.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                                </li>
-                            <?php } ?>
-                            <li class="page-item"><a class="page-link" href="student_list.php?page=
+                        </li>
+                        <?php } ?>
+                        <li class="page-item"><a class="page-link" href="student_list.php?page=
                      <?php
                         if (isset($_GET['page'])) {
                             if ($_GET['page'] == $maxpage) {
@@ -360,16 +334,14 @@ if ($temp) {
                             echo 2;
                         }
                         ?>">&raquo;</a></li>
-                        </ul>
-                    </div>
+                    </ul>
                 </div>
             </div>
-            <!-- /.card -->
         </div>
+        <!-- /.card -->
+    </div>
     </div>
     <!-- /.row -->
 </section>
 </div>
 <?php include_once "footer.php"; ?>
-
-

@@ -61,8 +61,8 @@ if ($temp) {
     <div class="container-fluid">
         <div class="row mb-2 card-header">
             <div class="col-sm-6">
-                <h3 class="m-0" style="font-family:Khmer OS Siemreap; color:#152550;">
-                    |Student List
+                <h3 class="m-0">
+                    |បញ្ចូលសិស្សទៅក្នុងថ្នាក់
                 </h3>
             </div>
         </div>
@@ -78,27 +78,27 @@ if ($temp) {
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <select name="addclass" id="" class="form-control">
-                                            <option value="">--Select Class--</option>
+                                        <select name="addclass" id="" class="form-control" style="font-size:14px;">
+                                            <option value="">--ជ្រើសរើស--</option>
                                             <?php foreach ($classes as $row) : ?>
-                                                <option value="<?= $row['ClassID']; ?>"
-                                                    <?= isset($_POST['addclass']) && $_POST['addclass'] == $row['ClassID'] ? 'selected' : '' ?>>
-                                                    <?= $row['Class_name']; ?>
-                                                </option>
+                                            <option value="<?= $row['ClassID']; ?>"
+                                                <?= isset($_POST['addclass']) && $_POST['addclass'] == $row['ClassID'] ? 'selected' : '' ?>>
+                                                <?= $row['Class_name']; ?>
+                                            </option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="ml-3">
-                                        <input type="submit" value="Show" name="btnsave" class="btn btn-success">
+                                        <input type="submit" value="បង្ហាញ" name="btnsave"
+                                            class="btn1 bg-sis text-white">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group" style="width: 300px;">
                                         <input type="text" id="" name="namesearch"
-                                            class="search form-control float-right" placeholder="Search"
-                                            style="font-family:Khmer OS Siemreap;">
+                                            class="search form-control float-right" placeholder="ស្វែងរក">
                                         <div class="input-group-append">
                                         </div>
                                     </div>
@@ -114,46 +114,45 @@ if ($temp) {
                 <div class="card col-md-12">
                     <div class="card-body">
                         <div class="table-responsive p-0 text-sm">
-                            <table class="table table-hover text-nowrap" style="font-family:Khmer OS Siemreap;"
-                                id="userTbl">
+                            <table class="table table-hover text-nowrap" id="userTbl">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
-                                        <th>Class Name</th>
-                                        <th>Student Code</th>
-                                        <th>English Name</th>
-                                        <th>Khmer Name</th>
-                                        <th>Gender</th>
-                                        <th>Date of Birth</th>
-                                        <th>Action</th>
+                                        <th>ល.រ</th>
+                                        <th>ថ្នាក់</th>
+                                        <th>អត្តលេខសិស្ស</th>
+                                        <th>ឈ្មោះភាសាអង់គ្លេស</th>
+                                        <th>ឈ្មោះភាសាខ្មែរ</th>
+                                        <th>ភេទ</th>
+                                        <th>ថ្ងៃខែឆ្នាំកំណើត</th>
+                                        <th>សកម្មភាព</th>
                                     </tr>
                                 </thead>
                                 <tbody id="showdata">
                                     <!-- Show students already in the class -->
                                     <?php if (isset($students_in_class) && !empty($students_in_class)) { ?>
-                                        <?php foreach ($students_in_class as $key => $student) { ?>
-                                            <tr>
-                                                <td><?= $key + 1; ?></td>
-                                                <td><?= $student['Class_name']; ?></td>
-                                                <td><?= $student['Stu_code']; ?></td>
-                                                <td><?= $student['En_name']; ?></td>
-                                                <td><?= $student['Kh_name']; ?></td>
-                                                <td><?= $student['Gender']; ?></td>
-                                                <td><?= $student['DOB']; ?></td>
-                                                <td>
-                                                    <!-- Remove button to delete the student from the class -->
-                                                    <a href="?remove_id=<?= $student['ID']; ?>&class_id=<?= $class_id; ?>"
-                                                        class="btn btn-danger btn-sm"
-                                                        onclick="return confirm('Are you sure you want to remove this student?');">
-                                                        Remove
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        <?php } ?>
+                                    <?php foreach ($students_in_class as $key => $student) { ?>
+                                    <tr>
+                                        <td><?= $key + 1; ?></td>
+                                        <td><?= $student['Class_name']; ?></td>
+                                        <td><?= $student['Stu_code']; ?></td>
+                                        <td><?= $student['En_name']; ?></td>
+                                        <td><?= $student['Kh_name']; ?></td>
+                                        <td><?= $student['Gender']; ?></td>
+                                        <td><?= $student['DOB']; ?></td>
+                                        <td>
+                                            <!-- Remove button to delete the student from the class -->
+                                            <a href="?remove_id=<?= $student['ID']; ?>&class_id=<?= $class_id; ?>"
+                                                class="btn btn-danger btn-sm"
+                                                onclick="return confirm('Are you sure you want to remove this student?');">
+                                                យកចេញ
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <?php } ?>
                                     <?php } else { ?>
-                                        <tr>
-                                            <td colspan="4">No students found for the selected class.</td>
-                                        </tr>
+                                    <tr>
+                                        <td colspan="4">គ្មានទិន្នន័យ</td>
+                                    </tr>
                                     <?php } ?>
                                 </tbody>
                             </table>
@@ -176,7 +175,7 @@ if ($temp) {
                         ?>
                     ">&laquo;</a></li>
                         <?php for ($i = 1; $i <= $maxpage; $i++) { ?>
-                            <li class="page-item
+                        <li class="page-item
                       <?php
                             if (isset($_GET['page'])) {
                                 if ($i == $_GET['page'])
@@ -186,8 +185,8 @@ if ($temp) {
                                     echo ' active ';
                             }
                         ?>"><a class="page-link"
-                                    href="student_in_class.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                            </li>
+                                href="student_in_class.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                        </li>
                         <?php } ?>
                         <li class="page-item"><a class="page-link" href="student_in_class.php?page=
                      <?php

@@ -66,7 +66,7 @@ if (isset($_POST['btnsave'])) {
                                                 <label for="inputStatus">ពណ៌</label>
                                                 <select id="" name="color" class="form-control custom-select">
                                                     <option selected disabled>--ជ្រើសរើស--</option>
-                                                    <option value="bg-primary">Primary</option>
+                                                    <option value="bg-primary">Primary​</option>
                                                     <option value="bg-secondary">Secondary</option>
                                                     <option value="bg-success">Success</option>
                                                     <option value="bg-danger">Danger</option>
@@ -79,8 +79,8 @@ if (isset($_POST['btnsave'])) {
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-between">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <input type="submit" value="Save" name="btnsave" class="btn btn-success">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">បោះបង់</button>
+                                <input type="submit" value="រក្សាទុក" name="btnsave" class="btn btn-success">
                                 <!-- <button type="button" class="btn btn-primary">Save</button> -->
                             </div>
                         </form>
@@ -115,10 +115,10 @@ if (isset($_POST['btnsave'])) {
                                 <i class="nav-icon fas fa-ellipsis-h text-white" data-toggle="dropdown"></i>
                                 <div class="dropdown-menu">
                                     <a href="update_subject.php?sub_id=<?= $row['SubID']; ?>" class="dropdown-item"><i
-                                            class="fa fa-edit text-success"></i> Edit</a>
+                                            class="fa fa-edit text-success"></i> កែប្រែ</a>
                                     <a href="all_condition.php?sub_id=<?php echo $row['SubID'] ?>"
                                         onclick="return confirm('Do you want to delete this record?')"
-                                        class="dropdown-item"><i class="fa fa-trash text-danger"></i> Delete</a>
+                                        class="dropdown-item"><i class="fa fa-trash text-danger"></i> លុប</a>
                                 </div>
                             </div>
                         </div>

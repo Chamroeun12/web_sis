@@ -69,8 +69,8 @@ if (isset($_POST['btnsave'])) {
     <div class="container-fluid">
         <div class="row mb-2 card-header">
             <div class="col-sm-6">
-                <h3 class="m-0" style="font-family:Khmer OS Siemreap; color:#152550;">
-                    |Class
+                <h3 class="m-0">
+                    |បញ្ចូលសិស្សទៅក្នុងថ្នាក់
                 </h3>
             </div>
         </div>
@@ -85,15 +85,15 @@ if (isset($_POST['btnsave'])) {
                                 <div class="input-group">
                                     <!-- Class selection dropdown -->
                                     <select name="addclass" class="form-control">
-                                        <option value="">--Select Class--</option>
+                                        <option value="">--ជ្រើសរើសថ្នាក់--</option>
                                         <?php foreach ($class as $row) : ?>
-                                            <option value="<?= $row['ClassID']; ?>"><?= $row['Class_name']; ?> <span> coure
-                                                    name</span> <span> Teacher name</span></option>
+                                        <option value="<?= $row['ClassID']; ?>"><?= $row['Class_name']; ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                     <div class="ml-3">
                                         <!-- Submit button -->
-                                        <input type="submit" value="Submit" name="btnsave" class="btn btn-success">
+                                        <input type="submit" value="រក្សាទុក" name="btnsave"
+                                            class="btn1 bg-sis text-white">
                                     </div>
                                 </div>
                             </div>
@@ -101,73 +101,73 @@ if (isset($_POST['btnsave'])) {
                         <div class="col-md-4">
                             <div class="form-group" style="width: 300px;">
                                 <input type="text" name="namesearch" class="search form-control float-right"
-                                    placeholder="Search" style="font-family:Khmer OS Siemreap;">
+                                    placeholder="ស្វែងរក" ">
                             </div>
                         </div>
                     </div>
             </div>
 
-            <div class="card">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card-body table-responsive p-0 text-sm">
-                            <table class="table table-hover text-nowrap" style="font-family:Khmer OS Siemreap;"
-                                id="userTbl">
-                                <thead>
-                                    <tr>
-                                        <th>Check</th>
-                                        <th>No</th>
-                                        <th>Student Code</th>
-                                        <th>English Name</th>
-                                        <th>Khmer Name</th>
-                                        <th>Gender</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="showdata">
-                                    <?php if (isset($student)) { ?>
-                                        <?php foreach ($student as $key => $value) { ?>
-                                            <tr>
-                                                <td>
-                                                    <div class="icheck-primary">
-                                                        <input type="checkbox" name="addstu[]"
-                                                            value="<?php echo $value['ID']; ?>" id="check<?php echo $key; ?>">
-                                                        <label for="check<?php echo $key; ?>"></label>
-                                                    </div>
-                                                </td>
-                                                <td><?php echo ($key + 1); ?></td>
-                                                <td><?php echo $value['Stu_code']; ?></td>
-                                                <td><?php echo $value['En_name']; ?></td>
-                                                <td><?php echo $value['Kh_name']; ?></td>
-                                                <td><?php echo $value['Gender']; ?></td>
-                                            </tr>
-                                        <?php } ?>
-                                    <?php } ?>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- Page -->
-                        <!-- xkjfjxfjhk -->
-                        <div>
-                            <?php if ($page > 1): ?>
-                                <a href="class.php?page=<?php echo $page - 1; ?>">Previous</a>
-                            <?php endif; ?>
+            <div class=" card">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card-body table-responsive p-0 text-sm">
+                                            <table class="table table-hover text-nowrap" id="userTbl">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ជ្រើសរើស</th>
+                                                        <th>ល.រ</th>
+                                                        <th>អត្តលេខ</th>
+                                                        <th>ឈ្មោះភាសាអង់គ្លេស</th>
+                                                        <th>ឈ្មោះភាសាខ្មែរ</th>
+                                                        <th>ភេទ</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="showdata">
+                                                    <?php if (isset($student)) { ?>
+                                                    <?php foreach ($student as $key => $value) { ?>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="icheck-primary">
+                                                                <input type="checkbox" name="addstu[]"
+                                                                    value="<?php echo $value['ID']; ?>"
+                                                                    id="check<?php echo $key; ?>">
+                                                                <label for="check<?php echo $key; ?>"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td><?php echo ($key + 1); ?></td>
+                                                        <td><?php echo $value['Stu_code']; ?></td>
+                                                        <td><?php echo $value['En_name']; ?></td>
+                                                        <td><?php echo $value['Kh_name']; ?></td>
+                                                        <td><?php echo $value['Gender']; ?></td>
+                                                    </tr>
+                                                    <?php } ?>
+                                                    <?php } ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- Page -->
+                                        <!-- xkjfjxfjhk -->
+                                        <!-- <div>
+                                            <?php if ($page > 1): ?>
+                                            <a href="class.php?page=<?php echo $page - 1; ?>">Previous</a>
+                                            <?php endif; ?>
 
-                            <?php if ($page < $total_pages): ?>
-                                <a href="class.php?page=<?php echo $page + 1; ?>">Next</a>
-                            <?php endif; ?>
-                        </div>
-
-
+                                            <?php if ($page < $total_pages): ?>
+                                            <a href="class.php?page=<?php echo $page + 1; ?>">Next</a>
+                                            <?php endif; ?>
+                                        </div> -->
 
 
 
-                    </div>
-                </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                </form>
+                <!-- this form table -->
             </div>
-            </form>
-            <!-- this form table -->
-        </div>
 
-    </div>
+        </div>
 </section>
 <?php include_once 'footer.php'; ?>

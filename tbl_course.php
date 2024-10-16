@@ -57,12 +57,12 @@ $Subject = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">|Course</h1>
+                    <h1 class="m-0">|វគ្គសិក្សា</h1>
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-6">
                     <a href="add_subject.php" class="btn btn-success float-sm-right" data-toggle="modal"
-                        data-target="#modal-lg">Create</a>
+                        data-target="#modal-lg">បញ្ចូលថ្មី</a>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -71,7 +71,7 @@ $Subject = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="modal-content">
 
                     <div class="modal-header">
-                        <h4>|Create Subject</h4>
+                        <h4>|បង្កើតវគ្គសិក្សាថ្មី</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -85,27 +85,27 @@ $Subject = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <input type="hidden" id="subID" name="subid" value="<?= $subject_id; ?>">
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <label for="inputName">Course Name</label>
+                                        <label for="inputName">វគ្គសិក្សា</label>
                                         <input type="text" id="coursename" name="cu_name" class="form-control" value="">
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="inputStatus">Subject Name</label>
+                                            <label for="inputStatus">មុខវិជ្ចាសិក្សា</label>
                                             <select id="" name="subject" class="form-control custom-select">
-                                                <option selected disabled>Select one</option>
+                                                <option selected disabled>--ជ្រើសរើស--</option>
                                                 <?php foreach ($Subject as  $row): ?>
-                                                    <option value="<?= $row['SubID']; ?>">
-                                                        <?= $row['Subject_name']; ?>
-                                                    </option>
+                                                <option value="<?= $row['SubID']; ?>">
+                                                    <?= $row['Subject_name']; ?>
+                                                </option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="inputStatus">Color</label>
+                                            <label for="inputStatus">ពណ៌</label>
                                             <select id="" name="color" class="form-control custom-select">
-                                                <option selected disabled>Select one</option>
+                                                <option selected disabled>--ជ្រើសរើស--</option>
                                                 <option value="bg-primary">Primary</option>
                                                 <option value="bg-secondary">Secondary</option>
                                                 <option value="bg-success">Success</option>
@@ -116,15 +116,15 @@ $Subject = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         </div>
                                     </div>
                                     <div class="col-md-3">
-                                        <label for="inputName">Date</label>
+                                        <label for="inputName">កាលបរិច្ឆេទ</label>
                                         <input type="date" id="date" name="date" class="form-control">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <input type="submit" value="Save" name="btnsave" class="btn btn-success">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">បោះបង់</button>
+                            <input type="submit" value="រក្សាទុក" name="btnsave" class="btn btn-success">
                             <!-- <button type="button" class="btn btn-primary">Save</button> -->
                         </div>
                     </form>
@@ -153,41 +153,40 @@ $Subject = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="card-tools">
                                 <div class="form-group" style="width: 300px;">
                                     <input type="text" id="" name="namesearch" class="search form-control float-right"
-                                        placeholder="Search" style="font-family:Khmer OS Siemreap;">
+                                        placeholder="ស្វែងរក">
                                     <div class="input-group-append">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body p-0">
-                            <table class="table table-hover text-nowrap" style="font-family:Khmer OS Siemreap;"
-                                id="userTbl">
+                            <table class="table table-hover text-nowrap" id="userTbl">
                                 <thead>
                                     <tr>
-                                        <th style="width: 10px">#</th>
-                                        <th>Course Name</th>
-                                        <th>Subject Name</th>
-                                        <th>Date</th>
-                                        <th>Action</th>
+                                        <th style="width: 10px">ល.រ</th>
+                                        <th>វគ្គសិក្សា</th>
+                                        <th>មុខវិជ្ចា</th>
+                                        <th>កាលបរិច្ឆេទ</th>
+                                        <th>សកម្មភាព</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($Course as $key => $value): ?>
-                                        <tr>
-                                            <td><?php echo $key + 1; ?>.</td>
-                                            <td><?php echo $value['Course_name']; ?></td>
-                                            <td><?php echo $value['Subject_name']; ?></td>
-                                            <td><?php echo $value['Date']; ?></td>
-                                            <td>
-                                                <a href="update_course.php?co_id=<?php echo $value['id'] ?>">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                                <a class="m-2" href="all_condition.php?co_id=<?php echo $value['id'] ?>"
-                                                    onclick="return confirm('Do you want to delete this record?')">
-                                                    <i class="fa fa-trash text-danger"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <td><?php echo $key + 1; ?>.</td>
+                                        <td><?php echo $value['Course_name']; ?></td>
+                                        <td><?php echo $value['Subject_name']; ?></td>
+                                        <td><?php echo $value['Date']; ?></td>
+                                        <td>
+                                            <a href="update_course.php?co_id=<?php echo $value['id'] ?>">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="m-2" href="all_condition.php?co_id=<?php echo $value['id'] ?>"
+                                                onclick="return confirm('Do you want to delete this record?')">
+                                                <i class="fa fa-trash text-danger"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
                                     <?php endforeach ?>
                                 </tbody>
                             </table>
@@ -195,7 +194,7 @@ $Subject = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <div class="card-footer">
                             <div class="card-tools">
                                 <ul class="pagination pagination-sm float-right">
-                                    <li class="page-item"><a class="page-link" href="student_list.php?page=
+                                    <li class="page-item"><a class="page-link" href="tbl_course.php?page=
                      <?php
                         if (isset($_GET['page']) && $_GET['page'] > 1)
 
@@ -205,7 +204,7 @@ $Subject = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         ?>
                     ">&laquo;</a></li>
                                     <?php for ($i = 1; $i <= $maxpage; $i++) { ?>
-                                        <li class="page-item
+                                    <li class="page-item
                       <?php
                                         if (isset($_GET['page'])) {
                                             if ($i == $_GET['page'])
@@ -214,10 +213,10 @@ $Subject = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                             if ($i == 1)
                                                 echo ' active ';
                                         }
-                        ?>"><a class="page-link" href="student_list.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                                        </li>
+                        ?>"><a class="page-link" href="tbl_course.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                                    </li>
                                     <?php } ?>
-                                    <li class="page-item"><a class="page-link" href="student_list.php?page=
+                                    <li class="page-item"><a class="page-link" href="tbl_course.php?page=
                      <?php
                         if (isset($_GET['page'])) {
                             if ($_GET['page'] == $maxpage) {

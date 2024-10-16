@@ -55,13 +55,13 @@ if ($temp) {
     <div class="container-fluid">
         <div class="row mb-2 card-header">
             <div class="col-sm-6">
-                <h3 class="m-0">|Teacher Lists</h3>
+                <h3 class="m-0">|បញ្ជីព័ត៌មានគ្រូ</h3>
             </div>
             <!-- /.col -->
             <div class="col-sm-6">
                 <h3 class="card-title float-sm-right">
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-lg">
-                        Add
+                        បញ្ចូលថ្មី
                     </button>
                 </h3>
             </div>
@@ -79,7 +79,7 @@ if ($temp) {
             <div class="modal-content">
                 <!-- form card-header -->
                 <div class="card-header">
-                    <h3 class="card-title">|Add Teacher</h3>
+                    <h3 class="card-title">|បញ្ចូលគ្រូបង្រៀនថ្មី</h3>
                 </div>
                 <!-- Condition to Add or Edit student -->
 
@@ -89,40 +89,40 @@ if ($temp) {
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <label for="inputName">English Name</label>
+                                    <label for="inputName">ឈ្មោះភាសាអង់គ្លេស</label>
                                     <input type="text" id="enName" name="En_name" class="form-control" value="">
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="inputName">Khmer Name</label>
+                                        <label for="inputName">ឈ្មោះភាសាខ្មែរ</label>
                                         <input type="text" id="khName" name="Kh_name" class="form-control" value="">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="">Date of Birth</label>
+                                    <label for="">ថ្ងៃខែឆ្នាំកំណើត</label>
                                     <input type="date" id="dob" name="dob" class="form-control" value="">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="inputStatus">Gender</label>
+                                        <label for="inputStatus">ភេទ</label>
                                         <select id="inputStatus" name="gender" class="form-control custom-select">
-                                            <option selected disabled>Select one</option>
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
+                                            <option selected disabled>--ជ្រើសរើស--</option>
+                                            <option value="ប្រុស">ប្រុស</option>
+                                            <option value="ស្រី">ស្រី</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="inputStatus">Position</label>
+                                        <label for="inputStatus">តួនាទី</label>
                                         <input type="text" name="position" id="" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="inputStatus">Code Number</label>
+                                        <label for="inputStatus">អត្តលេខ</label>
                                         <input type="text" name="code" id="" class="form-control">
                                     </div>
                                 </div>
@@ -130,30 +130,30 @@ if ($temp) {
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="inputStatus">Nationality</label>
+                                        <label for="inputStatus">ជនជាតិ</label>
                                         <input type="text" name="nation" id="" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="inputStatus">Ethnicity</label>
+                                        <label for="inputStatus">សញ្ជាតិ</label>
                                         <input type="text" name="ethnicity" id="" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="inputStatus">Status</label>
+                                        <label for="inputStatus">ស្ថានភាព</label>
                                         <input type="text" name="status" id="" class="form-control">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputDescription">Address</label>
+                                <label for="inputDescription">អាសយដ្ឋាន</label>
                                 <textarea id="inputDescription" name="address" class="form-control" rows="3"></textarea>
                             </div>
 
                             <div class="form-group">
-                                <label for="inputPhone">Phone</label>
+                                <label for="inputPhone">លេខទូរស័ព្ទ</label>
                                 <input type="text" id="inputPhone" name="phone" class="form-control" value="">
                             </div>
                         </div>
@@ -165,8 +165,8 @@ if ($temp) {
                         <?php } ?> -->
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" name="btnsave">Save</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">បោះបង់</button>
+                        <button type="submit" class="btn btn-primary" name="btnsave">រក្សាទុក</button>
                     </div>
                 </form>
             </div>
@@ -187,7 +187,7 @@ if ($temp) {
                     <div class="card-tools">
                         <div class="form-group" style="width: 300px;">
                             <input type="text" id="" name="namesearch" class="search form-control float-right"
-                                placeholder="Search" style="font-family:Khmer OS Siemreap;">
+                                placeholder="Search">
                             <div class="input-group-append">
                             </div>
                         </div>
@@ -195,60 +195,60 @@ if ($temp) {
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body table-responsive p-0 text-sm">
-                    <table class="table table-hover text-nowrap" style="font-family:Khmer OS Siemreap;" id="userTbl">
+                    <table class="table table-hover text-nowrap" id="userTbl">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>English Name</th>
-                                <th>Khmer Name</th>
-                                <th>Code</th>
-                                <th>Gender</th>
-                                <th>Date of Birth</th>
-                                <th>Position</th>
-                                <th>Address</th>
-                                <th>Phone</th>
+                                <th>ល.រ</th>
+                                <th>ឈ្មោះភាសាខ្មែរ</th>
+                                <th>ឈ្មោះភាសាអង់គ្លេស</th>
+                                <th>អត្តលេខ</th>
+                                <th>ភេទ</th>
+                                <th>ថ្ងៃខែឆ្នាំកំណើត</th>
+                                <th>តួនាទី</th>
+                                <th>អាសយដ្ឋាន</th>
+                                <th>លេខទូរស័ព្ទ</th>
                                 <!-- <th>NATION</th> -->
-                                <th>STATUS</th>
-                                <th rowspan="3">ACTION</th>
+                                <th>ស្ថានភាព</th>
+                                <th rowspan="3">សកម្មភាព</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($data as $key => $value) { ?>
-                                <tr>
-                                    <td><?php
+                            <tr>
+                                <td><?php
                                         if (isset($_GET['page']) && $_GET['page'] > 1)
                                             echo ($_GET['page'] - 1) * 10 + ($key + 1);
                                         else
                                             echo ($key + 1);
                                         ?></td>
-                                    <td><?php echo $value['En_name']; ?></td>
-                                    <td><?php echo $value['Kh_name']; ?></td>
-                                    <td><?php echo $value['Staff_code']; ?></td>
-                                    <td><?php echo $value['Gender']; ?></td>
-                                    <td><?php echo date('d-M-Y', strtotime($value['DOB'])); ?></td>
-                                    <td><?php echo $value['Position']; ?></td>
-                                    <td><?php echo $value['Address']; ?></td>
-                                    <td><?php echo $value['Phone']; ?></td>
-                                    <td><?php echo $value['Status']; ?></td>
-                                    <td>
-                                        <a href="update_teacher.php?t_id=<?php echo $value['id'] ?>">
-                                            <i class="fa fa-edit text-success"></i>
-                                        </a>
-                                        <a class="m-2" href="all_condition.php?t_id=<?php echo $value['id'] ?>"
-                                            onclick="return confirm('Do you want to delete this record?')">
-                                            <i class="fa fa-trash text-danger"></i>
-                                        </a>
-                                        <a href="">
-                                            <i class="nav-icon fas fa-ellipsis-h"></i>
-                                        </a>
-                                    </td>
-                                    <!-- <td>
+                                <td><?php echo $value['En_name']; ?></td>
+                                <td><?php echo $value['Kh_name']; ?></td>
+                                <td><?php echo $value['Staff_code']; ?></td>
+                                <td><?php echo $value['Gender']; ?></td>
+                                <td><?php echo date('d-M-Y', strtotime($value['DOB'])); ?></td>
+                                <td><?php echo $value['Position']; ?></td>
+                                <td><?php echo $value['Address']; ?></td>
+                                <td><?php echo $value['Phone']; ?></td>
+                                <td><?php echo $value['Status']; ?></td>
+                                <td>
+                                    <a href="update_teacher.php?t_id=<?php echo $value['id'] ?>">
+                                        <i class="fa fa-edit text-success"></i>
+                                    </a>
+                                    <a class="m-2" href="all_condition.php?t_id=<?php echo $value['id'] ?>"
+                                        onclick="return confirm('Do you want to delete this record?')">
+                                        <i class="fa fa-trash text-danger"></i>
+                                    </a>
+                                    <a href="">
+                                        <i class="nav-icon fas fa-ellipsis-h"></i>
+                                    </a>
+                                </td>
+                                <!-- <td>
                                     <a href="addstudent.php?student_id=<?php echo $value['Stuid'] ?>">
                                         <i class="fa fa-edit" style="color: chocolate;"></i>
                                         <span style="color: chocolate;">Edit</span></a>
                                 </td> -->
-                                    <!-- <td><a href="addstudent.php?student_id=<?php echo $value['Stuid'] ?>"><i class="fa fa-edit"></i> Edit</a></td> -->
-                                </tr>
+                                <!-- <td><a href="addstudent.php?student_id=<?php echo $value['Stuid'] ?>"><i class="fa fa-edit"></i> Edit</a></td> -->
+                            </tr>
                             <?php } ?>
                         </tbody>
                     </table>
@@ -268,7 +268,7 @@ if ($temp) {
                         ?>
                     ">&laquo;</a></li>
                             <?php for ($i = 1; $i <= $maxpage; $i++) { ?>
-                                <li class="page-item
+                            <li class="page-item
                       <?php
                                 if (isset($_GET['page'])) {
                                     if ($i == $_GET['page'])
@@ -278,7 +278,7 @@ if ($temp) {
                                         echo ' active ';
                                 }
                         ?>"><a class="page-link" href="teacher_list.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                                </li>
+                            </li>
                             <?php } ?>
                             <li class="page-item"><a class="page-link" href="teacher_list.php?page=
                      <?php

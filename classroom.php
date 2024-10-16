@@ -97,12 +97,12 @@ include_once "header.php";
     <div class="container-fluid">
         <div class="row mb-2 card-header">
             <div class="col-sm-6">
-                <h2 class="m-0">| Classroom</h2>
+                <h2 class="m-0">|បញ្ចីថ្នាក់រៀន</h2>
             </div>
             <div class="col-sm-6">
                 <h3 class="card-title float-sm-right">
-                    <button type="button" class="btn btn-success" data-toggle="modal"
-                        data-target="#modal-lg">Create</button>
+                    <button type="button" class="btn1 bg-sis text-white" data-toggle="modal"
+                        data-target="#modal-lg">បង្កើតថ្មី</button>
                 </h3>
             </div>
         </div>
@@ -122,23 +122,23 @@ include_once "header.php";
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label for="inputName">Class Name</label>
+                                    <label for="inputName">ថ្នាក់</label>
                                     <input type="text" name="class_name" class="form-control">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="inputName">Teacher Name</label>
+                                    <label for="inputName">គ្រូបង្រៀន</label>
                                     <select name="teacher_name" class="form-control">
-                                        <option selected disabled value="">Select Teacher</option>
+                                        <option selected disabled value="">--ជ្រើសរើស--</option>
                                         <?php foreach ($Teacher as $row) { ?>
-                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['En_name']; ?>
+                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['Kh_name']; ?>
                                         </option>
                                         <?php } ?>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="inputName">Course Name</label>
+                                    <label for="inputName">វគ្គសិក្សា</label>
                                     <select name="co" class="form-control">
-                                        <option selected disabled value="">Select Course</option>
+                                        <option selected disabled value="">--ជ្រើសរើស--</option>
                                         <?php foreach ($Course as $row) { ?>
                                         <option value="<?php echo $row['id']; ?>"><?php echo $row['Course_name']; ?>
                                         </option>
@@ -146,28 +146,29 @@ include_once "header.php";
                                     </select>
                                 </div>
                                 <div class="col-sm-3">
-                                    <label for="">Shift</label>
+                                    <label for="">វេនសិក្សា</label>
                                     <select name="shift" class="form-control">
-                                        <option value="AM">AM</option>
-                                        <option value="PM">PM</option>
+                                        <option value="FULL">ពេញម៉ោង</option>
+                                        <option value="AM">ពេលព្រឹក</option>
+                                        <option value="PM">ពេលរសៀល</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label for="inputName">Time In</label>
+                                    <label for="inputName">ម៉ោងចូល</label>
                                     <input type="text" name="time_in" class="form-control">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="inputName">Time Out</label>
+                                    <label for="inputName">ម់ោងចេញ</label>
                                     <input type="text" name="time_out" class="form-control">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="inputStatus">Start Class</label>
+                                    <label for="inputStatus">កាលបរិច្ឆេទចាប់ផ្ដើម</label>
                                     <input type="date" name="start_class" class="form-control"> <!-- Fixed name here -->
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="pob">End Class</label>
+                                    <label for="pob">កាលបរិច្ឆេទបញ្ចប់</label>
                                     <input type="date" name="end_class" class="form-control">
                                 </div>
                             </div>
@@ -175,7 +176,7 @@ include_once "header.php";
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <label for="">Status</label>
+                                    <label for="">ស្ថានភាព</label>
                                     <select name="status" class="form-control">
                                         <option value="active">Active</option>
                                         <option value="disable">Disable</option>
@@ -185,8 +186,8 @@ include_once "header.php";
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <input type="submit" value="Save" name="btnsave" class="btn btn-success">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">បោះបង់</button>
+                        <input type="submit" value="Save" name="btnsave" class="btn1 bg-sis text-white">
                     </div>
                 </form>
             </div>
@@ -200,7 +201,7 @@ include_once "header.php";
                     <div class="card-tools">
                         <div class="form-group" style="width: 300px;">
                             <input type="text" name="namesearch" class="search form-control float-right"
-                                placeholder="Search" style="font-family:Khmer OS Siemreap;">
+                                placeholder="ស្វែងរក">
                         </div>
                     </div>
                     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET"
@@ -209,7 +210,7 @@ include_once "header.php";
                             value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
                         <select name="status" onchange="this.form.submit()" class="form-select custom-select"
                             style="width: 250px;">
-                            <option value="" <?php echo ($status == '') ? 'selected' : ''; ?>>All</option>
+                            <option value="" <?php echo ($status == '') ? 'selected' : ''; ?>>ទាំងអស់</option>
                             <option value="active" <?php echo ($status === 'active') ? 'selected' : ''; ?>>Active
                             </option>
                             <option value="disable" <?php echo ($status === 'disable') ? 'selected' : ''; ?>>Disable
@@ -219,20 +220,20 @@ include_once "header.php";
                 </div>
 
                 <div class="card-body table-responsive p-0 text-sm">
-                    <table class="table table-hover text-nowrap" style="font-family:Khmer OS Siemreap;" id="userTbl">
+                    <table class="table table-hover text-nowrap" id="userTbl">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Class Name</th>
-                                <th>Teacher Name</th>
-                                <th>Course Name</th>
-                                <th>Time In</th>
-                                <th>Time Out</th>
-                                <th>Start Class</th>
-                                <th>End Class</th>
-                                <th>Shift</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>ល.រ</th>
+                                <th>ថ្នាក់</th>
+                                <th>គ្រូបង្រៀន</th>
+                                <th>វគ្គសិក្សា</th>
+                                <th>ម៉ោងចូល</th>
+                                <th>ម៉ោងចេញ</th>
+                                <th>កាលបរិច្ឆេទចាប់ផ្ដើម</th>
+                                <th>កាលបរិច្ឆេទបញ្ចប់</th>
+                                <th>វេនសិក្សា</th>
+                                <th>ស្ថានភាព</th>
+                                <th>សកម្មភាព</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -240,7 +241,7 @@ include_once "header.php";
                             <tr>
                                 <td><?php echo $i++; ?></td>
                                 <td><?php echo htmlspecialchars($row['Class_name']); ?></td>
-                                <td><?php echo htmlspecialchars($row['En_name']); ?></td>
+                                <td><?php echo htmlspecialchars($row['Kh_name']); ?></td>
                                 <td><?php echo htmlspecialchars($row['Course_name']); ?></td>
                                 <td><?php echo htmlspecialchars($row['Time_in']); ?></td>
                                 <td><?php echo htmlspecialchars($row['Time_out']); ?></td>
@@ -256,10 +257,7 @@ include_once "header.php";
                                 </td>
                                 <td>
                                     <form action="report_data.php" method="POST">
-                                        <button type="submit" name="print" title="Print"
-                                            style="border:none; background: transparent; padding:0px;"><i
-                                                class="fa fa-print text-dark ml-1"
-                                                style=" font-size: 18px;"></i></button>
+
                                         <button type="submit" name="export_pdf" title="PDF"
                                             style="border:none; background: transparent; padding:0px;"><i
                                                 class="fa fa-file-pdf text-danger ml-1" style=" font-size: 18px;"></i>
@@ -276,20 +274,13 @@ include_once "header.php";
                                             <div class="dropdown-menu">
                                                 <a href="classroom.php?class_id=<?php echo $row['ClassID']; ?>"
                                                     class="dropdown-item"><i class="fas fa-edit text-success mr-2"
-                                                        style=" font-size: 18px;"></i>Edit</a>
+                                                        style=" font-size: 18px;"></i>កែប្រែ</a>
                                                 <a href="all_condition.php?delete_class_id=<?php echo $row['ClassID']; ?>"
                                                     class="dropdown-item"><i class="fas fa-trash text-danger mr-2"
-                                                        style=" font-size: 18px;"></i>Delete</a>
+                                                        style=" font-size: 18px;"></i>លុប</a>
                                             </div>
                                         </span>
                                     </form>
-                                    <!-- <a href="">
-                                        <i class="nav-icon fas fa-ellipsis-v ml-2"></i>
-                                        <a href="classroom.php?class_id=<?php echo $row['ClassID']; ?>"><i
-                                                class="fa fa-edit"></i></a>
-                                        <a href="classroom.php?delete_class_id=<?php echo $row['ClassID']; ?>"><i
-                                                class="fa fa-trash text-danger"></i></a>
-                                    </a> -->
                                 </td>
                             </tr>
                             <?php } ?>
