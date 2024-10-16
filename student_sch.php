@@ -18,7 +18,7 @@ $sch = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <div class="card m-2">
             <div class="card-header">
-                <h3>|Teacher Schedule</h3>
+                <h3>|Student Schedule</h3>
             </div>
             <!-- create table with school schedule from monday to friday -->
             <table class="table table-bordered table-hover my-2" id="table1">
@@ -34,17 +34,17 @@ $sch = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </thead>
                 <tbody>
                     <?php foreach ($sch as $key => $value) { ?>
-                    <tr>
-                        <td>
-                            <span><?php echo $value['Time_in']; ?></span>
-                            :<span><?php echo $value['Time_out']; ?></span>
-                        </td>
-                        <td><?php echo $value['Monday']; ?></td>
-                        <td><?php echo $value['Tuesday']; ?></td>
-                        <td><?php echo $value['Wednesday']; ?></td>
-                        <td><?php echo $value['Thursday']; ?></td>
-                        <td><?php echo $value['Friday']; ?></td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <span><?php echo $value['Time_in']; ?></span>
+                                :<span><?php echo $value['Time_out']; ?></span>
+                            </td>
+                            <td><?php echo $value['Monday']; ?></td>
+                            <td><?php echo $value['Tuesday']; ?></td>
+                            <td><?php echo $value['Wednesday']; ?></td>
+                            <td><?php echo $value['Thursday']; ?></td>
+                            <td><?php echo $value['Friday']; ?></td>
+                        </tr>
                     <?php } ?>
                 </tbody>
             </table>
