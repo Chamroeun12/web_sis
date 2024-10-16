@@ -11,10 +11,10 @@ if (isset($_POST['name_search'])) {
     $stmt->execute();
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } else {
-    $sql = "SELECT * FROM tb_student LIMIT 10";
+    $sql = "SELECT * FROM tb_student LIMIT 8";
     if (isset($_GET['page'])) {
         if ($_GET['page'] > 1) {
-            $sql .= " OFFSET " . ($_GET['page'] - 1) * 10;
+            $sql .= " OFFSET " . ($_GET['page'] - 1) * 8;
         }
     }
     $stmt = $conn->prepare($sql);
@@ -22,47 +22,43 @@ if (isset($_POST['name_search'])) {
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-//Insert Student
-// if (isset($_POST['btnsave'])) {
-//     if (isset($_GET['stu_id']))
-//         if ($stmt->rowCount()) {
-//             header('Location: student_list.php');
-//             exit;
-//         }
-// }
-//Insert Student
-if (isset($_POST['btnsave'])) {
-    $file_name = $_FILES['image']['name'];
-    $tempname = $_FILES['image']['tmp_name'];
-    $folder = 'images/' . $file_name;
-    $sql = "INSERT INTO tb_student(Stu_code,En_name,Kh_name,Gender,DOB,Address,Dad_name,Mom_name,Dad_job,Mom_job,Phone,Profile_img,Status)
-    VALUES(:stucode,:En_name, :Kh_name,:Gender, :DOB, :Address, :Dad_name, :Mom_name, :Dad_job, :Mom_job, :Phone,:Profile_img,:Status)";
 
-    $sql = "INSERT INTO tb_student(Stu_code,En_name,Kh_name,DOB,Address,Dad_name,Mom_name,Dad_job,Mom_job,Phone,Profile_img,Status)
-    VALUES(:stucode,:En_name, :Kh_name, :DOB, :Address, :Dad_name, :Mom_name, :Dad_job, :Mom_job, :Phone,:Profile_img,:Status)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(":stucode", $_POST['studentcode'], PDO::PARAM_STR);
-    $stmt->bindParam(":En_name", $_POST['en_name'], PDO::PARAM_STR);
-    $stmt->bindParam(":Gender", $_POST['gender'], PDO::PARAM_STR);
-    $stmt->bindParam(":Kh_name", $_POST['kh_name'], PDO::PARAM_STR);
-    $stmt->bindParam(":DOB", $_POST['dob'], PDO::PARAM_STR);
-    $stmt->bindParam(":Address", $_POST['address'], PDO::PARAM_STR);
-    $stmt->bindParam(":Dad_name", $_POST['dad_name'], PDO::PARAM_STR);
-    $stmt->bindParam(":Mom_name", $_POST['mom_name'], PDO::PARAM_STR);
-    $stmt->bindParam(":Dad_job", $_POST['dad_job'], PDO::PARAM_STR);
-    $stmt->bindParam(":Mom_job", $_POST['mom_job'], PDO::PARAM_STR);
-    $stmt->bindParam(":Phone", $_POST['phone'], PDO::PARAM_STR);
-    $stmt->bindParam(":Status", $_POST['status'], PDO::PARAM_STR);
-    $stmt->bindParam(":Profile_img", $file_name, PDO::PARAM_STR);
-    $stmt->execute();
-    if ($stmt->rowCount()) {
-        header('Location: student_list.php');
-    }
-    if (move_uploaded_file($tempname, $folder)) {
-        echo "Image uploaded successfully";
-    } else {
-        echo "Failed to upload image";
-    }
+// Insert Student
+if (isset($_POST['btnsave'])) {
+  $file_name = $_FILES['image']['name'];
+  $tempname = $_FILES['image']['tmp_name'];
+  $folder = 'images/' . $file_name;
+
+  $sql = "INSERT INTO tb_student(Stu_code, En_name, Kh_name, Gender, DOB, Address, Dad_name, Mom_name, Dad_job, Mom_job, Phone, Profile_img, Status)
+  VALUES(:stucode, :En_name, :Kh_name, :Gender, :DOB, :Address, :Dad_name, :Mom_name, :Dad_job, :Mom_job, :Phone, :Profile_img, :Status)";
+
+  $stmt = $conn->prepare($sql);
+  $stmt->bindParam(":stucode", $_POST['studentcode'], PDO::PARAM_STR);
+  $stmt->bindParam(":En_name", $_POST['en_name'], PDO::PARAM_STR);
+  $stmt->bindParam(":Kh_name", $_POST['kh_name'], PDO::PARAM_STR);
+  $stmt->bindParam(":Gender", $_POST['gender'], PDO::PARAM_STR);
+  $stmt->bindParam(":DOB", $_POST['dob'], PDO::PARAM_STR);
+  $stmt->bindParam(":Address", $_POST['address'], PDO::PARAM_STR);
+  $stmt->bindParam(":Dad_name", $_POST['dad_name'], PDO::PARAM_STR);
+  $stmt->bindParam(":Mom_name", $_POST['mom_name'], PDO::PARAM_STR);
+  $stmt->bindParam(":Dad_job", $_POST['dad_job'], PDO::PARAM_STR);
+  $stmt->bindParam(":Mom_job", $_POST['mom_job'], PDO::PARAM_STR);
+  $stmt->bindParam(":Phone", $_POST['phone'], PDO::PARAM_STR);
+  $stmt->bindParam(":Status", $_POST['status'], PDO::PARAM_STR);
+  $stmt->bindParam(":Profile_img", $file_name, PDO::PARAM_STR);
+
+  // Execute and handle success/error
+  if ($stmt->execute() && move_uploaded_file($tempname, $folder)) {
+      $_SESSION['message'] = 'Student added successfully!';
+      $_SESSION['message_type'] = 'success';
+  } else {
+      $_SESSION['message'] = 'Failed to add student. Please try again.';
+      $_SESSION['message_type'] = 'error';
+  }
+
+  // Redirect to avoid resubmission
+  header('Location: student_list.php');
+  exit();
 }
 
 //pages
@@ -348,3 +344,5 @@ if ($temp) {
 </section>
 </div>
 <?php include_once "footer.php"; ?>
+
+
