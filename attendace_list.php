@@ -79,7 +79,7 @@ $attendance = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 // Create a DateTime object from the string
                                 $date = new DateTime($row['Date']);
                                 // Format the date to "15-Sep-2024 at 10 am"
-                                echo $date->format('d-M-Y \a\t g a');
+                                echo $date->format('d-M-Y');
                                 ?>
                                 </td>
                                 <td>

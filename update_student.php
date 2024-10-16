@@ -2,68 +2,78 @@
 include "connection.php";
 
 if (isset($_POST['btnsave'])) {
-    if (isset($_GET['stu_id'])) {
-        $file_name = $_FILES['image']['name'];
-        $tempname = $_FILES['image']['tmp_name'];
-        $folder = 'images/' . $file_name;
+  if (isset($_GET['stu_id'])) {
+      $file_name = $_FILES['image']['name'];
+      $tempname = $_FILES['image']['tmp_name'];
+      $folder = 'images/' . $file_name;
+      $upload_success = false;
 
-        // If a new image is uploaded
-        if ($file_name) {
-            if (move_uploaded_file($tempname, $folder)) {
-                echo "Image uploaded successfully";
-            } else {
-                echo "Failed to upload image";
-            }
-        } else {
-            // If no new image is uploaded, retain the current image name
-            $sql_current = "SELECT Profile_img FROM tb_student WHERE ID=:ID";
-            $stmt_current = $conn->prepare($sql_current);
-            $stmt_current->bindParam(":ID", $_GET['stu_id'], PDO::PARAM_INT);
-            $stmt_current->execute();
-            $current_data = $stmt_current->fetch(PDO::FETCH_ASSOC);
-            $file_name = $current_data['Profile_img'];
-        }
+      // Validate and upload image
+      if ($file_name) {
+          $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
+          if (in_array($_FILES['image']['type'], $allowed_types) && $_FILES['image']['size'] <= 500000) {
+              $upload_success = move_uploaded_file($tempname, $folder);
+          } else {
+              $_SESSION['message'] = "Invalid file type or size too large.";
+              $_SESSION['message_type'] = "error";
+              header('Location: edit_student.php?stu_id=' . $_GET['stu_id']);
+              exit;
+          }
+      } else {
+          // No new image uploaded
+          $sql_current = "SELECT Profile_img FROM tb_student WHERE ID=:ID";
+          $stmt_current = $conn->prepare($sql_current);
+          $stmt_current->bindParam(":ID", $_GET['stu_id'], PDO::PARAM_INT);
+          $stmt_current->execute();
+          $current_data = $stmt_current->fetch(PDO::FETCH_ASSOC);
+          $file_name = $current_data['Profile_img'];
+      }
 
-        // Prepare and execute the update statement
-        $sql = "UPDATE tb_student SET
-                    Stu_code=:Stu_code,
-                    En_name=:En_name,
-                    Kh_name=:Kh_name,
-                    Gender=:Gender,
-                    DOB=:DOB,
-                    Address=:Address,
-                    Status=:Status,
-                    Dad_name=:Dad_name,
-                    Mom_name=:Mom_name,
-                    Dad_job=:Dad_job,
-                    Mom_job=:Mom_job,
-                    Phone=:Phone,
-                    Profile_img=:Profile
-                WHERE ID=:ID";
+      // Prepare and execute the update statement
+      $sql = "UPDATE tb_student SET
+                  Stu_code=:Stu_code,
+                  En_name=:En_name,
+                  Kh_name=:Kh_name,
+                  Gender=:Gender,
+                  DOB=:DOB,
+                  Address=:Address,
+                  Status=:Status,
+                  Dad_name=:Dad_name,
+                  Mom_name=:Mom_name,
+                  Dad_job=:Dad_job,
+                  Mom_job=:Mom_job,
+                  Phone=:Phone,
+                  Profile_img=:Profile
+              WHERE ID=:ID";
 
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(":Stu_code", $_POST['code'], PDO::PARAM_STR);
-        $stmt->bindParam(":En_name", $_POST['en_name'], PDO::PARAM_STR);
-        $stmt->bindParam(":Kh_name", $_POST['kh_name'], PDO::PARAM_STR);
-        $stmt->bindParam(":Gender", $_POST['gender'], PDO::PARAM_STR);
-        $stmt->bindParam(":DOB", $_POST['dob'], PDO::PARAM_STR);
-        $stmt->bindParam(":Address", $_POST['address'], PDO::PARAM_STR);
-        $stmt->bindParam(":Status", $_POST['status'], PDO::PARAM_STR);
-        $stmt->bindParam(":Dad_name", $_POST['dad_name'], PDO::PARAM_STR);
-        $stmt->bindParam(":Mom_name", $_POST['mom_name'], PDO::PARAM_STR);
-        $stmt->bindParam(":Dad_job", $_POST['dad_job'], PDO::PARAM_STR);
-        $stmt->bindParam(":Mom_job", $_POST['mom_job'], PDO::PARAM_STR);
-        $stmt->bindParam(":Phone", $_POST['phone'], PDO::PARAM_STR);
-        $stmt->bindParam(":Profile", $file_name, PDO::PARAM_STR);
-        $stmt->bindParam(":ID", $_GET['stu_id'], PDO::PARAM_INT);
-        $stmt->execute();
+      $stmt = $conn->prepare($sql);
+      $stmt->bindParam(":Stu_code", $_POST['code'], PDO::PARAM_STR);
+      $stmt->bindParam(":En_name", $_POST['en_name'], PDO::PARAM_STR);
+      $stmt->bindParam(":Kh_name", $_POST['kh_name'], PDO::PARAM_STR);
+      $stmt->bindParam(":Gender", $_POST['gender'], PDO::PARAM_STR);
+      $stmt->bindParam(":DOB", $_POST['dob'], PDO::PARAM_STR);
+      $stmt->bindParam(":Address", $_POST['address'], PDO::PARAM_STR);
+      $stmt->bindParam(":Status", $_POST['status'], PDO::PARAM_STR);
+      $stmt->bindParam(":Dad_name", $_POST['dad_name'], PDO::PARAM_STR);
+      $stmt->bindParam(":Mom_name", $_POST['mom_name'], PDO::PARAM_STR);
+      $stmt->bindParam(":Dad_job", $_POST['dad_job'], PDO::PARAM_STR);
+      $stmt->bindParam(":Mom_job", $_POST['mom_job'], PDO::PARAM_STR);
+      $stmt->bindParam(":Phone", $_POST['phone'], PDO::PARAM_STR);
+      $stmt->bindParam(":Profile", $file_name, PDO::PARAM_STR);
+      $stmt->bindParam(":ID", $_GET['stu_id'], PDO::PARAM_INT);
+      $stmt->execute();
 
-        // Redirect to student list if the update was successful
-        if ($stmt->rowCount()) {
-            header('Location: student_list.php');
-            exit;
-        }
-    }
+      // Redirect with a success message
+      if ($stmt->rowCount() || $upload_success) {
+          $_SESSION['message'] = "Student updated successfully.";
+          $_SESSION['message_type'] = "success";
+      } else {
+          $_SESSION['message'] = "No changes made or error occurred.";
+          $_SESSION['message_type'] = "error";
+      }
+      header('Location: student_list.php');
+      exit;
+  }
 }
 
 // Fetch student details for editing

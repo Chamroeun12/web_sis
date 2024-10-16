@@ -11,10 +11,10 @@ if (isset($_POST['name_search'])) {
     $stmt->execute();
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } else {
-    $sql = "SELECT * FROM tb_student LIMIT 10";
+    $sql = "SELECT * FROM tb_student LIMIT 8";
     if (isset($_GET['page'])) {
         if ($_GET['page'] > 1) {
-            $sql .= " OFFSET " . ($_GET['page'] - 1) * 10;
+            $sql .= " OFFSET " . ($_GET['page'] - 1) * 8;
         }
     }
     $stmt = $conn->prepare($sql);
@@ -22,47 +22,43 @@ if (isset($_POST['name_search'])) {
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-//Insert Student
-// if (isset($_POST['btnsave'])) {
-//     if (isset($_GET['stu_id']))
-//         if ($stmt->rowCount()) {
-//             header('Location: student_list.php');
-//             exit;
-//         }
-// }
-//Insert Student
-if (isset($_POST['btnsave'])) {
-    $file_name = $_FILES['image']['name'];
-    $tempname = $_FILES['image']['tmp_name'];
-    $folder = 'images/' . $file_name;
-    $sql = "INSERT INTO tb_student(Stu_code,En_name,Kh_name,Gender,DOB,Address,Dad_name,Mom_name,Dad_job,Mom_job,Phone,Profile_img,Status)
-    VALUES(:stucode,:En_name, :Kh_name,:Gender, :DOB, :Address, :Dad_name, :Mom_name, :Dad_job, :Mom_job, :Phone,:Profile_img,:Status)";
 
-    $sql = "INSERT INTO tb_student(Stu_code,En_name,Kh_name,DOB,Address,Dad_name,Mom_name,Dad_job,Mom_job,Phone,Profile_img,Status)
-    VALUES(:stucode,:En_name, :Kh_name, :DOB, :Address, :Dad_name, :Mom_name, :Dad_job, :Mom_job, :Phone,:Profile_img,:Status)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(":stucode", $_POST['studentcode'], PDO::PARAM_STR);
-    $stmt->bindParam(":En_name", $_POST['en_name'], PDO::PARAM_STR);
-    $stmt->bindParam(":Gender", $_POST['gender'], PDO::PARAM_STR);
-    $stmt->bindParam(":Kh_name", $_POST['kh_name'], PDO::PARAM_STR);
-    $stmt->bindParam(":DOB", $_POST['dob'], PDO::PARAM_STR);
-    $stmt->bindParam(":Address", $_POST['address'], PDO::PARAM_STR);
-    $stmt->bindParam(":Dad_name", $_POST['dad_name'], PDO::PARAM_STR);
-    $stmt->bindParam(":Mom_name", $_POST['mom_name'], PDO::PARAM_STR);
-    $stmt->bindParam(":Dad_job", $_POST['dad_job'], PDO::PARAM_STR);
-    $stmt->bindParam(":Mom_job", $_POST['mom_job'], PDO::PARAM_STR);
-    $stmt->bindParam(":Phone", $_POST['phone'], PDO::PARAM_STR);
-    $stmt->bindParam(":Status", $_POST['status'], PDO::PARAM_STR);
-    $stmt->bindParam(":Profile_img", $file_name, PDO::PARAM_STR);
-    $stmt->execute();
-    if ($stmt->rowCount()) {
-        header('Location: student_list.php');
-    }
-    if (move_uploaded_file($tempname, $folder)) {
-        echo "Image uploaded successfully";
-    } else {
-        echo "Failed to upload image";
-    }
+// Insert Student
+if (isset($_POST['btnsave'])) {
+  $file_name = $_FILES['image']['name'];
+  $tempname = $_FILES['image']['tmp_name'];
+  $folder = 'images/' . $file_name;
+
+  $sql = "INSERT INTO tb_student(Stu_code, En_name, Kh_name, Gender, DOB, Address, Dad_name, Mom_name, Dad_job, Mom_job, Phone, Profile_img, Status)
+  VALUES(:stucode, :En_name, :Kh_name, :Gender, :DOB, :Address, :Dad_name, :Mom_name, :Dad_job, :Mom_job, :Phone, :Profile_img, :Status)";
+
+  $stmt = $conn->prepare($sql);
+  $stmt->bindParam(":stucode", $_POST['studentcode'], PDO::PARAM_STR);
+  $stmt->bindParam(":En_name", $_POST['en_name'], PDO::PARAM_STR);
+  $stmt->bindParam(":Kh_name", $_POST['kh_name'], PDO::PARAM_STR);
+  $stmt->bindParam(":Gender", $_POST['gender'], PDO::PARAM_STR);
+  $stmt->bindParam(":DOB", $_POST['dob'], PDO::PARAM_STR);
+  $stmt->bindParam(":Address", $_POST['address'], PDO::PARAM_STR);
+  $stmt->bindParam(":Dad_name", $_POST['dad_name'], PDO::PARAM_STR);
+  $stmt->bindParam(":Mom_name", $_POST['mom_name'], PDO::PARAM_STR);
+  $stmt->bindParam(":Dad_job", $_POST['dad_job'], PDO::PARAM_STR);
+  $stmt->bindParam(":Mom_job", $_POST['mom_job'], PDO::PARAM_STR);
+  $stmt->bindParam(":Phone", $_POST['phone'], PDO::PARAM_STR);
+  $stmt->bindParam(":Status", $_POST['status'], PDO::PARAM_STR);
+  $stmt->bindParam(":Profile_img", $file_name, PDO::PARAM_STR);
+
+  // Execute and handle success/error
+  if ($stmt->execute() && move_uploaded_file($tempname, $folder)) {
+      $_SESSION['message'] = 'Student added successfully!';
+      $_SESSION['message_type'] = 'success';
+  } else {
+      $_SESSION['message'] = 'Failed to add student. Please try again.';
+      $_SESSION['message_type'] = 'error';
+  }
+
+  // Redirect to avoid resubmission
+  header('Location: student_list.php');
+  exit();
 }
 
 //pages
@@ -256,19 +252,20 @@ if ($temp) {
                         </thead>
                         <tbody id="showdata">
                             <?php foreach ($data as $key => $value) { ?>
-                            <tr>
-                                <td><?php
+                                <tr>
+                                    <td><?php
                                         if (isset($_GET['page']) && $_GET['page'] > 1)
                                             echo ($_GET['page'] - 1) * 10 + ($key + 1);
                                         else
                                             echo ($key + 1);
                                         ?></td>
-                                <td>
-                                    <div class="user-panel p-0">
-                                        <div class="image p-0">
-                                            <img onerror="this.style.display = 'none'" class="img-circle p-0"
-                                                src="images/<?= $value['Profile_img']; ?>"
-                                                style="width: 35px; height: 35px;" />
+                                    <td>
+                                        <div class="user-panel p-0">
+                                            <div class="image p-0">
+                                                <img onerror="this.style.display = 'none'" class="img-circle p-0"
+                                                    src="images/<?= $value['Profile_img']; ?>"
+                                                    style="width: 35px; height: 35px;" />
+                                            </div>
                                         </div>
                                     </div>
                                 </td>
@@ -296,6 +293,31 @@ if ($temp) {
                                     </a>
                                 </td>
                             </tr>
+                                    </td>
+                                    <td><?php echo $value['Stu_code']; ?></td>
+                                    <td><?php echo $value['En_name']; ?></td>
+                                    <td><?php echo $value['Kh_name']; ?></td>
+                                    <td><?php echo $value['Gender']; ?></td>
+                                    <td><?php echo date('d-M-Y', strtotime($value['DOB'])); ?></td>
+                                    <td><?php echo $value['Address']; ?></td>
+                                    <td><?php echo $value['Phone']; ?></td>
+                                    <td>
+                                        <?php if ($value['Status'] == 'Active') { ?>
+                                            <span class="badge badge-success">Active</span>
+                                        <?php } else { ?>
+                                            <span class="badge badge-danger">Disabled</span>
+                                        <?php } ?>
+                                    </td>
+                                    <td>
+                                        <a href="update_student.php?stu_id=<?php echo $value['ID'] ?>">
+                                            <i class="fa fa-edit text-success"></i>
+                                        </a>
+                                        <a class="m-2" href="all_condition.php?stu_id=<?php echo $value['ID'] ?>"
+                                            onclick="return confirm('Do you want to delete this record?')">
+                                            <i class="fa fa-trash text-danger"></i>
+                                        </a>
+                                    </td>
+                                </tr>
                             <?php } ?>
                         </tbody>
                     </table>
@@ -314,7 +336,7 @@ if ($temp) {
                         ?>
                     ">&laquo;</a></li>
                             <?php for ($i = 1; $i <= $maxpage; $i++) { ?>
-                            <li class="page-item
+                                <li class="page-item
                       <?php
                                 if (isset($_GET['page'])) {
                                     if ($i == $_GET['page'])
@@ -324,7 +346,7 @@ if ($temp) {
                                         echo ' active ';
                                 }
                         ?>"><a class="page-link" href="student_list.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                            </li>
+                                </li>
                             <?php } ?>
                             <li class="page-item"><a class="page-link" href="student_list.php?page=
                      <?php
@@ -349,3 +371,5 @@ if ($temp) {
 </section>
 </div>
 <?php include_once "footer.php"; ?>
+
+

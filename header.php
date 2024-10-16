@@ -44,6 +44,11 @@ include 'connection.php';
     <!-- Get cookie -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
+    <!-- toastr -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
     <style>
     aside a p {
         color: #fff;
@@ -74,6 +79,10 @@ include 'connection.php';
     .btn1 {
         padding: 6px 10px;
         border-radius: 5px;
+    }
+
+    .bg-sis {
+        background-color: #152550;
     }
     </style>
 
@@ -152,6 +161,7 @@ include 'connection.php';
                with font-awesome or any other icon font library -->
 
 
+                        <?php if ($_SESSION['role'] == 'admin') : ?>
                         <li class="nav-item">
                             <a href="index.php" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-th"></i>
@@ -168,6 +178,8 @@ include 'connection.php';
                                 </p>
                             </a>
                         </li>
+                        <?php endif; ?>
+                        <?php if ($_SESSION['role'] == 'user') : ?>
                         <li class="nav-item">
                             <a href="score.php" class="nav-link btnhover1">
                                 <i class="nav-icon far fa-chart-bar"></i>
@@ -175,7 +187,6 @@ include 'connection.php';
                                     ពិន្ទុ
                                 </p>
                             </a>
-                        </li>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link btnhover1">
@@ -185,7 +196,7 @@ include 'connection.php';
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview "
+                            <ul class="nav nav-treeview"
                                 style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
                                     <a href="attendance.php" class="nav-link">
@@ -194,7 +205,7 @@ include 'connection.php';
                                     </a>
                                 </li>
                             </ul>
-                            <ul class="nav nav-treeview "
+                            <ul class="nav nav-treeview"
                                 style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
                                     <a href="attendace_list.php" class="nav-link">
@@ -202,6 +213,18 @@ include 'connection.php';
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="logout.php" class="nav-link btnhover1">
+                                <!-- <i class="nav-icon far fa-chart-bar"></i> -->
+                                <i class="fas fa-sign-out-alt ml-2"></i>
+                                <p>
+                                    ចាកចេញ
+                                </p>
+                            </a>
+                        </li>
+                        <?php endif; ?>
+                        <?php if ($_SESSION['role'] == 'admin') : ?>
                         <li class="nav-item">
                             <a href="subject.php" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-graduation-cap"></i>
@@ -329,7 +352,11 @@ include 'connection.php';
                                 </li>
                             </ul>
                         </li>
+                        <?php endif; ?>
+                        <!-- check _SESSION if user -->
+
                     </ul>
+
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>
