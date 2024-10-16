@@ -4,6 +4,13 @@ include_once 'connection.php';
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+// join table
+$sql = "SELECT *
+FROM tb_class c 
+JOIN tb_month_score ms ON c.ClassID = c.month_score_id";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$classjoinscore = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Fetch all classes for the dropdown
 $sql = "SELECT * FROM tb_class where Status = 'Active'";
@@ -24,8 +31,8 @@ $students_info = [];
 
 // Check if form is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $selected_month = $_POST['month'] ?? '';
-    $selected_class = $_POST['Class_id'] ?? '';
+    // $selected_month = $_POST['month'];
+    $selected_class = $_POST['Class_id'];
 
     // Only run the query if a class is selected
     if ($selected_class) {
@@ -45,16 +52,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['scorebox'])) {
         foreach ($_POST['scorebox'] as $student_id => $scores) {
             // Extracting scores for each subject
-            $homework = $scores['Homework'] ?? 0;
-            $participation = $scores['Participation'] ?? 0;
-            $attendance = $scores['Attendance'] ?? 0;
-            $monthly = $scores['Monthly'] ?? 0;
+            $homework = $scores['Homework'];
+            $participation = $scores['Participation'];
+            $attendance = $scores['Attendance'];
+            $monthly = $scores['Monthly'];
 
             // Calculate average score
             $average = ($homework + $participation + $attendance + $monthly) / 4;
 
             // Insert into the scores table
-            $sql = "INSERT INTO tb_month_score (Class_id, Homework, Participation, Attendance, Monthly, Average, Stu_id, for_month)
+            $sql = "INSERT INTO tb_month_score (class_id, Homework, Participation, Attendance, Monthly, Average, Stu_id, for_month)
                     VALUES (:class_id, :homework, :participation, :attendance, :monthly, :average, :student_id, :for_month)";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(":class_id", $selected_class, PDO::PARAM_INT);
@@ -64,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt->bindParam(":monthly", $monthly, PDO::PARAM_INT);
             $stmt->bindParam(":average", $average, PDO::PARAM_STR);
             $stmt->bindParam(":student_id", $student_id, PDO::PARAM_INT);
-            $stmt->bindParam(":for_month", $selected_month, PDO::PARAM_STR);
+            $stmt->bindParam(":for_month", $_POST['month'], PDO::PARAM_STR);
             $stmt->execute();
         }
         echo "<script>alert('Scores saved successfully!'); window.location.href='score.php';</script>";
@@ -100,9 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <label for="month">បញ្ចូលសម្រាប់ខែ</label>
                                         <select name="month" id="month" class="form-control" style="font-size:14px;">
                                             <option value="">--ជ្រើសរើសខែ--</option>
-                                            <option value="First Month"
-                                                <?php echo ($selected_month == 'First Month') ? 'selected' : ''; ?>>
-                                                ប្រចាំខែទី១</option>
+                                            <option value="FirstMonth">ប្រចាំខែទី១</option>
                                             <option value="Second Month"
                                                 <?php echo ($selected_month == 'Second Month') ? 'selected' : ''; ?>>
                                                 ប្រចាំខែទី២</option>
@@ -138,9 +143,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             style="font-size:14px;">
                                             <option value="">--ជ្រើសរើសថ្នាក់--</option>
                                             <?php foreach ($classes as $row) : ?>
-                                            <option value="<?= $row['ClassID']; ?>"
-                                                <?= ($row['ClassID'] == $selected_class) ? 'selected' : ''; ?>>
-                                                <?= $row['Class_name']; ?></option>
+                                                <option value="<?= $row['ClassID']; ?>"
+                                                    <?= $row['ClassID'] == $selected_class ? 'selected' : ''; ?>>
+                                                    <?= $row['Class_name']; ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
@@ -176,27 +181,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <td><?php echo $key + 1; ?></td>
                                             <td><?php echo $student['Kh_name']; ?></td>
                                             <td><?php echo $student['Gender']; ?></td>
+                            <form action="" method="POST" name="formscore">
+                                <div class="card-body p-0">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>ល.រ</th>
+                                                <th>ឈ្មោះសិស្ស</th>
+                                                <th>ភេទ</th>
+                                                <?php foreach ($subjects as $subject): ?>
+                                                    <th class="text-center"><?php echo $subject['name']; ?></th>
+                                                <?php endforeach; ?>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($students_info as $key => $student): ?>
+                                                <tr>
+                                                    <td><?php echo $key + 1; ?></td>
+                                                    <td><?php echo $student['En_name']; ?></td>
+                                                    <td><?php echo $student['Gender']; ?></td>
 
-                                            <?php foreach ($subjects as $subject): ?>
-                                            <td style="padding:0px">
-                                                <input type="number" class="form-control text-center"
-                                                    name="scorebox[<?php echo $student['ID']; ?>][<?php echo $subject['name']; ?>]"
-                                                    placeholder="0-100" min="0" max="100">
-                                            </td>
+                                                    <?php foreach ($subjects as $subject): ?>
+                                                        <td style="padding:0px">
+                                                            <input type="number" class="form-control text-center"
+                                                                name="scorebox[<?php echo $student['ID']; ?>][<?php echo $subject['name']; ?>]"
+                                                                placeholder="0-100" min="0" max="100" required>
+                                                        </td>
+                                                    <?php endforeach; ?>
+                                                </tr>
                                             <?php endforeach; ?>
-                                        </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="card-footer">
-                                <button class="btn bg-sis text-white" type="submit" name="btnsubmit">រក្សាទុក</button>
-                            </div>
-                        </form>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn bg-sis text-white" type="submit" name="btnsubmit">រក្សាទុក</button>
+                                </div>
+                            </form>
                         <?php else: ?>
-                        <div class="card-body">
-                            <p class="text-center">គ្មានទិន្នន័យ</p>
-                        </div>
+                            <div class="card-body">
+                                <p class="text-center">គ្មានទិន្នន័យ</p>
+                            </div>
                         <?php endif; ?>
                         <!-- no students found for the selected -->
                     </div>
