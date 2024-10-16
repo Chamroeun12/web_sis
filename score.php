@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Only run the query if a class is selected
     if ($selected_class) {
         // Fetch students based on selected class
-        $sql = "SELECT tb_student.ID, tb_student.En_name, tb_student.Gender
+        $sql = "SELECT tb_student.ID, tb_student.Kh_name, tb_student.Gender
                 FROM tb_add_to_class
                 INNER JOIN tb_student ON tb_add_to_class.Stu_id = tb_student.ID
                 INNER JOIN tb_class ON tb_add_to_class.Class_id = tb_class.ClassID
@@ -148,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <label for="">&nbsp;</label>
                                         <div class="ml-3">
                                             <input type="submit" value="បង្ហាញ" name="btnsave"
-                                                class="btn bg-sis text-white">
+                                                class="btn1 bg-sis text-white">
                                         </div>
                                     </div>
                                 </div>
@@ -174,7 +174,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <?php foreach ($students_info as $key => $student): ?>
                                         <tr>
                                             <td><?php echo $key + 1; ?></td>
-                                            <td><?php echo $student['En_name']; ?></td>
+                                            <td><?php echo $student['Kh_name']; ?></td>
                                             <td><?php echo $student['Gender']; ?></td>
 
                                             <?php foreach ($subjects as $subject): ?>

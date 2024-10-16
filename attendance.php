@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $class_date = $_POST['class_date'];
 
         // Fetch students based on selected class
-        $sql = "SELECT tb_student.ID, tb_student.En_name, tb_student.Stu_code
+        $sql = "SELECT tb_student.ID, tb_student.Kh_name, tb_student.Stu_code
                 FROM tb_add_to_class
                 INNER JOIN tb_student ON tb_add_to_class.Stu_id = tb_student.ID
                 INNER JOIN tb_class ON tb_add_to_class.Class_id = tb_class.ClassID
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 // Function to fetch attendance information
 function fetchAttendance($class_id, $class_date, $conn) {
-    $sql = "SELECT tb_student.ID, tb_student.En_name, tb_student.Stu_code, tb_attendance.Attendance
+    $sql = "SELECT tb_student.ID, tb_student.Kh_name, tb_student.Stu_code, tb_attendance.Attendance
             FROM tb_student
             LEFT JOIN tb_attendance ON tb_student.ID = tb_attendance.Stu_ID AND tb_attendance.Class_ID = :class_id AND tb_attendance.Date = :class_date
             WHERE tb_student.ID IN (SELECT Stu_id FROM tb_add_to_class WHERE Class_id = :class_id)";
@@ -83,6 +83,9 @@ function fetchAttendance($class_id, $class_date, $conn) {
 
 <section class="content-wrapper">
     <form action="" method="POST">
+        <div class="col-sm-6 pt-3 mb-3 ml-3">
+            <h3>|បញ្ចីហៅវត្តមានសិស្ស</h3>
+        </div>
         <div class="row justify-content-center">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                 <div id="msg">
@@ -92,10 +95,11 @@ function fetchAttendance($class_id, $class_date, $conn) {
                     <div class="card-body rounded-0">
                         <div class="container-fluid">
                             <div class="row align-items-end">
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                    <label for="Class_id" class="form-label">Class</label>
-                                    <select name="Class_id" id="Class_id" class="form-control" required>
-                                        <option value="">--Select Class--</option>
+                                <div class="col-sm-5">
+                                    <label for="Class_id" class="form-label">សម្រាប់ថ្នាក់</label>
+                                    <select name="Class_id" id="Class_id" class="form-control" required
+                                        style="font-size:14px;">
+                                        <option value="">--ជ្រើសរើសថ្នាក់--</option>
                                         <?php foreach ($classes as $row) : ?>
                                         <option value="<?= htmlspecialchars($row['ClassID'], ENT_QUOTES, 'UTF-8'); ?>"
                                             <?= ($row['ClassID'] == $selected_class) ? 'selected' : ''; ?>>
@@ -103,16 +107,18 @@ function fetchAttendance($class_id, $class_date, $conn) {
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
-                                    <label for="class_date" class="form-label">Date</label>
+                                <div class="col-sm-5">
+                                    <label for="class_date" class="form-label">កាលបិរិច្ឆេទ</label>
                                     <input type="date" name="class_date" id="class_date" class="form-control" required
+                                        style="font-size:14px;"
                                         value="<?= htmlspecialchars($class_date, ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
-                                <div class="col-ms-2">
+                                <div class="col-sm-2">
                                     <label for="">&nbsp;</label>
-                                    <div class="ml-3">
+                                    <div class="ml-2">
                                         <input type="hidden" name="action" value="show">
-                                        <input type="submit" value="Show" name="btnsave" class="btn btn-success">
+                                        <input type="submit" value="បង្ហាញ" name="btnsave"
+                                            class="btn1 bg-sis text-white">
                                     </div>
                                 </div>
                             </div>
@@ -122,9 +128,9 @@ function fetchAttendance($class_id, $class_date, $conn) {
 
                 <div class="card m-3">
                     <div class="card-header rounded-0">
-                        <div class="card-title">Attendance Sheet</div>
+                        <div class="card-title">តារាងបញ្ចូលវត្តមានសិស្ស</div>
                         <div class="d-flex justify-content-end">
-                            <button class="btn btn-success mr-2" type="submit">Submit</button>
+                            <button class="btn1 bg-sis text-white mr-2" type="submit">រក្សាទុក</button>
                         </div>
                     </div>
 
@@ -134,25 +140,25 @@ function fetchAttendance($class_id, $class_date, $conn) {
                                 <table id="attendance-tbl" class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th class="text-center text-dark">#</th>
-                                            <th class="text-center text-dark">Student Name</th>
-                                            <th class="text-center text-dark">StuCode</th>
-                                            <th class="text-center text-success">Present</th>
-                                            <th class="text-center text-warning">Permission</th>
-                                            <th class="text-center text-danger">Absent</th>
+                                            <th class="text-center text-dark">ល.រ</th>
+                                            <th class="text-center text-dark">ឈ្មោះសិស្ស</th>
+                                            <th class="text-center text-dark">អត្តលេខ</th>
+                                            <th class="text-center text-success">វត្តមាន</th>
+                                            <th class="text-center text-warning">សុំច្បាប់</th>
+                                            <th class="text-center text-danger">អវត្តមាន</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php if (!empty($students_info)): ?>
                                         <?php foreach ($students_info as $index => $student): ?>
                                         <tr class="student-row">
-                                            <td class="px-2 py-1 text-dark-emphasis fw-bold">
+                                            <td class="px-2 py-1 text-center text-dark-emphasis ">
                                                 <input type="hidden" name="student_id[]"
                                                     value="<?= htmlspecialchars($student['ID'], ENT_QUOTES, 'UTF-8'); ?>">
                                                 <?= $index + 1; ?>
                                             </td>
-                                            <td class="text-center px-2 py-1 text-dark-emphasis fw-bold">
-                                                <?= htmlspecialchars($student['En_name'], ENT_QUOTES, 'UTF-8'); ?>
+                                            <td class=" px-2 py-1 text-dark-emphasis ">
+                                                <?= htmlspecialchars($student['Kh_name'], ENT_QUOTES, 'UTF-8'); ?>
                                             </td>
                                             <td class="text-center px-2 py-1 text-dark-emphasis">
                                                 <?= htmlspecialchars($student['Stu_code'], ENT_QUOTES, 'UTF-8'); ?>
@@ -182,7 +188,7 @@ function fetchAttendance($class_id, $class_date, $conn) {
                                         <?php endforeach; ?>
                                         <?php else: ?>
                                         <tr>
-                                            <td colspan="6" class="text-center">No students found in this class.</td>
+                                            <td colspan="6" class="text-center">គ្មានទិន្នន័យ</td>
                                         </tr>
                                         <?php endif; ?>
                                     </tbody>

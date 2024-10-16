@@ -9,22 +9,6 @@ $sql = "SELECT * FROM tb_subject";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// if (isset($_POST['btnsave'])) {
-//     $sql = "INSERT INTO tb_subject(Subject_name,Color) 
-//     VALUES(:subName,:color)";
-//     $stmt = $conn->prepare($sql);
-//     $stmt->bindParam(":subName", $_POST['sub_name'], PDO::PARAM_STR);
-//     $stmt->bindParam(":color", $_POST['color'], PDO::PARAM_STR);
-//     $stmt->execute();
-//     if ($stmt->rowCount()) {
-//         // echo "<script>alert('Data saved successfully');</script>";
-//         // Redirect to page subject.php
-//         header('Locatoin: subject.php');
-//         exit;
-//     }
-// }
-
 if (isset($_POST['btnsave'])) {
     $sql = "INSERT INTO tb_subject(Subject_name,Color) VALUES(:subName,:color)";
     $stmt = $conn->prepare($sql);
@@ -47,27 +31,20 @@ if (isset($_POST['btnsave'])) {
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">|Subject</h1>
+                    <h1 class="m-0">|មុខវិជ្ចាសិក្សា</h1>
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-6">
-                    <button type="button" class="btn btn-success float-sm-right" data-toggle="modal"
-                        data-target="#modal-lg">Create</button>
+                    <button type="button" class="btn1 bg-sis text-white float-sm-right" data-toggle="modal"
+                        data-target="#modal-lg">បង្កើតថ្មី</button>
                 </div>
-                <!-- <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard v2</li>
-                    </ol>
-                </div> -->
-                <!-- /.col -->
             </div>
             <div class="modal fade" id="modal-lg">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
 
                         <div class="modal-header">
-                            <h4>|Create Subject</h4>
+                            <h4>|បន្ថែមមុខវិជ្ចា</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -80,15 +57,15 @@ if (isset($_POST['btnsave'])) {
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label for="inputName">Subject Name</label>
+                                            <label for="inputName">មុខវិជ្ចាសិក្សា</label>
                                             <input type="text" id="subName" name="sub_name" class="form-control"
                                                 value="">
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="inputStatus">Color</label>
+                                                <label for="inputStatus">ពណ៌</label>
                                                 <select id="" name="color" class="form-control custom-select">
-                                                    <option selected disabled>Select one</option>
+                                                    <option selected disabled>--ជ្រើសរើស--</option>
                                                     <option value="bg-primary">Primary</option>
                                                     <option value="bg-secondary">Secondary</option>
                                                     <option value="bg-success">Success</option>
