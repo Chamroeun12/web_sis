@@ -87,7 +87,8 @@ if (isset($_POST['btnsave'])) {
                                     <select name="addclass" class="form-control">
                                         <option value="">--Select Class--</option>
                                         <?php foreach ($class as $row) : ?>
-                                        <option value="<?= $row['ClassID']; ?>"><?= $row['Class_name']; ?> <span> coure name</span> <span> Teacher name</span></option>
+                                            <option value="<?= $row['ClassID']; ?>"><?= $row['Class_name']; ?> <span> coure
+                                                    name</span> <span> Teacher name</span></option>
                                         <?php endforeach; ?>
                                     </select>
                                     <div class="ml-3">
@@ -99,9 +100,9 @@ if (isset($_POST['btnsave'])) {
                         </div>
                         <div class="col-md-4">
                             <div class="form-group" style="width: 300px;">
-                                  <input type="text" name="namesearch" class="search form-control float-right"
-                                      placeholder="Search" style="font-family:Khmer OS Siemreap;">
-                              </div>
+                                <input type="text" name="namesearch" class="search form-control float-right"
+                                    placeholder="Search" style="font-family:Khmer OS Siemreap;">
+                            </div>
                         </div>
                     </div>
             </div>
@@ -124,22 +125,22 @@ if (isset($_POST['btnsave'])) {
                                 </thead>
                                 <tbody id="showdata">
                                     <?php if (isset($student)) { ?>
-                                    <?php foreach ($student as $key => $value) { ?>
-                                    <tr>
-                                        <td>
-                                            <div class="icheck-primary">
-                                                <input type="checkbox" name="addstu[]"
-                                                    value="<?php echo $value['ID']; ?>" id="check<?php echo $key; ?>">
-                                                <label for="check<?php echo $key; ?>"></label>
-                                            </div>
-                                        </td>
-                                        <td><?php echo ($key + 1); ?></td>
-                                        <td><?php echo $value['Stu_code']; ?></td>
-                                        <td><?php echo $value['En_name']; ?></td>
-                                        <td><?php echo $value['Kh_name']; ?></td>
-                                        <td><?php echo $value['Gender']; ?></td>
-                                    </tr>
-                                    <?php } ?>
+                                        <?php foreach ($student as $key => $value) { ?>
+                                            <tr>
+                                                <td>
+                                                    <div class="icheck-primary">
+                                                        <input type="checkbox" name="addstu[]"
+                                                            value="<?php echo $value['ID']; ?>" id="check<?php echo $key; ?>">
+                                                        <label for="check<?php echo $key; ?>"></label>
+                                                    </div>
+                                                </td>
+                                                <td><?php echo ($key + 1); ?></td>
+                                                <td><?php echo $value['Stu_code']; ?></td>
+                                                <td><?php echo $value['En_name']; ?></td>
+                                                <td><?php echo $value['Kh_name']; ?></td>
+                                                <td><?php echo $value['Gender']; ?></td>
+                                            </tr>
+                                        <?php } ?>
                                     <?php } ?>
                                 </tbody>
                             </table>
@@ -148,11 +149,11 @@ if (isset($_POST['btnsave'])) {
                         <!-- xkjfjxfjhk -->
                         <div>
                             <?php if ($page > 1): ?>
-                            <a href="class.php?page=<?php echo $page - 1; ?>">Previous</a>
+                                <a href="class.php?page=<?php echo $page - 1; ?>">Previous</a>
                             <?php endif; ?>
 
                             <?php if ($page < $total_pages): ?>
-                            <a href="class.php?page=<?php echo $page + 1; ?>">Next</a>
+                                <a href="class.php?page=<?php echo $page + 1; ?>">Next</a>
                             <?php endif; ?>
                         </div>
 
