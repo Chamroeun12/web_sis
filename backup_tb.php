@@ -16,7 +16,7 @@ try {
 
 <?php include_once 'header.php'; ?>
 <?php
-
+echo '<section class="content-wrapper">';
 // Check if tables were selected
 if (isset($_POST['tables']) && !empty($_POST['tables'])) {
     // Get selected tables
@@ -64,9 +64,8 @@ if (isset($_POST['tables']) && !empty($_POST['tables'])) {
           </div>";
 }
 echo '
-<div class="container mt-5"><div class="alert alert-success text-center"><a href="backup.php">Back to backup</a></div>
-
-';
-
+<div class="container mt-5"><h3 class="alert alert-success text-center"><a href="backup.php" class="btn text-white">Back to backup</a></h3>';
+echo '</section>'; // Close the section
 ?>
+
 <?php include_once 'footer.php'; ?>

@@ -1,9 +1,31 @@
 <?php
-include_once 'connection.php';
+include 'connection.php';
 //start seesion
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $username = htmlspecialchars(trim($_POST['username']));
+    $password = htmlspecialchars(trim($_POST['password']));
+    $role = htmlspecialchars(trim($_POST['role']));
+
+    // Hash the password before storing
+    // $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    // Insert the new user into the database
+    $sql = $conn->prepare("INSERT INTO tb_login (Username, Password, Role) VALUES (:uname, :pwd, :role)");
+    $sql->bindParam(':uname', $username, PDO::PARAM_STR);
+    $sql->bindParam(':pwd', $password, PDO::PARAM_STR);
+    $sql->bindParam(':role', $role, PDO::PARAM_STR);
+
+    if ($sql->execute()) {
+        echo "Registration successful!";
+    } else {
+        echo "Error during registration.";
+    }
+}
+
 
 $sql = "SELECT * FROM tb_login LIMIT 10";
 if (isset($_GET['page'])) {
@@ -16,19 +38,55 @@ $stmt->execute();
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
-// Insert Teacher
-if (isset($_POST['btnsave'])) {
-    $sql = "INSERT INTO tb_login(Username,Password,Role) 
-    VALUES(:Username, :Password, :Role)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(":Username", $_POST['username'], PDO::PARAM_STR);
-    $stmt->bindParam(":Password", $_POST['password'], PDO::PARAM_STR);
-    $stmt->bindParam(":Role", $_POST['role'], PDO::PARAM_STR);
-    $stmt->execute();
-    if ($stmt->rowCount()) {
-        header('Location: user_info.php');
-    }
-}
+// Insert User
+
+
+
+
+
+
+// if (isset($_POST['btnsave'])) {
+//     $sql = "INSERT INTO tb_login(Username,Password,Role) 
+//     VALUES(:Username, :Password, :Role)";
+//     $stmt = $conn->prepare($sql);
+//     $stmt->bindParam(":Username", $_POST['username'], PDO::PARAM_STR);
+//     $stmt->bindParam(":Password", $_POST['password'], PDO::PARAM_STR);
+//     $stmt->bindParam(":Role", $_POST['role'], PDO::PARAM_STR);
+//     $stmt->execute();
+//     if ($stmt->rowCount()) {
+//         header('Location: user_info.php');
+//     }
+// }
+// if (isset($_POST['btnsave'])) {
+//     // Hash the password before storing it
+//     $hashedPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+//     // Prepare the SQL statement
+//     $sql = "INSERT INTO tb_login (Username, Password, Role) 
+//             VALUES (:Username, :Password, :Role)";
+//     $stmt = $conn->prepare($sql);
+
+//     // Bind parameters
+//     $stmt->bindParam(":Username", $_POST['username'], PDO::PARAM_STR);
+//     $stmt->bindParam(":Password", $hashedPassword, PDO::PARAM_STR); // Use hashed password
+//     $stmt->bindParam(":Role", $_POST['role'], PDO::PARAM_STR);
+
+//     // Execute the statement and check for success
+//     try {
+//         $stmt->execute();
+//         if ($stmt->rowCount()) {
+//             header('Location: user_info.php');
+//             exit();
+//         } else {
+//             // Handle case where no rows were affected
+//             echo "User registration failed.";
+//         }
+//     } catch (PDOException $e) {
+//         // Handle error during execution
+//         echo "Error: " . $e->getMessage();
+//     }
+// }
+
 
 //Count Page
 $sql  = "SELECT COUNT(*) AS CountRecords FROM tb_login";

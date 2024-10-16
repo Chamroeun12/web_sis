@@ -1,70 +1,3 @@
-<?php
-session_start();
-
-// Database connection settings
-$servername = "localhost";
-$username = "root";  // Your MySQL username
-$password = "";      // Your MySQL password
-$dbname = "db_students";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Check if form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $remember = isset($_POST['remember']);
-    if ($remember) {
-        // setcookie('username', $username, time() + (86400 * 30), "/"); // 30 days
-        // setcookie('password', $password, time() + (86400 * 30), "/"); // 30 days
-        if (!isset($_COOKIE[$username])) {
-            setcookie($username, $password, time() + (86400 * 30), "/");
-        }
-    }
-
-    // Prepare SQL statement to prevent SQL injection
-    $stmt = $conn->prepare("SELECT id, Username, Password, Role FROM tb_login WHERE Username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $stmt->store_result();
-
-    // Check if user exists
-    if ($stmt->num_rows > 0) {
-        $stmt->bind_result($id, $user, $password, $role);
-        $stmt->fetch();
-
-        if ($stmt) {
-            // Set session variables
-            $_SESSION['loggedin'] = true;
-            $_SESSION['id'] = $id;
-            $_SESSION['user'] = $user;
-            $_SESSION['role'] = $role;
-            header("Location: index.php");
-            // Redirect based on role
-            // if ($role == 'admin') {
-            //     header("Location: admin_dashboard.php");
-            // } else {
-            //     header("Location: user_dashboard.php");
-            // }
-            exit();
-        } else {
-            echo "Invalid password.";
-        }
-    } else {
-        echo "No user found with that username.";
-    }
-
-    $stmt->close();
-}
-
-$conn->close();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -89,44 +22,45 @@ $conn->close();
     <!-- Get cookie -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function() {
-            // Check if there's a username cookie
-            const usernameCookie = getCookie('username');
-            const passwordCookie = getCookie('password');
+    $(document).ready(function() {
+        // Check if there's a username cookie
+        const usernameCookie = getCookie('username');
+        const passwordCookie = getCookie('password');
 
-            if (usernameCookie) {
-                $('#username').val(usernameCookie);
-            }
+        if (usernameCookie) {
+            $('#username').val(usernameCookie);
+        }
 
-            $('#username').on('input', function() {
-                if ($(this).val() === usernameCookie) {
-                    $('#password').val(passwordCookie);
-                } else {
-                    $('#password').val(''); // Clear password if username doesn't match
-                }
-            });
-
-            function getCookie(name) {
-                let cookieArr = document.cookie.split(";");
-                for (let i = 0; i < cookieArr.length; i++) {
-                    let cookiePair = cookieArr[i].split("=");
-                    if (name === cookiePair[0].trim()) {
-                        return decodeURIComponent(cookiePair[1]);
-                    }
-                }
-                return null;
+        $('#username').on('input', function() {
+            if ($(this).val() === usernameCookie) {
+                $('#password').val(passwordCookie);
+            } else {
+                $('#password').val(''); // Clear password if username doesn't match
             }
         });
+
+        function getCookie(name) {
+            let cookieArr = document.cookie.split(";");
+            for (let i = 0; i < cookieArr.length; i++) {
+                let cookiePair = cookieArr[i].split("=");
+                if (name === cookiePair[0].trim()) {
+                    return decodeURIComponent(cookiePair[1]);
+                }
+            }
+            return null;
+        }
+    });
     </script>
     <style>
-        .textcolor{
-                 color:#152550;
-                             }
-        .bgcolor{
-            background: #152550;
-        }
+    .textcolor {
+        color: #152550;
+    }
+
+    .bgcolor {
+        background: #152550;
+    }
     </style>
-    
+
 </head>
 
 <body class="hold-transition login-page">
@@ -136,39 +70,41 @@ $conn->close();
             <div class="card-header text-center mt-3">
                 <img src="images/SiSlogo.png" alt="" class="profile-user-img" style="border:none;">
                 <div class="textcolor" style="font-family:Khmer OS Siemreap; font-size:16px; margin-bottom:-20px;">
-                   <p>ស្មាតប្រាយ អ៊ិនធើណាសិនណលស្គូល</p>
-                   <p style="margin-top:-15px;">Smartbright International School</p>
+                    <p>ស្មាតប្រាយ អ៊ិនធើណាសិនណលស្គូល</p>
+                    <p style="margin-top:-15px;">Smartbright International School</p>
                 </div>
             </div>
-            
+
             <div class="card-body">
-                <form action="" method="post">
+                <form action="login.php" method="post">
                     <input type="hidden" name="role" value="">
                     <?php if (isset($_GET['error'])) { ?>
-                        <div class="alert alert-danger" role="alert">
-                            <?= $_GET['error'] ?>
-                        </div>
+                    <div class="alert alert-danger" role="alert">
+                        <?= $_GET['error'] ?>
+                    </div>
                     <?php } ?>
 
                     <?php if (isset($data['Username']) && isset($data['Password'])) {  ?>
-                        <div class="alert alert-success" role="alert">
-                            <?= $_SESSION['login'] ?>
-                        </div>
+                    <div class="alert alert-success" role="alert">
+                        <?= $_SESSION['login'] ?>
+                    </div>
                     <?php } ?>
                     <!-- <button type="button" class="btn btn-success toastsDefaultSuccess">
                         Launch Success Toast
                     </button> -->
-                    
-                    <div class="input-group mb-3" >
-                        <input type="text" id="username" class="form-control" name="username" placeholder="Username" style="border-radius: 15px 0px 0px 15px;">
-                        <div class="input-group-append" >
-                        <div class="input-group-text bgcolor text-light" style="border-radius: 0px 15px 15px 0px;">
+
+                    <div class="input-group mb-3">
+                        <input type="text" id="username" class="form-control" name="username" placeholder="Username"
+                            style="border-radius: 15px 0px 0px 15px;">
+                        <div class="input-group-append">
+                            <div class="input-group-text bgcolor text-light" style="border-radius: 0px 15px 15px 0px;">
                                 <span class="fas fa-envelope"></span>
                             </div>
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" id="password" name="password" class="form-control" placeholder="Password" style="border-radius: 15px 0px 0px 15px;">
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+                            style="border-radius: 15px 0px 0px 15px;">
                         <div class="input-group-append">
                             <div class="input-group-text bgcolor text-light" style="border-radius: 0px 15px 15px 0px;">
                                 <span class="fas fa-lock"></span>
@@ -213,42 +149,42 @@ $conn->close();
 
 
     <script>
-        $(function() {
-            var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-            $('.toastsDefaultSuccess').click(function() {
-                $(document).Toasts('create', {
-                    class: 'bg-success',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
+    $(function() {
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
         });
+        $('.toastsDefaultSuccess').click(function() {
+            $(document).Toasts('create', {
+                class: 'bg-success',
+                title: 'Toast Title',
+                subtitle: 'Subtitle',
+                body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+            })
+        });
+    });
     </script>
 
     <!-- Cookie -->
     <script>
-        $(document).ready(function() {
-            $("#username").keyup(function() {
-                function getCookie(cookieName) {
-                    let cookie = {};
-                    document.cookie.split(';').forEach(function(el) {
-                        let [key, value] = el.split('=');
-                        cookie[key.trim()] = value;
-                    })
-                    return cookie[cookieName];
-                }
-                let u = $(this).val();
-                if (u !== undefined) {
-                    $("#password").val(getCookie(u));
-                }
-            });
+    $(document).ready(function() {
+        $("#username").keyup(function() {
+            function getCookie(cookieName) {
+                let cookie = {};
+                document.cookie.split(';').forEach(function(el) {
+                    let [key, value] = el.split('=');
+                    cookie[key.trim()] = value;
+                })
+                return cookie[cookieName];
+            }
+            let u = $(this).val();
+            if (u !== undefined) {
+                $("#password").val(getCookie(u));
+            }
         });
+    });
     </script>
 </body>
 
