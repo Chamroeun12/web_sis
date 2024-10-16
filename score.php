@@ -144,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-                                    <div class="col-ms-2">
+                                    <div class="col-md-2">
                                         <label for="">&nbsp;</label>
                                         <div class="ml-3">
                                             <input type="submit" value="បង្ហាញ" name="btnsave"

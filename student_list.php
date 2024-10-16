@@ -101,7 +101,7 @@ if ($temp) {
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4>|Insert Student</h4>
+                    <h4>|បញ្ចូលសិស្សថ្មី</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -114,16 +114,16 @@ if ($temp) {
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <label for="">Student Code</label>
+                                    <label for="">អត្តលេខសិស្ស</label>
                                     <input type="text" name="studentcode" id="studentcode" class="form-control">
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="inputName">English Name</label>
+                                    <label for="inputName">ឈ្មោះភាសាអង់គ្លេស</label>
                                     <input type="text" id="enName" name="en_name" class="form-control" value="">
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="inputName">Khmer Name</label>
+                                        <label for="inputName">ឈ្មោះភាសាខ្មែរ</label>
                                         <input type="text" id="khName" name="kh_name" class="form-control" value="">
                                     </div>
                                 </div>
@@ -131,17 +131,17 @@ if ($temp) {
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="inputStatus">Gender</label>
+                                        <label for="inputStatus">ភេទ</label>
                                         <select id="inputStatus" name="gender" class="form-control custom-select">
-                                            <option selected disabled>--Select one--</option>
-                                            <option value="Male"> Male</option>
-                                            <option value="Female">Female</option>
+                                            <option selected disabled>--ជ្រើសរើសភេទ--</option>
+                                            <option value="Male"> ប្រុស</option>
+                                            <option value="Female">ស្រី</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="inputDateOfBirth">Date Of Birth</label>
+                                        <label for="inputDateOfBirth">ថ្ងៃ​ ខែ ឆ្នាំកំណើត</label>
                                         <input type="date" id="inputDateOfBirth" name="dob" class="form-control"
                                             value="">
                                     </div>
