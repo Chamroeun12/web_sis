@@ -1,6 +1,6 @@
 <footer class="main-footer">
-    <strong>Copyright &copy; 2023-2024 <a href="#">SmartBright International School</a>.</strong>
-    All rights reserved.
+    <strong>រក្សាសិទ្ធិ &copy; ២០២៣-២០២៤ <a href="">ស្មាតប្រាយ អ៊ិនធើណាសិនណលស្គូល</a>,</strong>
+    រក្សាសិទ្ធិគ្រប់យ៉ាង។
     <!-- <div class="float-right d-none d-sm-inline-block">
         <b>Version</b> 3.2.0
     </div> -->

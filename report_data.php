@@ -78,35 +78,38 @@ if (isset($_POST['export_excel'])) {
 } elseif (isset($_POST['export_pdf'])) {
     // Create a new PDF document using TCPDF
     $pdf = new TCPDF();
-    $pdf->SetCreator(PDF_CREATOR);
     $pdf->SetTitle('Students In Class');
+    $pdf->SetCreator(PDF_CREATOR);
+
     $pdf->AddPage();
-    $pdf->SetFont('helvetica', '', 12);
+//     $fontname = TCPDF_FONTS::addTTFfont('Suwannaphum.ttf', 'TrueTypeUnicode', '', 96);
+// $pdf->SetFont($fontname, '', 10);
+    $pdf->SetFont('FreeSerif', '', 10);
 
     // Add content to PDF
-    $html = '<h1 style="color: blue; text-align: center;">Students In Class</h1>';
+    $html = '<h1 style="color: #151515; text-align: center;">Students In Class</h1>';
     $html .= '<table border="1" cellspacing="0" cellpadding="4">
-              <tr style="background-color: powderblue;">
-                  <th style="color: blue; text-align: center;">Student Name</th>
-                  <th style="color: blue; text-align: center;">Gender</th>
-                  <th style="color: blue; text-align: center;">DOB</th>
-                  <th style="color: blue; text-align: center;">Class Name</th>
-                  <th style="color: blue; text-align: center;">Course Name</th>
-                  <th style="color: blue; text-align: center;">Shift</th>
-                  <th style="color: blue; text-align: center;">Teacher Name</th>
-                  <th style="color: blue; text-align: center;">Phone</th>
+              <tr style="background-color: #152550;">
+                  <th style="color: white; text-align: center;">Student Name</th>
+                  <th style="color: white; text-align: center;">Gender</th>
+                  <th style="color: white; text-align: center;">DOB</th>
+                  <th style="color: white; text-align: center;">Class Name</th>
+                  <th style="color: white; text-align: center;">Course Name</th>
+                  <th style="color: white; text-align: center;">Shift</th>
+                  <th style="color: white; text-align: center;">Teacher Name</th>
+                  <th style="color: white; text-align: center;">Phone</th>
               </tr>';
 
     foreach ($data as $row) {
         $html .= '<tr>
-                  <td style="text-align: center;">' . htmlspecialchars($row['Student_Name']) . '</td>
-                  <td style="text-align: center;">' . htmlspecialchars($row['Gender']) . '</td>
-                  <td style="text-align: center;">' . htmlspecialchars($row['DOB']) . '</td>
-                  <td style="text-align: center;">' . htmlspecialchars($row['Class_name']) . '</td>
-                  <td style="text-align: center;">' . htmlspecialchars($row['Course_name']) . '</td>
-                  <td style="text-align: center;">' . htmlspecialchars($row['Shift']) . '</td>
-                  <td style="text-align: center;">' . htmlspecialchars($row['Teacher_Name']) . '</td>
-                  <td style="text-align: center;">' . htmlspecialchars($row['Phone']) . '</td>
+                  <td style="text-align: center; font-size:12px;">' . htmlspecialchars($row['Student_Name']) . '</td>
+                  <td style="text-align: center; font-size:12px; font-family:FreeSerif;">' . htmlspecialchars($row['Gender']) . '</td>
+                  <td style="text-align: center; font-size:12px;">' . htmlspecialchars($row['DOB']) . '</td>
+                  <td style="text-align: center; font-size:12px;">' . htmlspecialchars($row['Class_name']) . '</td>
+                  <td style="text-align: center; font-size:12px;">' . htmlspecialchars($row['Course_name']) . '</td>
+                  <td style="text-align: center; font-size:12px;">' . htmlspecialchars($row['Shift']) . '</td>
+                  <td style="text-align: center; font-size:12px;">' . htmlspecialchars($row['Teacher_Name']) . '</td>
+                  <td style="text-align: center; font-size:12px;">' . htmlspecialchars($row['Phone']) . '</td>
               </tr>';
     }
 

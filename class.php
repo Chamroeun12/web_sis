@@ -5,18 +5,20 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // Fetch Classes
-$sql = "SELECT * FROM tb_class where Status = 'Active'";
-$sql = "SELECT * FROM tb_class";
+$sql = "SELECT * FROM tb_class
+INNER join
+    tb_course ON tb_class.course_id = tb_course.id
+where Status = 'Active'";
 
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $class = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Number of records per page
-$records_per_page = 5;
+$records_per_page = 15;
 
 
-$sql = "SELECT * FROM tb_student LIMIT $records_per_page";
+$sql = "SELECT * FROM tb_student  WHERE status='active' LIMIT $records_per_page";
 $student = $conn->prepare($sql);
 $student->execute();
 $student = $student->fetchAll(PDO::FETCH_ASSOC);
@@ -87,7 +89,7 @@ if (isset($_POST['btnsave'])) {
                                     <select name="addclass" class="form-control">
                                         <option value="">--ជ្រើសរើសថ្នាក់--</option>
                                         <?php foreach ($class as $row) : ?>
-                                        <option value="<?= $row['ClassID']; ?>"><?= $row['Class_name']; ?></option>
+                                        <option value="<?= $row['ClassID']; ?>"><?= $row['Class_name']; ?> - <?= $row['Course_name']; ?> - <?= $row['Shift']; ?> </option>
                                         <?php endforeach; ?>
                                     </select>
                                     <div class="ml-3">
@@ -101,7 +103,7 @@ if (isset($_POST['btnsave'])) {
                         <div class="col-md-4">
                             <div class="form-group" style="width: 300px;">
                                 <input type="text" name="namesearch" class="search form-control float-right"
-                                    placeholder="ស្វែងរក" ">
+                                    placeholder="ស្វែងរក">
                             </div>
                         </div>
                     </div>

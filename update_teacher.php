@@ -41,7 +41,7 @@ if (isset($_GET['t_id'])) {
     <div class="container-fluid">
         <div class="row mb-2 card-header">
             <div class="col-sm-6">
-                <h1 class="m-0">|Edit Teacher</h1>
+                <h1 class="m-0">|កែប្រែព័ត៌មានគ្រូ</h1>
             </div>
             <!-- /.col -->
 
@@ -53,19 +53,19 @@ if (isset($_GET['t_id'])) {
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-4">
-                            <label for="inputName">English Name</label>
+                            <label for="inputName">ឈ្មោះភាសាអង់គ្លេស</label>
                             <input type="text" id="enName" name="En_name" class="form-control"
                                 value="<?php echo !isset($data) ? '' : $data['En_name']; ?>">
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="inputName">Khmer Name</label>
+                                <label for="inputName">ឈ្មោះភាសាខ្មែរ</label>
                                 <input type="text" id="khName" name="Kh_name" class="form-control"
                                     value="<?php echo !isset($data) ? '' : $data['Kh_name']; ?>">
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <label for="">Date of Birth</label>
+                            <label for="">ថ្ងៃខែឆ្នាំកំណើត</label>
                             <input type="date" id="dob" name="dob" class="form-control"
                                 value="<?php echo !isset($data) ? '' : $data['DOB']; ?>">
                         </div>
@@ -73,30 +73,30 @@ if (isset($_GET['t_id'])) {
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="inputStatus">Gender</label>
+                                <label for="inputStatus">ភេទ</label>
                                 <select id="inputStatus" name="gender" class="form-control custom-select">
-                                    <option selected disabled>Select one</option>
-                                    <option value="Male"
-                                        <?php echo !isset($data) ? '' : ($data['Gender'] == 'Male' ? 'selected' : ''); ?>>
-                                        Male
+                                    <option selected disabled>--ជ្រើសរើស--</option>
+                                    <option value="ប្រុស"
+                                        <?php echo !isset($data) ? '' : ($data['Gender'] == 'ប្រុស' ? 'selected' : ''); ?>>
+                                        ប្រុស
                                     </option>
-                                    <option value="Female"
-                                        <?php echo !isset($data) ? '' : ($data['Gender'] == 'Female' ? 'selected' : ''); ?>>
-                                        Female
+                                    <option value="ស្រី"
+                                        <?php echo !isset($data) ? '' : ($data['Gender'] == 'ស្រី' ? 'selected' : ''); ?>>
+                                        ស្រី
                                     </option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="inputStatus">Position</label>
+                                <label for="inputStatus">តួនាទី</label>
                                 <input type="text" name="position" id="" class="form-control"
                                     value="<?php echo !isset($data) ? '' : $data['Position']; ?>">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="inputStatus">Code Number</label>
+                                <label for="inputStatus">អត្តលេខ</label>
                                 <input type="text" name="code" id="" class="form-control"
                                     value="<?php echo !isset($data) ? '' : $data['Staff_code']; ?>">
                             </div>
@@ -105,34 +105,38 @@ if (isset($_GET['t_id'])) {
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="inputStatus">Nationality</label>
+                                <label for="inputStatus">ជនជាតិ</label>
                                 <input type="text" name="nation" id="" class="form-control"
                                     value="<?php echo !isset($data) ? '' : $data['Nation']; ?>">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="inputStatus">Ethnicity</label>
+                                <label for="inputStatus">សញ្ជាតិ</label>
                                 <input type="text" name="ethnicity" id="" class="form-control"
                                     value="<?php echo !isset($data) ? '' : $data['Ethnicity']; ?>">
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="inputStatus">Status</label>
-                                <input type="text" name="status" id="" class="form-control"
-                                    value="<?php echo !isset($data) ? '' : $data['Status']; ?>">
-                            </div>
+                        <div class="col-md-3">
+                            <label for="inputStatus">ស្ថានភាព</label>
+                            <select id="inputStatus" name="status" class="form-control custom-select">
+                                <option selected disabled>--ជ្រើសរើស--</option>
+                                <option value="active" <?= ($data['status'] == 'active') ? 'selected' : ''; ?>>
+                                    Active
+                                </option>
+                                <option value="disable" <?= ($data['status'] == 'disable') ? 'selected' : ''; ?>>
+                                    Disable</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="inputDescription">Address</label>
+                    <div class="form-group mt-3">
+                        <label for="inputDescription">អាសយដ្ឋាន</label>
                         <textarea id="inputDescription" name="address" class="form-control"
                             rows="3"><?php echo !isset($data) ? '' : $data['Address']; ?></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputPhone">Phone</label>
+                        <label for="inputPhone">លេខទូរស័ព្ទ</label>
                         <input type="text" id="inputPhone" name="phone" class="form-control"
                             value="<?php echo !isset($data) ? '' : $data['Phone']; ?>">
                     </div>
@@ -145,8 +149,10 @@ if (isset($_GET['t_id'])) {
                         <?php } ?> -->
             </div>
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" name="btnsave">Save</button>
+                <button type="button" class="btn bg-danger">
+                    <a href="teacher_list.php">បោះបង់</a>
+                </button>
+                <input type="submit" value="រក្សាទុក" name="btnsave" class="btn1 bg-sis text-white">
             </div>
         </form>
     </div>

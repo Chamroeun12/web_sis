@@ -11,7 +11,11 @@ $students_info = [];
 $msg = '';
 
 // Fetch all active classes for the dropdown
-$sql = "SELECT * FROM tb_class WHERE Status = 'Active'";
+// Fetch Classes
+$sql = "SELECT * FROM tb_class
+INNER join
+    tb_course ON tb_class.course_id = tb_course.id
+where Status = 'Active'";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $classes = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -84,7 +88,7 @@ function fetchAttendance($class_id, $class_date, $conn) {
 <section class="content-wrapper">
     <form action="" method="POST">
         <div class="col-sm-6 pt-3 mb-3 ml-3">
-            <h3>|បញ្ចីហៅវត្តមានសិស្ស</h3>
+            <h3>|បញ្ជីហៅវត្តមានសិស្ស</h3>
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
@@ -103,12 +107,12 @@ function fetchAttendance($class_id, $class_date, $conn) {
                                         <?php foreach ($classes as $row) : ?>
                                         <option value="<?= htmlspecialchars($row['ClassID'], ENT_QUOTES, 'UTF-8'); ?>"
                                             <?= ($row['ClassID'] == $selected_class) ? 'selected' : ''; ?>>
-                                            <?= htmlspecialchars($row['Class_name'], ENT_QUOTES, 'UTF-8'); ?></option>
+                                            <?= htmlspecialchars($row['Class_name'], ENT_QUOTES, 'UTF-8'); ?> - <?= $row['Course_name']; ?> - <?= $row['Shift']; ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
                                 <div class="col-sm-5">
-                                    <label for="class_date" class="form-label">កាលបិរិច្ឆេទ</label>
+                                    <label for="class_date" class="form-label">កាលបរិច្ឆេទ</label>
                                     <input type="date" name="class_date" id="class_date" class="form-control" required
                                         style="font-size:14px;"
                                         value="<?= htmlspecialchars($class_date, ENT_QUOTES, 'UTF-8'); ?>">

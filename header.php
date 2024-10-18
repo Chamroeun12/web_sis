@@ -9,6 +9,7 @@ include 'connection.php';
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SmartBright International School</title>
+    <link rel="icon" href="images/SiSlogo.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -43,6 +44,13 @@ include 'connection.php';
 
     <!-- Get cookie -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- Toastr CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+<!-- Toastr JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 
     <style>
     aside a p {
@@ -150,13 +158,13 @@ include 'connection.php';
                 <!-- Sidebar Menu -->
 
                 <nav class="mt-1">
+
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
-
-                        <?php if ($_SESSION['role'] == 'admin') : ?>
+               <?php if($_SESSION['role'] == 'admin'):?>
                         <li class="nav-item">
                             <a href="index.php" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-th"></i>
@@ -165,6 +173,7 @@ include 'connection.php';
                                 </p>
                             </a>
                         </li>
+
                         <li class="nav-item">
                             <a href="student_list.php" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-users"></i>
@@ -173,58 +182,19 @@ include 'connection.php';
                                 </p>
                             </a>
                         </li>
-                        <?php endif; ?>
-                        <?php if ($_SESSION['role'] == 'user') : ?>
                         <li class="nav-item">
-                            <a href="score.php" class="nav-link btnhover1">
-                                <i class="nav-icon far fa-chart-bar"></i>
+                            <a href="teacher_list.php" class="nav-link btnhover1">
+                                <i class="nav-icon fas fa-user-tie"></i>
                                 <p>
-                                    ពិន្ទុ
+                                    ព័ត៌មានគ្រូបង្រៀន
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link btnhover1">
-                                <i class="nav-icon fas fa-tasks"></i>
-                                <p>
-                                    វត្តមាន
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview"
-                                style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
-                                <li class="nav-item">
-                                    <a href="attendance.php" class="nav-link">
-                                        <p class="stu-list text-white pl-2">
-                                            បញ្ចូលវត្តមាន</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview"
-                                style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
-                                <li class="nav-item">
-                                    <a href="attendace_list.php" class="nav-link">
-                                        <p class="stu-list text-white pl-2">បញ្ចីវត្តមាន</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="logout.php" class="nav-link btnhover1">
-                                <!-- <i class="nav-icon far fa-chart-bar"></i> -->
-                                <i class="fas fa-sign-out-alt ml-2"></i>
-                                <p>
-                                    ចាកចេញ
-                                </p>
-                            </a>
-                        </li>
-                        <?php endif; ?>
-                        <?php if ($_SESSION['role'] == 'admin') : ?>
                         <li class="nav-item">
                             <a href="subject.php" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-graduation-cap"></i>
                                 <p>
-                                    មុខវិជ្ចាសិក្សា
+                                    មុខវិជ្ជាសិក្សា
                                 </p>
                             </a>
                         </li>
@@ -250,15 +220,7 @@ include 'connection.php';
                                 <li class="nav-item">
                                     <a href="classroom.php" class="nav-link">
                                         <p class="stu-list text-white pl-2">
-                                            បញ្ចីថ្នាក់</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview "
-                                style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
-                                <li class="nav-item">
-                                    <a href="Student_in_class.php" class="nav-link">
-                                        <p class="stu-list text-white pl-2">សិស្សក្នុងថ្នាក់រៀន</p>
+                                            បញ្ជីថ្នាក់រៀន</p>
                                     </a>
                                 </li>
                             </ul>
@@ -270,14 +232,112 @@ include 'connection.php';
                                     </a>
                                 </li>
                             </ul>
-                        <li class="nav-item">
-                            <a href="teacher_list.php" class="nav-link btnhover1">
-                                <i class="nav-icon fas fa-user-tie"></i>
+                            <ul class="nav nav-treeview "
+                                style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
+                                <li class="nav-item">
+                                    <a href="Student_in_class.php" class="nav-link">
+                                        <p class="stu-list text-white pl-2">សិស្សក្នុងថ្នាក់រៀន</p>
+                                    </a>
+                                </li>
+                            </ul>
+
+  </li>
+  <?php endif; ?>
+  <!-- close  -->
+
+  <?php if($_SESSION['role'] == 'admin'):?>
+  <li class="nav-item">
+                            <a href="score_list.php" class="nav-link btnhover1">
+                                <i class="nav-icon fas fa-book"></i>
                                 <p>
-                                    ព័ត៌មានគ្រូបង្រៀន
+                                    លទ្ធផលពិន្ទុ
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="attendace_list.php" class="nav-link btnhover1">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>
+                                    បញ្ជីវត្តមានសិក្សា
+                                </p>
+                            </a>
+                        </li>
+                        <?php endif; ?>
+
+                        <!-- User page -->
+
+
+  <?php if($_SESSION['role'] == 'user'):?>
+
+  <li class="nav-item">
+                            <a href="#" class="nav-link btnhover1">
+                                <i class="nav-icon fas fa-chart-bar"></i>
+                                <p>
+                                    ពិន្ទុ
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview "
+                                style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
+                                <li class="nav-item">
+                                    <a href="Classlist.php" class="nav-link">
+                                        <p class="stu-list text-white pl-2">
+                                          បញ្ជូលពិន្ទុ</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview"
+                                style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
+                                <li class="nav-item">
+                                    <a href="score_list.php" class="nav-link ">
+                                        <p class="stu-list text-white pl-2">លទ្ធផលពិន្ទុ</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <?php endif; ?>
+
+
+
+                        <?php if($_SESSION['role'] == 'user'):?>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link btnhover1">
+                                <i class="nav-icon fas fa-tasks"></i>
+                                <p>
+                                    វត្តមាន
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview"
+                                style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
+                                <li class="nav-item">
+                                    <a href="attendance.php" class="nav-link">
+                                        <p class="stu-list text-white pl-2">
+                                            បញ្ចូលវត្តមាន</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview"
+                                style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
+                                <li class="nav-item">
+                                    <a href="attendace_list.php" class="nav-link">
+                                        <p class="stu-list text-white pl-2">បញ្ជីវត្តមាន</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="logout.php" class="nav-link btnhover1">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    ចាកចេញ
+                                </p>
+                            </a>
+                        </li>
+                        <?php endif; ?>
+
+
+                        <?php if($_SESSION['role'] == 'admin'):?>
                         <li class="nav-item">
                             <a href="#" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-calendar"></i>
@@ -289,7 +349,7 @@ include 'connection.php';
                             <ul class="nav nav-treeview "
                                 style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
-                                    <a href="" class="nav-link ">
+                                    <a href="schedule_tea.php" class="nav-link ">
 
                                         <p class="stu-list text-white pl-2">កាលវិភាគគ្រូបង្រៀន</p>
                                     </a>
@@ -298,7 +358,7 @@ include 'connection.php';
                             <ul class="nav nav-treeview"
                                 style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
-                                    <a href="class_for_sch.php" class="nav-link ">
+                                    <a href="schedule_stu.php" class="nav-link ">
 
                                         <p class="stu-list text-white pl-2">កាលវិភាគសិស្ស</p>
                                     </a>
@@ -314,6 +374,8 @@ include 'connection.php';
                                 </p>
                             </a>
                         </li>
+
+
                         <li class="nav-item">
                             <a href="#" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-cogs"></i>
@@ -347,10 +409,10 @@ include 'connection.php';
                                 </li>
                             </ul>
                         </li>
-                        <?php endif; ?>
                         <!-- check _SESSION if user -->
-
+<?php endif; ?>
                     </ul>
+
 
                 </nav>
                 <!-- /.sidebar-menu -->

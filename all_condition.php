@@ -3,7 +3,7 @@ include "connection.php";
 
 //  Delete student
 if (isset($_GET['stu_id'])) {
-    $sql = "DELETE FROM tb_student WHERE ID=:ID";
+    $sql = "UPDATE tb_student set `status` = 'disable' WHERE ID=:ID";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(":ID", $_GET['stu_id'], PDO::PARAM_INT);
     $stmt->execute();
@@ -14,7 +14,7 @@ if (isset($_GET['stu_id'])) {
 }
 // Delete Teacher
 if (isset($_GET['t_id'])) {
-    $sql = "DELETE FROM tb_teacher WHERE id=:id";
+    $sql = "UPDATE tb_teacher set `status` = 'disable' WHERE id=:id";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(":id", $_GET['t_id'], PDO::PARAM_INT);
     $stmt->execute();
