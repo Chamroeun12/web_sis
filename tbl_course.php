@@ -61,7 +61,7 @@ $Subject = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-6">
-                    <a href="add_subject.php" class="btn btn-success float-sm-right" data-toggle="modal"
+                    <a href="add_subject.php" class="btn1 bg-sis text-white float-sm-right" data-toggle="modal"
                         data-target="#modal-lg">បញ្ចូលថ្មី</a>
                 </div>
             </div>
@@ -90,7 +90,7 @@ $Subject = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="inputStatus">មុខវិជ្ចាសិក្សា</label>
+                                            <label for="inputStatus">មុខវិជ្ជាសិក្សា</label>
                                             <select id="" name="subject" class="form-control custom-select">
                                                 <option selected disabled>--ជ្រើសរើស--</option>
                                                 <?php foreach ($Subject as  $row): ?>
@@ -101,7 +101,7 @@ $Subject = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <!-- <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="inputStatus">ពណ៌</label>
                                             <select id="" name="color" class="form-control custom-select">
@@ -114,7 +114,7 @@ $Subject = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                                 <option value="bg-info">Info</option>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="col-md-3">
                                         <label for="inputName">កាលបរិច្ឆេទ</label>
                                         <input type="date" id="date" name="date" class="form-control">
@@ -123,8 +123,8 @@ $Subject = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">បោះបង់</button>
-                            <input type="submit" value="រក្សាទុក" name="btnsave" class="btn btn-success">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">បោះបង់</button>
+                            <input type="submit" value="រក្សាទុក" name="btnsave" class="btn1 bg-sis text-white">
                             <!-- <button type="button" class="btn btn-primary">Save</button> -->
                         </div>
                     </form>
@@ -144,11 +144,6 @@ $Subject = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <!-- <h3 class="card-title">
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-lg">
-                            Add
-                        </button>
-                    </h3> -->
 
                             <div class="card-tools">
                                 <div class="form-group" style="width: 300px;">
@@ -173,7 +168,7 @@ $Subject = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <tbody>
                                     <?php foreach ($Course as $key => $value): ?>
                                     <tr>
-                                        <td><?php echo $key + 1; ?>.</td>
+                                        <td><?php echo $key + 1; ?></td>
                                         <td><?php echo $value['Course_name']; ?></td>
                                         <td><?php echo $value['Subject_name']; ?></td>
                                         <td><?php echo $value['Date']; ?></td>
@@ -191,47 +186,29 @@ $Subject = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 </tbody>
                             </table>
                         </div>
-                        <div class="card-footer">
-                            <div class="card-tools">
-                                <ul class="pagination pagination-sm float-right">
-                                    <li class="page-item"><a class="page-link" href="tbl_course.php?page=
-                     <?php
-                        if (isset($_GET['page']) && $_GET['page'] > 1)
 
-                            echo $_GET['page'] - 1;
-                        else
-                            echo 1;
-                        ?>
-                    ">&laquo;</a></li>
-                                    <?php for ($i = 1; $i <= $maxpage; $i++) { ?>
-                                    <li class="page-item
-                      <?php
-                                        if (isset($_GET['page'])) {
-                                            if ($i == $_GET['page'])
-                                                echo ' active ';
-                                        } else {
-                                            if ($i == 1)
-                                                echo ' active ';
-                                        }
-                        ?>"><a class="page-link" href="tbl_course.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                                    </li>
-                                    <?php } ?>
-                                    <li class="page-item"><a class="page-link" href="tbl_course.php?page=
-                     <?php
-                        if (isset($_GET['page'])) {
-                            if ($_GET['page'] == $maxpage) {
-                                echo $maxpage;
-                            } else {
-                                echo $maxpage + 1;
-                            }
-                        } else {
-                            echo 2;
-                        }
-                        ?>">&raquo;</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+
+                        <div class="card-footer">
+                    <ul class="pagination pagination-sm m-0 float-right">
+                        <!-- Previous link -->
+                        <li class="page-item">
+                            <a class="page-link" href="tbl_course.php?page=<?php echo isset($_GET['page']) && $_GET['page'] > 1 ? $_GET['page'] - 1 : 1; ?>">&laquo;</a>
+                        </li>
+
+                        <!-- Page links -->
+                        <?php for ($i = 1; $i <= $maxpage; $i++): ?>
+                            <li class="page-item <?php echo isset($_GET['page']) && $_GET['page'] == $i ? 'active' : ''; ?>">
+                                <a class="page-link" href="tbl_course.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                            </li>
+                        <?php endfor; ?>
+
+                        <!-- Next link -->
+                        <li class="page-item">
+                            <a class="page-link" href="tbl_course.php?page=<?php echo isset($_GET['page']) && $_GET['page'] < $maxpage ? $_GET['page'] + 1 : $maxpage; ?>">&raquo;</a>
+                        </li>
+                    </ul>
+                </div>
+
                     <!-- /.card -->
                     <!-- /.card -->
                 </div>

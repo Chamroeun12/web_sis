@@ -37,7 +37,7 @@ if (isset($_POST['btnsave'])) {
                   Gender=:Gender,
                   DOB=:DOB,
                   Address=:Address,
-                  status=:status,
+                  Status=:Status,
                   Dad_name=:Dad_name,
                   Mom_name=:Mom_name,
                   Dad_job=:Dad_job,
@@ -53,7 +53,7 @@ if (isset($_POST['btnsave'])) {
       $stmt->bindParam(":Gender", $_POST['gender'], PDO::PARAM_STR);
       $stmt->bindParam(":DOB", $_POST['dob'], PDO::PARAM_STR);
       $stmt->bindParam(":Address", $_POST['address'], PDO::PARAM_STR);
-      $stmt->bindParam(":status", $_POST['status'], PDO::PARAM_STR);
+      $stmt->bindParam(":Status", $_POST['status'], PDO::PARAM_STR);
       $stmt->bindParam(":Dad_name", $_POST['dad_name'], PDO::PARAM_STR);
       $stmt->bindParam(":Mom_name", $_POST['mom_name'], PDO::PARAM_STR);
       $stmt->bindParam(":Dad_job", $_POST['dad_job'], PDO::PARAM_STR);
@@ -145,10 +145,10 @@ if (isset($_GET['stu_id'])) {
                             <label for="inputStatus">ស្ថានភាព</label>
                             <select id="inputStatus" name="status" class="form-control custom-select">
                                 <option selected disabled>Select one</option>
-                                <option value="active" <?= ($data['status'] == 'active') ? 'selected' : ''; ?>>
+                                <option value="Active" <?= ($data['Status'] == 'Active') ? 'selected' : ''; ?>>
                                     Active
                                 </option>
-                                <option value="disable" <?= ($data['status'] == 'disable') ? 'selected' : ''; ?>>
+                                <option value="Deactive" <?= ($data['Status'] == 'Deactive') ? 'selected' : ''; ?>>
                                     Deactive</option>
                             </select>
                         </div>

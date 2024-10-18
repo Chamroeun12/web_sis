@@ -10,7 +10,7 @@ $stmt = $conn->prepare($course);
 $stmt->execute();
 $Course = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$teacher = "SELECT * FROM tb_teacher";
+$teacher = "SELECT * FROM tb_teacher WHERE tb_teacher.status='active ';";
 $stmt = $conn->prepare($teacher);
 $stmt->execute();
 $Teacher = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -97,7 +97,7 @@ include_once "header.php";
     <div class="container-fluid">
         <div class="row mb-2 card-header">
             <div class="col-sm-6">
-                <h2 class="m-0">|បញ្ចីថ្នាក់រៀន</h2>
+                <h2 class="m-0">|បញ្ជីថ្នាក់រៀន</h2>
             </div>
             <div class="col-sm-6">
                 <h3 class="card-title float-sm-right">
@@ -148,26 +148,26 @@ include_once "header.php";
                                 <div class="col-sm-3">
                                     <label for="">វេនសិក្សា</label>
                                     <select name="shift" class="form-control">
-                                        <option value="FULL">ពេញម៉ោង</option>
-                                        <option value="AM">ពេលព្រឹក</option>
-                                        <option value="PM">ពេលរសៀល</option>
+                                        <option value="ពេញម៉ោង">ពេញម៉ោង</option>
+                                        <option value="ពេលព្រឹក">ពេលព្រឹក</option>
+                                        <option value="ពេលរសៀល">ពេលរសៀល</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-3 mt-3">
                                     <label for="inputName">ម៉ោងចូល</label>
                                     <input type="text" name="time_in" class="form-control">
                                 </div>
-                                <div class="col-md-3">
-                                    <label for="inputName">ម់ោងចេញ</label>
+                                <div class="col-md-3 mt-3">
+                                    <label for="inputName">ម៉ោងចេញ</label>
                                     <input type="text" name="time_out" class="form-control">
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 mt-3">
                                     <label for="inputStatus">កាលបរិច្ឆេទចាប់ផ្ដើម</label>
                                     <input type="date" name="start_class" class="form-control"> <!-- Fixed name here -->
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 mt-3">
                                     <label for="pob">កាលបរិច្ឆេទបញ្ចប់</label>
                                     <input type="date" name="end_class" class="form-control">
                                 </div>
@@ -187,7 +187,7 @@ include_once "header.php";
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">បោះបង់</button>
-                        <input type="submit" value="Save" name="btnsave" class="btn1 bg-sis text-white">
+                        <input type="submit" value="រក្សាទុក" name="btnsave" class="btn1 bg-sis text-white">
                     </div>
                 </form>
             </div>
@@ -237,6 +237,11 @@ include_once "header.php";
                             </tr>
                         </thead>
                         <tbody>
+                        <?php if (empty($Class)) { ?>
+                        <tr>
+                            <td colspan="11" class="text-center">No records found</td>
+                        </tr>
+                        <?php } else { ?>
                             <?php $i = 1; foreach ($Class as $row) { ?>
                             <tr>
                                 <td><?php echo $i++; ?></td>
@@ -252,7 +257,7 @@ include_once "header.php";
                                     <?php if ($row['status'] == 'active') { ?>
                                     <span class="badge badge-success">Active</span>
                                     <?php } else { ?>
-                                    <span class="badge badge-danger">Disabled</span>
+                                    <span class="badge badge-danger">Disable</span>
                                     <?php } ?>
                                 </td>
                                 <td>
@@ -283,7 +288,7 @@ include_once "header.php";
                                     </form>
                                 </td>
                             </tr>
-                            <?php } ?>
+                            <?php } ?><?php } ?>
                         </tbody>
                     </table>
                 </div>

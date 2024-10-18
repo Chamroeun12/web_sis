@@ -63,41 +63,30 @@ $subjects = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <div class="row">
         <!-- Edit Course Form -->
             <?php if ($course_to_edit): ?>
-                <h2>Edit Course</h2>
+                <h3>|កែប្រែវគ្គសិក្សា</h3>
                 <form method="post" action="">
                     <input type="hidden" name="course_id" value="<?= $course_to_edit['id'] ?>">
-                    <div class="form-group">
-                        <label>Course Name</label>
+                    <div class="form-group mt-4 col-4">
+                        <label>វគ្គសិក្សា</label>
                         <input type="text" name="cu_name" class="form-control" value="<?= $course_to_edit['Course_name'] ?>" required>
                     </div>
-                    <div class="form-group">
-                        <label>Subject</label>
+                    <div class="form-group col-4">
+                        <label>មុខវិជ្ជា</label>
                         <select name="subject" class="form-control" required>
-                            <option value="" disabled>Select Subject</option>
+                            <option value="" disabled>--ជ្រើសរើស--</option>
                             <?php foreach ($subjects as $subject): ?>
                                 <option value="<?= $subject['SubID'] ?>" <?= $subject['SubID'] == $course_to_edit['Sub_id'] ? 'selected' : '' ?>><?= $subject['Subject_name'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label>Color</label>
-                        <select name="color" class="form-control" required>
-                            <option value="bg-primary" <?= $course_to_edit['Color'] == 'bg-primary' ? 'selected' : '' ?>>Primary</option>
-                            <option value="bg-secondary" <?= $course_to_edit['Color'] == 'bg-secondary' ? 'selected' : '' ?>>Secondary</option>
-                            <option value="bg-success" <?= $course_to_edit['Color'] == 'bg-success' ? 'selected' : '' ?>>Success</option>
-                            <option value="bg-danger" <?= $course_to_edit['Color'] == 'bg-danger' ? 'selected' : '' ?>>Danger</option>
-                            <option value="bg-warning" <?= $course_to_edit['Color'] == 'bg-warning' ? 'selected' : '' ?>>Warning</option>
-                            <option value="bg-info" <?= $course_to_edit['Color'] == 'bg-info' ? 'selected' : '' ?>>Info</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Date</label>
+                    <div class="form-group col-4">
+                        <label>កាលបរិច្ឆេទ</label>
                         <input type="date" name="date" class="form-control" value="<?= $course_to_edit['Date'] ?>" required>
                     </div>
-                    <button type="submit" name="btnedit" class="btn btn-warning">Update</button>
+                    <button type="submit" name="btnedit" class="btn1 bg-sis text-white ml-2">រក្សាទុក</button>
                 </form>
             <?php else: ?>
-                <p>Course not found.</p>
+                <p>គ្មានទិន្នន័យ</p>
             <?php endif; ?>
           </div>
         </div>

@@ -31,7 +31,7 @@ if (isset($_POST['btnsave'])) {
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">|មុខវិជ្ចាសិក្សា</h1>
+                    <h1 class="m-0">|មុខវិជ្ជាសិក្សា</h1>
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-6">
@@ -44,7 +44,7 @@ if (isset($_POST['btnsave'])) {
                     <div class="modal-content">
 
                         <div class="modal-header">
-                            <h4>|បន្ថែមមុខវិជ្ចា</h4>
+                            <h4>|បន្ថែមមុខវិជ្ជា</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -57,7 +57,7 @@ if (isset($_POST['btnsave'])) {
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label for="inputName">មុខវិជ្ចាសិក្សា</label>
+                                            <label for="inputName">មុខវិជ្ជាសិក្សា</label>
                                             <input type="text" id="subName" name="sub_name" class="form-control"
                                                 value="">
                                         </div>
@@ -79,8 +79,8 @@ if (isset($_POST['btnsave'])) {
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-between">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">បោះបង់</button>
-                                <input type="submit" value="រក្សាទុក" name="btnsave" class="btn btn-success">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">បោះបង់</button>
+                                <input type="submit" value="រក្សាទុក" name="btnsave" class="btn1 bg-sis text-white">
                                 <!-- <button type="button" class="btn btn-primary">Save</button> -->
                             </div>
                         </form>

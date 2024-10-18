@@ -59,12 +59,12 @@ if (isset($_POST['tables']) && !empty($_POST['tables'])) {
             <a href='$backupFile' class='btn btn-success mt-3'>Download Backup</a>
           </div></div>";
 } else {
-    echo "<div class='container mt-5'><div class='alert alert-warning text-center'>
+    echo "<div class='container mt-5'><div class='alert alert-light-emphasis text-center'>
             No tables selected for backup. Please select at least one table.
           </div>";
 }
 echo '
-<div class="container mt-5"><h3 class="alert alert-success text-center"><a href="backup.php" class="btn text-white">Back to backup</a></h3>';
+<div class="container mt-5"><p class="alert alert-light-emphasis text-center"><a href="backup.php" class="btn1 bg-sis text-white">Back to backup</a></hp>';
 echo '</section>'; // Close the section
 ?>
 

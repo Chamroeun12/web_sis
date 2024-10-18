@@ -46,7 +46,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 // if (isset($_POST['btnsave'])) {
-//     $sql = "INSERT INTO tb_login(Username,Password,Role) 
+//     $sql = "INSERT INTO tb_login(Username,Password,Role)
 //     VALUES(:Username, :Password, :Role)";
 //     $stmt = $conn->prepare($sql);
 //     $stmt->bindParam(":Username", $_POST['username'], PDO::PARAM_STR);
@@ -62,7 +62,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 //     $hashedPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
 //     // Prepare the SQL statement
-//     $sql = "INSERT INTO tb_login (Username, Password, Role) 
+//     $sql = "INSERT INTO tb_login (Username, Password, Role)
 //             VALUES (:Username, :Password, :Role)";
 //     $stmt = $conn->prepare($sql);
 
@@ -103,13 +103,13 @@ if ($temp) {
     <div class="container-fluid">
         <div class="row mb-2 card-header">
             <div class="col-sm-6">
-                <h3 class="m-0">|User Lists</h3>
+                <h3 class="m-0">|បញ្ជីអ្នកប្រើប្រាស់</h3>
             </div>
             <!-- /.col -->
             <div class="col-sm-6">
                 <h3 class="card-title float-sm-right">
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-lg">
-                        Create
+                    <button type="button" class="btn1 bg-sis text-white" data-toggle="modal" data-target="#modal-lg">
+                        បញ្ចូលថ្មី
                     </button>
                 </h3>
             </div>
@@ -127,7 +127,7 @@ if ($temp) {
             <div class="modal-content">
                 <!-- form card-header -->
                 <div class="card-header">
-                    <h3 class="card-title">|Add User</h3>
+                    <h3 class="card-title">|បញ្ជូលអ្នកប្រើប្រាស់</h3>
                 </div>
                 <!-- Condition to Add or Edit student -->
 
@@ -140,7 +140,7 @@ if ($temp) {
                                     <div class="input-group mb-3">
                                         <div class="input-group-append mx-2">
                                             <div class="input-group-text">
-                                                <span class="mx-2">Username:</span>
+                                                <span class="mx-2">ឈ្មោះអ្នកប្រើប្រាស់</span>
                                             </div>
                                         </div>
                                         <input type="text" id="username" class="form-control" name="username">
@@ -152,7 +152,7 @@ if ($temp) {
                                     <div class="input-group mb-3">
                                         <div class="input-group-append mx-2">
                                             <div class="input-group-text">
-                                                <span class="mx-2">Password:</span>
+                                                <span class="mx-2">ពាក្យសម្ងាត់</span>
                                             </div>
                                         </div>
                                         <input type="text" id="password" class="form-control" name="password">
@@ -164,11 +164,11 @@ if ($temp) {
                                     <div class="input-group mb-3">
                                         <div class="input-group-append mx-2">
                                             <div class="input-group-text">
-                                                <span class="mx-2">Role:</span>
+                                                <span class="mx-2">Role</span>
                                             </div>
                                         </div>
                                         <select name="role" id="role" class="form-control">
-                                            <option selected disabled>Select Role</option>
+                                            <option selected disabled>--ជ្រើសរើស--</option>
                                             <option value="admin">Admin</option>
                                             <option value="user">User</option>
                                         </select>
@@ -208,8 +208,8 @@ if ($temp) {
                         <?php } ?> -->
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" name="btnsave">Save</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">បោះបង់</button>
+                        <button type="submit" class="btn1 bg-sis text-white" name="btnsave">រក្សាទុក</button>
                     </div>
                 </form>
             </div>
@@ -230,7 +230,7 @@ if ($temp) {
                     <div class="card-tools">
                         <div class="form-group" style="width: 300px;">
                             <input type="text" id="" name="namesearch" class="search form-control float-right"
-                                placeholder="Search" style="font-family:Khmer OS Siemreap;">
+                                placeholder="ស្វែងរក" >
                             <div class="input-group-append">
                             </div>
                         </div>
@@ -238,14 +238,13 @@ if ($temp) {
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body table-responsive p-0 text-sm">
-                    <table class="table table-hover text-nowrap" style="font-family:Khmer OS Siemreap;" id="userTbl">
+                    <table class="table table-hover text-nowrap"  id="userTbl">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Username</th>
-                                <th>Password</th>
+                                <th>ល.រ</th>
+                                <th>ឈ្មោះអ្នកប្រើប្រាស់</th>
                                 <th>Role</th>
-                                <th rowspan="2">ACTION</th>
+                                <th rowspan="2">សកម្មភាព</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -259,7 +258,6 @@ if ($temp) {
                                             echo ($key + 1);
                                         ?></td>
                                     <td><?php echo $value['Username']; ?></td>
-                                    <td><?php echo $value['Password']; ?></td>
                                     <td><?php echo $value['Role']; ?></td>
                                     <td>
                                         <a href="update_user.php?user_id=<?php echo $value['id'] ?>">

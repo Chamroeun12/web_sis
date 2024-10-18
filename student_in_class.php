@@ -38,7 +38,10 @@ if (isset($_POST['addclass'])) {
 }
 
 // Fetch all classes for the dropdown
-$sql = "SELECT * FROM tb_class where Status = 'Active'";
+$sql = "SELECT * FROM tb_class
+INNER join
+    tb_course ON tb_class.course_id = tb_course.id
+where Status = 'Active'";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $classes = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -83,7 +86,7 @@ if ($temp) {
                                             <?php foreach ($classes as $row) : ?>
                                             <option value="<?= $row['ClassID']; ?>"
                                                 <?= isset($_POST['addclass']) && $_POST['addclass'] == $row['ClassID'] ? 'selected' : '' ?>>
-                                                <?= $row['Class_name']; ?>
+                                                <?= $row['Class_name']; ?> - <?= $row['Course_name']; ?> - <?= $row['Shift']; ?>
                                             </option>
                                             <?php endforeach; ?>
                                         </select>
